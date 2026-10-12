@@ -1,0 +1,26 @@
+# Archivos locales y compilados de Visual Studio/SSIS
+.vs/
+**/bin/
+**/obj/
+*.suo
+*.user
+*.dtproj.user
+*.ispac
+*.log
+*.tmp
+
+# Credenciales y configuración privada
+.env
+.env.*
+!.env.example
+*.secrets.json
+
+# Archivos físicos de SQL Server y respaldo original del caso
+*.mdf
+*.ndf
+*.ldf
+BikeZ.bak
+caso2.zip
+
+# El backup DIMENSIONAL validado debe incluirse en database/backup/.
+# No se ignoran todos los .bak porque son un entregable de la pauta.
