@@ -1,6 +1,6 @@
 # Análisis del origen BikeZ
 
-**Estado:** exploración inicial y primeros controles de calidad ejecutados por Joaquín. Se registraron los conteos, el rango de fechas y las columnas de las claves primarias de las 9 tablas de negocio. Faltan algunas comprobaciones adicionales para preparar las transformaciones.
+**Estado:** se integraron la exploración y los controles de Joaquín con la revisión de fechas y códigos de empleados de Frank. Están registrados los conteos, las claves de las 9 tablas de negocio, los datos faltantes y la clasificación de clientes. La nueva comprobación de horas está pendiente de ejecutar.
 
 Consultas utilizadas: `database/scripts/01_explorar_origen.sql` y `database/scripts/02_revisar_calidad.sql`.
 
@@ -38,7 +38,7 @@ También aparece `sysdiagrams` con 1 registro. Es una tabla de soporte de los di
 
 La dimensión Fecha debe cubrir, como mínimo, del 1 de julio de 2015 al 7 de agosto de 2018 para resolver tanto la fecha de venta como la de envío. El último envío está fuera del mes de la última venta, por lo que el calendario no debe terminar en julio de 2018.
 
-El rango se incorporó el 13 de octubre de 2026 a partir de la captura compartida por Joaquín. Los años extremos tienen información de ventas para una parte del año; esto se debe considerar al comparar períodos.
+El rango se incorporó el 13 de octubre de 2026 a partir de la captura compartida por Joaquín. Frank comprobó el mismo rango en su equipo. Para el modelo se propone generar años completos del 2015-01-01 al 2018-12-31, que incluyen todas las fechas observadas. Los años extremos tienen ventas para una parte del año; esto se debe considerar al comparar períodos.
 
 ## Hallazgos y decisiones
 
@@ -92,9 +92,36 @@ Las categorías suman los 19820 clientes del origen. No se suman los dos conteos
 
 Estas reglas están propuestas para la implementación. El DW y el ETL aún no están construidos. Los controles ejecutados no justifican rechazar ventas por los datos descriptivos faltantes; debemos conservar las filas y sus importes, manteniendo trazabilidad de estos casos.
 
+## Códigos de género y estado civil
+
+Frank ejecutó la consulta de códigos el 13 de octubre de 2026 en su instancia FRANK-PC. La consulta se conservó en el script 02 como resultado 5, después de la clasificación de clientes de Joaquín.
+
+| Genero | EstadoCivil | Empleados |
+|---|---|---:|
+| F | M | 49 |
+| F | S | 35 |
+| M | M | 97 |
+| M | S | 109 |
+| Total | | 290 |
+
+Los cuatro grupos suman los 290 empleados del origen. Solo se observaron F/M en Genero y M/S en EstadoCivil, sin nulos en ese resultado. Las traducciones propuestas son Femenino/Masculino y Casado(a)/Soltero(a), respectivamente. La M necesita una regla distinta según la columna.
+
+Frank también verificó el rango de fechas y registró que los controles generales coincidían con los obtenidos por Joaquín. Sus capturas se conservan junto con las de Joaquín.
+
+## Orden de resultados del script 02
+
+1. Rango de fechas.
+2. Conteos de situaciones por revisar.
+3. Referencias inexistentes.
+4. Clasificación de clientes por nombre y apellido.
+5. Códigos de género y estado civil.
+6. Ventas y envíos con hora distinta de medianoche: consulta agregada, pendiente de ejecutar.
+
 ## Pendientes del análisis
 
-La exploración inicial y los cuatro resultados de `02_revisar_calidad.sql` quedaron registrados. Antes de construir las transformaciones que los utilicen, revisar códigos de género y estado civil, espacios y longitudes de textos.
+- Ejecutar el resultado 6 y registrar VentasConHora y EnviosConHora. Las capturas de los mínimos y máximos muestran medianoche, pero no prueban las horas de todas las filas. Hasta obtener el resultado no se afirma que todas las fechas carezcan de hora.
+- Revisar espacios y longitudes antes de construir las transformaciones que los utilicen. Los tamaños del destino deben admitir las etiquetas: por ejemplo, Color del origen permite 15 caracteres, pero "Sin color informado" ocupa 19.
+- El análisis de fechas se hará por día. Si se detectan horas en el origen, documentar su tratamiento y si deben conservarse por separado.
 
 ## Evidencia
 - [Estructura y claves primarias](evidencias/01_exploracion_estructura.png): base, versión, columnas visibles y parte de las claves.
@@ -104,5 +131,6 @@ La exploración inicial y los cuatro resultados de `02_revisar_calidad.sql` qued
 - [Controles de calidad](evidencias/02_calidad_origen.tsv) y [referencias inexistentes](evidencias/02_referencias_origen.tsv): resultados de la segunda consulta compartidos por Joaquín.
 - [Rango de fechas](evidencias/02_rango_fechas.tsv) y [captura del rango](evidencias/03_exploracion_rango_fechas.png): resultado de PrimeraVenta, UltimaVenta, PrimerEnvio y UltimoEnvio compartido por Joaquín.
 - [Clasificación de clientes](evidencias/02_nombres_clientes.tsv) y [captura de clientes](evidencias/05_exploracion_nombres_clientes.png): resultado 4, que confirma la coincidencia de clientes sin nombre y sin apellido.
+- [Rango verificado por Frank](evidencias/02_rango_fechas.png) y [códigos de empleados](evidencias/02_codigos_genero_estado_civil.png): capturas aportadas por Frank desde su instancia.
 
-Ejecución realizada por Joaquín Ramírez. Falta completar los pendientes indicados y registrar el commit o PR de este avance.
+Joaquín ejecutó y documentó la exploración, los controles y la clasificación de clientes. Frank verificó el rango de fechas y agregó la consulta y evidencia de códigos. Los commits de ambos se registran en [aportes.md](aportes.md). El DW y el ETL siguen pendientes de implementar.

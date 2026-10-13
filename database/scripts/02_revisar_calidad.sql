@@ -123,3 +123,17 @@ SELECT
         AS ConNombreYApellido
 FROM ClientesRevisados;
 GO
+
+SELECT Genero, EstadoCivil, COUNT(*) AS Empleados
+FROM dbo.Empleados
+GROUP BY Genero, EstadoCivil
+ORDER BY Genero, EstadoCivil;
+GO
+
+SELECT
+    COUNT_BIG(CASE WHEN CAST(Fecha AS time) <> '00:00:00' THEN 1 END)
+        AS VentasConHora,
+    COUNT_BIG(CASE WHEN CAST(FechaEnvio AS time) <> '00:00:00' THEN 1 END)
+        AS EnviosConHora
+FROM dbo.Ventas;
+GO

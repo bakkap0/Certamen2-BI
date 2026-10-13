@@ -10,18 +10,17 @@ Bike Z necesita analizar sus ventas para apoyar sus decisiones comerciales. En e
 
 En la **Fase 1** vamos a crear un modelo dimensional en SQL Server y cargar sus datos mediante un proceso ETL en SSIS. El cubo OLAP y el dashboard en Power BI quedan para la Fase 2.
 
-## Indicadores propuestos
+## Indicadores definidos
 
 | KPI | Cálculo | ¿Para qué sirve? |
 |---|---|---|
-| Monto de ventas | Suma de cantidad × precio unitario | Comparar las ventas entre períodos y segmentos |
-| Unidades vendidas | Suma de cantidades | Identificar los productos más vendidos |
-| Número de ventas | Conteo de VentaID distintos | Saber cuántas ventas se realizaron |
-| Ticket promedio | Monto de ventas / número de ventas | Conocer el monto promedio por compra |
-| Crecimiento mensual | (Ventas actuales − anteriores) / anteriores × 100 | Ver cómo cambian las ventas entre meses |
-| Participación por categoría | Ventas de la categoría / ventas totales × 100 | Identificar las categorías con mayor aporte |
+| Monto de ventas | Suma de cantidad × precio unitario | Medir el tamaño del negocio y compararlo por mes, producto, categoría o territorio |
+| Crecimiento mensual de ventas | (Monto del mes − monto del mes anterior) / monto del mes anterior × 100 | Saber si la empresa sigue creciendo |
+| % de ventas con vendedor informado | Ventas distintas con vendedor informado / total de ventas distintas × 100 | Medir la cobertura de identificación del vendedor |
+| Ticket promedio | Monto de ventas / número de ventas distintas | Saber cuánto gasta un cliente por compra |
+| Días promedio de despacho | Promedio de (fecha de envío − fecha de venta) | Medir qué tan rápido se envían los pedidos |
 
-Si no hay ventas del mes anterior o su monto es cero, el crecimiento queda sin calcular. No calcularemos rentabilidad porque la base no incluye costos.
+El crecimiento se mide por mes porque 2015 y 2018 son años incompletos; si el mes anterior no tiene ventas, queda sin calcular. El ticket se divide por ventas distintas y no por detalles, porque una venta tiene varias líneas. No calcularemos rentabilidad ni inventario porque la base no incluye costos ni stock. El detalle de cada indicador está en [la propuesta del modelo](docs/modelo-dimensional/propuesta.md).
 
 ## Modelo dimensional
 
@@ -57,10 +56,10 @@ docs/presentacion/       Material para la presentación
 2. Ejecutar [01_explorar_origen.sql](database/scripts/01_explorar_origen.sql) en SSMS y registrar los resultados en [análisis del origen](docs/analisis-origen.md).
 3. Abrir [BikeZ_ETL.sln](etl/proyecto-ssis/BikeZ_ETL.sln) en Visual Studio 2019 con la extensión SSIS. El proyecto está configurado para SQL Server 2019; el paquete aún está vacío.
 
-En el equipo de Joaquín la instancia es `BAKKAPO\BI2019`. Cada integrante debe usar el nombre de su instancia al configurar las conexiones.
+En el equipo de Joaquín la instancia es `BAKKAPO\BIT2019`. Cada integrante debe usar el nombre de su instancia al configurar las conexiones.
 
 ## Avance y trabajo en equipo
 
-Tenemos el entorno instalado, la base de origen restaurada y el proyecto SSIS inicial. Falta registrar los resultados de la exploración, implementar el modelo y el ETL, validar la carga y preparar el respaldo dimensional y la presentación. La Fase 2 todavía no está iniciada.
+Tenemos el entorno instalado, la base de origen restaurada, la exploración y los controles iniciales documentados, y el diseño dimensional definido. El proyecto SSIS todavía está vacío. Falta comprobar las horas del origen, implementar el modelo y el ETL, validar la carga y preparar el respaldo dimensional y la presentación. La Fase 2 todavía no está iniciada.
 
-La distribución de tareas está en [el plan propuesto](docs/plan-trabajo.md), pendiente de acordar entre ambos. Registraremos los aportes de cada integrante en [aportes.md](docs/aportes.md), con sus commits o pull requests. Cada uno trabajará desde su cuenta y revisaremos los cambios antes de integrarlos.
+Joaquín realizó la exploración y los controles de datos; Frank amplió el análisis y documentó los KPI y el modelo. Frank continúa con el script dimensional y Joaquín revisará y probará su ejecución. Ambos participarán en SSIS, validación y presentación. El detalle está en [el plan de trabajo](docs/plan-trabajo.md) y los avances registrados en [aportes.md](docs/aportes.md). Cada uno trabaja desde su cuenta y revisamos los cambios antes de integrarlos.
