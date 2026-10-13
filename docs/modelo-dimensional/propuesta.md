@@ -28,6 +28,38 @@ Es el nivel más fino disponible en el origen. El producto, la cantidad y el pre
 
 Como una venta tiene varias líneas (31.465 ventas y 121.317 detalles), el número de ventas se calcula con `COUNT(DISTINCT VentaID)` y no contando filas.
 
+### 3. Dimensiones
+
+Modelo **estrella**: cada dimensión es una sola tabla unida directamente a la tabla de hechos. Los datos que en el origen están en tablas separadas se desnormalizan dentro de su dimensión.
+
+| Dimensión | Tablas de origen | Atributos principales | Jerarquía |
+|---|---|---|---|
+| DimFecha | Generada por script (no existe en el origen) | Fecha, día, mes, trimestre, semestre, año | Año → Semestre → Trimestre → Mes → Fecha |
+| DimProducto | `Productos` + `Categorias` | Producto, color, categoría | Categoría → Producto |
+| DimCliente | `Clientes` | Nombre, apellido | — |
+| DimVendedor | `Empleados` + `Territorios` | Cargo, género, estado civil, territorio asignado | — |
+| DimTerritorio | `Territorios` + `Paises` | Territorio, país, grupo | Grupo → País → Territorio |
+
+- **DimFecha** cubre del 2015-01-01 al 2018-12-31 e incluye las fechas de venta y de envío. La misma tabla se usa dos veces en el hecho: como fecha de venta y como fecha de envío.
+- **DimVendedor:** el origen no tiene nombres de empleados, por lo que cada vendedor se identifica como "Vendedor ‹EmpleadoID›". Los códigos se traducen: Genero `F`/`M` → Femenino/Masculino y EstadoCivil `S`/`M` → Soltero(a)/Casado(a).
+- **La geografía de la venta** se toma de `Ventas.TerritorioID` (DimTerritorio), no del territorio asignado al vendedor.
+- **Almacenes no se incluye:** la venta no indica desde qué almacén se despachó, y unirla por territorio asignaría ventas a almacenes sin evidencia.
+
+**Estrella o copo de nieve:** se eligió estrella porque `Categorias` y `Paises` solo contienen un nombre. Integrarlos en sus dimensiones evita joins adicionales, simplifica las consultas y el cubo, y es más fácil de entender para el usuario.
+
+#### Tratamiento de datos no informados
+
+| Situación | Tratamiento |
+|---|---|
+| Venta sin vendedor (27.658 ventas, 87,90%) | Se asocia a un **miembro desconocido** de DimVendedor (clave -1, "Vendedor no informado"). Así no se pierde ninguna venta y el total cuadra con el origen. |
+| Cliente sin nombre o apellido (9.546) | Conserva su propia fila y su ClienteID; el texto faltante se rellena con "Sin nombre informado" o "Sin apellido informado". No se unen clientes distintos en uno solo. |
+| Producto sin color (248) | Conserva su fila; color = "Sin color informado". |
+| Producto sin categoría (209) | Conserva su fila; categoría = "Sin categoría informada". |
+| Empleado sin territorio asignado (275) | Territorio asignado = "Territorio no informado". |
+
+Todas las dimensiones (salvo DimFecha, cuya clave es la fecha) tienen una fila -1 de miembro desconocido para referencias faltantes. La fila -1 se usa cuando no se sabe **quién** es; cuando el registro existe pero falta un atributo, se mantiene su fila y se rellena el texto.
+
+
 ## Componentes propuestos
 | Componente | Contenido previsto |
 |---|---|
