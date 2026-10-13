@@ -1,4 +1,6 @@
-# Propuesta inicial — pendiente de contrastar con BikeZ
+# Modelo dimensional — Bike Z
+
+Diseño definido a partir del análisis del origen (`docs/analisis-origen.md`), siguiendo los cuatro pasos de Kimball. Implementación: `database/scripts/03_crear_modelo_dimensional.sql`. Diagrama: [diagrama.png](diagrama.png).
 
 ## KPI definidos
 
@@ -88,26 +90,12 @@ Todas las dimensiones (salvo DimFecha, cuya clave es la fecha) tienen una fila -
 | Número de ventas | **Calculada** (conteo distinto) | `COUNT(DISTINCT VentaID)` en cada contexto. Los conteos de distintos grupos no se suman, porque una misma venta puede aparecer en varios productos. |
 | Ticket promedio, crecimiento y porcentajes | **Calculadas** | Se recalculan en cada nivel a partir del monto y el número de ventas. Nunca se suman porcentajes ni promedios. |
 
-## Componentes propuestos
-| Componente | Contenido previsto |
-|---|---|
-| DimFecha | Clave YYYYMMDD, fecha, año, trimestre, mes y día; roles venta y envío |
-| DimCliente | Clave sustituta, ClienteID, nombre y apellido |
-| DimProducto | Clave sustituta, ProductoID, producto, color y categoría |
-| DimVendedor | Clave sustituta, EmpleadoID y atributos pertinentes del empleado |
-| DimTerritorio | Clave sustituta, TerritorioID, territorio, país y grupo |
-| FactVentas | Claves dimensionales, VentaID, DetalleVentaID, Cantidad, PrecioUnitario, ImporteVenta |
+## Decisiones del modelo
 
-La estrella desnormaliza categoría dentro de Producto y país/grupo dentro de Territorio. Las claves de referencia deben resolverse durante el ETL y conservar la trazabilidad con claves naturales.
+- **Historia de las dimensiones (SCD tipo 1):** los cambios se sobrescriben. El origen solo guarda el valor actual de cada atributo y no tiene fechas de vigencia, por lo que no hay historia que conservar.
+- **Claves sustitutas:** cada dimensión (salvo DimFecha) usa una clave propia generada en el DW y conserva el ID del origen para la trazabilidad. Las claves se resuelven durante el ETL.
+- **Referencias inexistentes y devoluciones:** el análisis del origen no encontró referencias inexistentes, cantidades negativas ni precios negativos, por lo que no se requiere un tratamiento especial. Si aparecieran en cargas futuras, las referencias faltantes se asocian al miembro -1.
+- **Sin rentabilidad ni moneda:** no se calcula utilidad porque no hay costos, y los montos se presentan sin convertir porque el origen no informa la moneda.
 
-## Decisiones que deben explicarse
-- Un pedido puede contener varias líneas. Contar pedidos con DISTINCT VentaID, no con COUNT(*).
-- Cantidad e ImporteVenta son aditivos. PrecioUnitario, ticket, porcentajes y conteos distintos se recalculan en su contexto.
-- El ticket se obtiene como importe total / pedidos distintos; no como promedio de tickets parciales.
-- Usar Ventas.TerritorioID para la geografía comercial.
-- No atribuir ventas a Almacenes solo por territorio. El esquema no ofrece AlmacenID en la venta y una unión podría multiplicar filas.
-- No calcular utilidad sin costos ni asumir una moneda que el origen no informa.
-- Definir tratamiento de NULL, huérfanos, devoluciones, fechas y cambios dimensionales después del perfilamiento real.
-
-## Pendiente de implementar
-Diagrama definitivo, diccionario con tipos reales, DDL, claves, restricciones, política de historia dimensional, miembros desconocidos, reglas de calidad y medidas finales. Este documento no afirma que exista un DW creado o cargado.
+## Pendiente
+Script de creación en SQL Server (`03_crear_modelo_dimensional.sql`), diagrama del modelo implementado y proceso ETL. Este documento describe el diseño; el DW todavía no está creado ni cargado.
