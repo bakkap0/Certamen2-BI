@@ -1,0 +1,10 @@
+Relacion	EsquemaHijo	TablaHija	ColumnaHija	EsquemaPadre	TablaPadre	ColumnaPadre	Deshabilitada	NoVerificada
+fk_categoria_producto	dbo	Productos	CategoriaID	dbo	Categorias	CategoriaID	0	0
+fk_cliente_venta	dbo	Ventas	ClienteID	dbo	Clientes	ClienteID	0	0
+fk_pais_territorio	dbo	Territorios	PaisID	dbo	Paises	PaisID	0	0
+fk_producto_detalle	dbo	DetalleVentas	ProductoID	dbo	Productos	ProductoID	0	0
+fk_territorio_almacen	dbo	Almacenes	TerritorioID	dbo	Territorios	TerritorioID	0	0
+fk_territorio_empleado	dbo	Empleados	TerritorioID	dbo	Territorios	TerritorioID	0	0
+fk_territorio_venta	dbo	Ventas	TerritorioID	dbo	Territorios	TerritorioID	0	0
+fk_vendedor_venta	dbo	Ventas	VendedorID	dbo	Empleados	EmpleadoID	0	0
+fk_venta_detalle	dbo	DetalleVentas	VentaID	dbo	Ventas	VentaID	0	0

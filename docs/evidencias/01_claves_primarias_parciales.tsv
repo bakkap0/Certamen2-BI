@@ -1,0 +1,9 @@
+Esquema	Tabla	ClavePrimaria	Columna	OrdenEnClave
+dbo	Almacenes	PK__Almacene__022A08561CF15040	AlmacenID	1
+dbo	Categorias	PK__Categori__F353C1C508EA5793	CategoriaID	1
+dbo	Clientes	PK__Clientes__71ABD0A71A14E395	ClienteID	1
+dbo	DetalleVentas	PK_DetalleVentas	VentaID	1
+dbo	DetalleVentas	PK_DetalleVentas	DetalleVentaID	2
+dbo	Empleados	PK__Empleado__958BE6F0164452B1	EmpleadoID	1
+dbo	Paises	PK__Paises__B501E1A50F975522	PaisID	1
+dbo	Productos	PK__Producto__A430AE830BC6C43E	ProductoID	1

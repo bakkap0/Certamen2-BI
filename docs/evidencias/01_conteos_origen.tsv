@@ -1,0 +1,11 @@
+Esquema	Tabla	Filas
+dbo	Almacenes	701
+dbo	Categorias	37
+dbo	Clientes	19820
+dbo	DetalleVentas	121317
+dbo	Empleados	290
+dbo	Paises	238
+dbo	Productos	504
+dbo	sysdiagrams	1
+dbo	Territorios	10
+dbo	Ventas	31465
