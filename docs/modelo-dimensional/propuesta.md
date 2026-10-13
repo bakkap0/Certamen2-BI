@@ -15,10 +15,18 @@ Los KPI se definieron a partir del análisis del origen (`docs/analisis-origen.m
 Todos los KPI se pueden analizar por las dimensiones del modelo: fecha, producto, cliente, vendedor y territorio.
 
 ## Cuatro pasos de Kimball
-1. **Proceso de negocio:** ventas de artículos para motocross.
-2. **Granularidad:** una fila por detalle `(VentaID, DetalleVentaID)`.
-3. **Dimensiones:** Fecha, Cliente, Producto, Vendedor y Territorio.
-4. **Hecho y medidas:** FactVentas con Cantidad, PrecioUnitario e ImporteVenta.
+
+### 1. Proceso de negocio
+**Ventas de artículos para motocross.**
+
+Es el proceso central de Bike Z y el que permite medir su crecimiento. Además, es el único con datos completos en el origen: la cabecera de la venta (`Ventas`) registra cuándo, a quién, quién vendió y dónde, y el detalle (`DetalleVentas`) registra qué producto, en qué cantidad y a qué precio. No se modela inventario porque `Almacenes` solo contiene el nombre del almacén y su territorio, sin stock ni movimientos.
+
+### 2. Granularidad
+**Una fila por detalle de venta, identificada por `VentaID` + `DetalleVentaID`** (un producto dentro de una venta).
+
+Es el nivel más fino disponible en el origen. El producto, la cantidad y el precio solo existen en `DetalleVentas`; con una fila por venta se perdería qué productos y categorías se vendieron. Con el grano por detalle se puede agregar hacia arriba (venta, día, mes, categoría, territorio), pero no se puede bajar a un detalle que no se guardó.
+
+Como una venta tiene varias líneas (31.465 ventas y 121.317 detalles), el número de ventas se calcula con `COUNT(DISTINCT VentaID)` y no contando filas.
 
 ## Componentes propuestos
 | Componente | Contenido previsto |
