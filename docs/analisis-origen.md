@@ -1,6 +1,6 @@
 # Análisis del origen BikeZ
 
-**Estado:** se integraron la exploración y los controles de Joaquín con la revisión de fechas y códigos de empleados de Frank. Están registrados los conteos, las claves de las 9 tablas de negocio, los datos faltantes y la clasificación de clientes. La nueva comprobación de horas está pendiente de ejecutar.
+**Estado:** se integraron la exploración y los controles de Joaquín con la revisión de fechas y códigos de empleados de Frank. Están registrados los conteos, las claves de las 9 tablas de negocio, los datos faltantes y la clasificación de clientes. Joaquín ejecutó la comprobación de horas: ambos conteos dieron 0.
 
 Consultas utilizadas: `database/scripts/01_explorar_origen.sql` y `database/scripts/02_revisar_calidad.sql`.
 
@@ -108,6 +108,17 @@ Los cuatro grupos suman los 290 empleados del origen. Solo se observaron F/M en 
 
 Frank también verificó el rango de fechas y registró que los controles generales coincidían con los obtenidos por Joaquín. Sus capturas se conservan junto con las de Joaquín.
 
+## Comprobación de horas
+
+Joaquín ejecutó el resultado 6 de `02_revisar_calidad.sql` y compartió los valores desde SSMS el 13 de octubre de 2026.
+
+| Control | Filas |
+|---|---:|
+| VentasConHora | 0 |
+| EnviosConHora | 0 |
+
+La consulta cuenta fechas informadas cuya hora es distinta de `00:00:00`. Ambos resultados confirman que las fechas de venta y envío informadas están a medianoche. Los controles anteriores también dieron 0 ventas sin fecha de envío. Para este origen podemos trabajar al nivel de día mediante una dimensión Fecha de tipo `date`, con roles de venta y envío.
+
 ## Orden de resultados del script 02
 
 1. Rango de fechas.
@@ -115,13 +126,12 @@ Frank también verificó el rango de fechas y registró que los controles genera
 3. Referencias inexistentes.
 4. Clasificación de clientes por nombre y apellido.
 5. Códigos de género y estado civil.
-6. Ventas y envíos con hora distinta de medianoche: consulta agregada, pendiente de ejecutar.
+6. Ventas y envíos con hora distinta de medianoche: ejecutado; ambos conteos dieron 0.
 
 ## Pendientes del análisis
 
-- Ejecutar el resultado 6 y registrar VentasConHora y EnviosConHora. Las capturas de los mínimos y máximos muestran medianoche, pero no prueban las horas de todas las filas. Hasta obtener el resultado no se afirma que todas las fechas carezcan de hora.
 - Revisar espacios y longitudes antes de construir las transformaciones que los utilicen. Los tamaños del destino deben admitir las etiquetas: por ejemplo, Color del origen permite 15 caracteres, pero "Sin color informado" ocupa 19.
-- El análisis de fechas se hará por día. Si se detectan horas en el origen, documentar su tratamiento y si deben conservarse por separado.
+- Mantener la comprobación de horas en futuras cargas para detectar cambios en el origen y revisar el tratamiento si fuera necesario.
 
 ## Evidencia
 - [Estructura y claves primarias](evidencias/01_exploracion_estructura.png): base, versión, columnas visibles y parte de las claves.
@@ -132,5 +142,6 @@ Frank también verificó el rango de fechas y registró que los controles genera
 - [Rango de fechas](evidencias/02_rango_fechas.tsv) y [captura del rango](evidencias/03_exploracion_rango_fechas.png): resultado de PrimeraVenta, UltimaVenta, PrimerEnvio y UltimoEnvio compartido por Joaquín.
 - [Clasificación de clientes](evidencias/02_nombres_clientes.tsv) y [captura de clientes](evidencias/05_exploracion_nombres_clientes.png): resultado 4, que confirma la coincidencia de clientes sin nombre y sin apellido.
 - [Rango verificado por Frank](evidencias/02_rango_fechas.png) y [códigos de empleados](evidencias/02_codigos_genero_estado_civil.png): capturas aportadas por Frank desde su instancia.
+- [Horas del origen](evidencias/02_horas_origen.tsv): resultado 6 compartido por Joaquín en texto desde SSMS; 0 ventas y 0 envíos con hora distinta de medianoche.
 
 Joaquín ejecutó y documentó la exploración, los controles y la clasificación de clientes. Frank verificó el rango de fechas y agregó la consulta y evidencia de códigos. Los commits de ambos se registran en [aportes.md](aportes.md). El DW y el ETL siguen pendientes de implementar.
