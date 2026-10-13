@@ -54,12 +54,14 @@ docs/presentacion/       Material para la presentación
 
 1. Clonar el repositorio y restaurar el archivo `BikeZ.bak` del caso como base `BikeZ` en SQL Server 2019.
 2. Ejecutar [01_explorar_origen.sql](database/scripts/01_explorar_origen.sql) en SSMS y registrar los resultados en [análisis del origen](docs/analisis-origen.md).
-3. Abrir [BikeZ_ETL.sln](etl/proyecto-ssis/BikeZ_ETL.sln) en Visual Studio 2019 con la extensión SSIS. El proyecto está configurado para SQL Server 2019; el paquete aún está vacío.
+3. Para una instalación inicial, ejecutar [03_crear_modelo_dimensional.sql](database/scripts/03_crear_modelo_dimensional.sql). El script elimina y recrea las tablas de BikeZ_DW, por lo que no se utiliza para revisar una base ya cargada.
+4. Ejecutar [04_verificar_modelo.sql](database/scripts/04_verificar_modelo.sql), de solo lectura, para revisar conteos, miembros desconocidos, claves y relaciones.
+5. Abrir [BikeZ_ETL.sln](etl/proyecto-ssis/BikeZ_ETL.sln) en Visual Studio 2019 con la extensión SSIS. El proyecto está configurado para SQL Server 2019; el paquete aún está vacío.
 
 En el equipo de Joaquín la instancia es `BAKKAPO\BIT2019`. Cada integrante debe usar el nombre de su instancia al configurar las conexiones.
 
 ## Avance y trabajo en equipo
 
-Tenemos el entorno instalado, la base de origen restaurada, la exploración y los controles iniciales documentados, y el diseño dimensional definido. Se comprobó que las fechas informadas están a medianoche. El proyecto SSIS todavía está vacío. Falta implementar el modelo y el ETL, validar la carga y preparar el respaldo dimensional y la presentación. La Fase 2 todavía no está iniciada.
+Tenemos el entorno instalado, la base de origen restaurada, la exploración y los controles iniciales documentados, y el modelo dimensional creado. Frank guardó el diagrama y pruebas de restricciones; Joaquín ejecutó el script y comprobó los conteos, miembros desconocidos, claves y relaciones en su equipo. Se comprobó que las fechas del origen están a medianoche. El proyecto SSIS todavía está vacío: falta implementar el ETL, validar la carga y preparar el respaldo dimensional y la presentación. La Fase 2 todavía no está iniciada.
 
-Joaquín realizó la exploración y los controles de datos; Frank amplió el análisis y documentó los KPI y el modelo. Frank continúa con el script dimensional y Joaquín revisará y probará su ejecución. Ambos participarán en SSIS, validación y presentación. El detalle está en [el plan de trabajo](docs/plan-trabajo.md) y los avances registrados en [aportes.md](docs/aportes.md). Cada uno trabaja desde su cuenta y revisamos los cambios antes de integrarlos.
+Joaquín realizó la exploración, los controles de datos y la comprobación inicial del modelo en su equipo; Frank amplió el análisis, documentó los KPI y creó el modelo y su diagrama. Ambos participarán en SSIS, validación y presentación. El detalle está en [el plan de trabajo](docs/plan-trabajo.md) y los avances registrados en [aportes.md](docs/aportes.md). Cada uno trabaja desde su cuenta y revisamos los cambios antes de integrarlos.

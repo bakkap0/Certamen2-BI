@@ -6,16 +6,17 @@ Esta lista recoge los entregables y controles de la pauta. Marcar una casilla ú
 - [x] Repositorio creado.
 - [x] Nombres y sección registrados.
 - [ ] Usuario GitHub de Frank registrado y colaboración habilitada.
-- [ ] Aportes sustantivos de ambos identificables en Git.
+- [x] Aportes sustantivos de ambos identificables en Git.
 - [ ] Repositorio accesible para el docente.
-- [ ] README actualizado para la versión que se demostrará.
+- [x] README actualizado para el avance actual; volver a revisar antes de presentar.
 
 ## Análisis y diseño
-- [ ] Esquema del origen, conteos y calidad documentados con resultados reales.
-- [ ] KPI definidos y justificados.
-- [ ] Cuatro pasos de Kimball documentados y contrastados con el origen.
-- [ ] Diagrama definitivo coherente con el modelo implementado.
-- [ ] DDL de dimensiones, hechos, claves y relaciones ejecutado en SQL Server 2019.
+- [x] Esquema del origen, conteos y controles iniciales de calidad documentados con resultados reales.
+- [x] KPI definidos y justificados.
+- [x] Cuatro pasos de Kimball documentados y contrastados con el origen.
+- [x] Diagrama coherente con el modelo implementado; revisar si cambia el diseño.
+- [x] DDL de dimensiones, hechos, claves y relaciones ejecutado en SQL Server 2019.
+- [x] Verificación de miembros desconocidos, claves y relaciones con el script 04 en el equipo de Joaquín.
 
 ## ETL y validación
 - [ ] Proyecto SSIS guardado, compartible y compilado para SQL Server 2019.

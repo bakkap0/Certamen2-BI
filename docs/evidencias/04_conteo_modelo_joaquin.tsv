@@ -1,0 +1,7 @@
+Tabla	Filas
+DimProducto	1
+DimCliente	1
+DimVendedor	1
+DimTerritorio	1
+DimFecha	0
+FactVentas	0

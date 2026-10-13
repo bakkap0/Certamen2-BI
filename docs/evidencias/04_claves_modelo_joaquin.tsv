@@ -1,0 +1,13 @@
+Tabla	Restriccion	Tipo	Columna	OrdenEnClave	EsIdentity
+DimCliente	PK_DimCliente	PK	ClienteKey	1	1
+DimCliente	UQ_DimCliente_ClienteID	UQ	ClienteID	1	0
+DimFecha	PK_DimFecha	PK	FechaKey	1	0
+DimFecha	UQ_DimFecha_Fecha	UQ	Fecha	1	0
+DimProducto	PK_DimProducto	PK	ProductoKey	1	1
+DimProducto	UQ_DimProducto_ProductoID	UQ	ProductoID	1	0
+DimTerritorio	PK_DimTerritorio	PK	TerritorioKey	1	1
+DimTerritorio	UQ_DimTerritorio_TerritorioID	UQ	TerritorioID	1	0
+DimVendedor	PK_DimVendedor	PK	VendedorKey	1	1
+DimVendedor	UQ_DimVendedor_EmpleadoID	UQ	EmpleadoID	1	0
+FactVentas	PK_FactVentas	PK	VentaID	1	0
+FactVentas	PK_FactVentas	PK	DetalleVentaID	2	0
