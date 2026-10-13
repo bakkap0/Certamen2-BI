@@ -113,6 +113,8 @@ SELECT N'Detalles con venta inexistente', COUNT_BIG(*)
 FROM dbo.DetalleVentas d
 WHERE NOT EXISTS (SELECT 1 FROM dbo.Ventas v WHERE v.VentaID = d.VentaID);
 
+-- Resultado 4: codigos de genero y estado civil de los empleados.
+-- Define las reglas de traduccion de DimVendedor en el ETL.
 SELECT Genero, EstadoCivil, COUNT(*) AS Empleados
 FROM dbo.Empleados
 GROUP BY Genero, EstadoCivil
