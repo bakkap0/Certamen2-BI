@@ -59,6 +59,34 @@ Modelo **estrella**: cada dimensión es una sola tabla unida directamente a la t
 
 Todas las dimensiones (salvo DimFecha, cuya clave es la fecha) tienen una fila -1 de miembro desconocido para referencias faltantes. La fila -1 se usa cuando no se sabe **quién** es; cuando el registro existe pero falta un atributo, se mantiene su fila y se rellena el texto.
 
+### 4. Tabla de hechos y medidas
+
+**FactVentas**: una fila por detalle de venta.
+
+| Columna | Tipo | Origen o cálculo |
+|---|---|---|
+| `VentaID`, `DetalleVentaID` | Dimensiones degeneradas (clave primaria) | `DetalleVentas`. Identifican la línea; la clave primaria impide cargar dos veces el mismo detalle. |
+| `FechaVentaKey` | Clave de DimFecha | `Ventas.Fecha` en formato AAAAMMDD |
+| `FechaEnvioKey` | Clave de DimFecha (rol envío) | `Ventas.FechaEnvio` en formato AAAAMMDD |
+| `ProductoKey` | Clave de DimProducto | Búsqueda por `DetalleVentas.ProductoID` |
+| `ClienteKey` | Clave de DimCliente | Búsqueda por `Ventas.ClienteID` |
+| `VendedorKey` | Clave de DimVendedor | Búsqueda por `Ventas.VendedorID`; -1 si no tiene vendedor |
+| `TerritorioKey` | Clave de DimTerritorio | Búsqueda por `Ventas.TerritorioID` |
+| `Cantidad` | Medida | `DetalleVentas.Cantidad` |
+| `PrecioUnitario` | Medida | `DetalleVentas.PrecioUnitario` (`money`, 4 decimales) |
+| `ImporteVenta` | Medida calculada | `Cantidad × PrecioUnitario` |
+| `DiasDespacho` | Medida calculada | Días entre `Fecha` y `FechaEnvio` |
+
+#### Medidas que se suman y medidas que se recalculan
+
+| Medida | Clasificación | Cómo se agrega |
+|---|---|---|
+| Cantidad | **Aditiva** | Se suma por cualquier dimensión. |
+| ImporteVenta | **Aditiva** | Se suma por cualquier dimensión. Se guarda calculada para no multiplicar en cada consulta. |
+| PrecioUnitario | **No aditiva** | No se suma: sumar precios no representa ningún valor. El precio promedio se recalcula como Σ ImporteVenta / Σ Cantidad. |
+| DiasDespacho | **No aditiva** | No se suma. Se promedia en cada nivel de análisis. Como los días pertenecen a la venta y se repiten en cada línea, el promedio se calcula por venta distinta. |
+| Número de ventas | **Calculada** (conteo distinto) | `COUNT(DISTINCT VentaID)` en cada contexto. Los conteos de distintos grupos no se suman, porque una misma venta puede aparecer en varios productos. |
+| Ticket promedio, crecimiento y porcentajes | **Calculadas** | Se recalculan en cada nivel a partir del monto y el número de ventas. Nunca se suman porcentajes ni promedios. |
 
 ## Componentes propuestos
 | Componente | Contenido previsto |
