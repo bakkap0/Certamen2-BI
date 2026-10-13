@@ -1,4 +1,3 @@
-
 USE BikeZ;
 GO
 SELECT DB_NAME() AS BaseActual,
@@ -43,8 +42,7 @@ FROM sys.foreign_keys fk
 JOIN sys.foreign_key_columns fkc ON fkc.constraint_object_id=fk.object_id
 ORDER BY fk.name,fkc.constraint_column_id;
 GO
-/* Conteos EXACTOS por tabla. QUOTENAME protege nombres de esquema/tabla.
-   Ejecutar sin cambios concurrentes para que los conteos sean comparables. */
+
 DECLARE @Consulta nvarchar(max);
 SELECT @Consulta=STRING_AGG(
  CAST(N'SELECT N'+QUOTENAME(s.name,CHAR(39))+N' AS Esquema, N'
@@ -59,4 +57,3 @@ BEGIN
  EXEC sys.sp_executesql @Consulta;
 END;
 GO
-
