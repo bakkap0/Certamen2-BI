@@ -1,7 +1,7 @@
 # Modelo dimensional — Bike Z
 
-Diseño definido a partir del análisis del origen (`docs/analisis-origen.md`), siguiendo los cuatro pasos de Kimball. Pendientes: implementar `database/scripts/03_crear_modelo_dimensional.sql` y generar `docs/modelo-dimensional/diagrama.png` a partir del modelo creado.
-
+Diseño definido a partir del análisis del origen (`docs/analisis-origen.md`), siguiendo los cuatro pasos de Kimball. Implementación: `database/scripts/03_crear_modelo_dimensional.sql`.
+Diagrama: [diagrama.png](diagrama.png).
 ## KPI definidos
 
 Los KPI se definieron a partir del análisis del origen (`docs/analisis-origen.md`). Solo se incluyen indicadores que pueden calcularse con los datos disponibles: la base no tiene costos, stock ni moneda, por lo que no se miden rentabilidad ni inventario.
