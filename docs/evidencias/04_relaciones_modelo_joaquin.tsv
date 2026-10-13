@@ -1,0 +1,7 @@
+Relacion	ColumnaHecho	Dimension	ClaveDimension	Deshabilitada	NoVerificada
+FK_FactVentas_Cliente	ClienteKey	DimCliente	ClienteKey	0	0
+FK_FactVentas_FechaEnvio	FechaEnvioKey	DimFecha	FechaKey	0	0
+FK_FactVentas_FechaVenta	FechaVentaKey	DimFecha	FechaKey	0	0
+FK_FactVentas_Producto	ProductoKey	DimProducto	ProductoKey	0	0
+FK_FactVentas_Territorio	TerritorioKey	DimTerritorio	TerritorioKey	0	0
+FK_FactVentas_Vendedor	VendedorKey	DimVendedor	VendedorKey	0	0

@@ -13,5 +13,7 @@ Este registro complementa el historial de Git. Describe avances realizados; no m
 | Frank Soto | Proceso y granularidad | [23ebde0](https://github.com/bakkap0/Certamen2-BI/commit/23ebde0) | Los primeros dos pasos de Kimball y la clave compuesta del detalle |
 | Frank Soto | Dimensiones y datos no informados | [3f4a104](https://github.com/bakkap0/Certamen2-BI/commit/3f4a104) | Roles de Fecha, desnormalización y miembros desconocidos |
 | Frank Soto | Tabla de hechos, agregaciones e historia dimensional | [3100b5f](https://github.com/bakkap0/Certamen2-BI/commit/3100b5f), [8d075d6](https://github.com/bakkap0/Certamen2-BI/commit/8d075d6) | Medidas aditivas, promedios por venta y SCD tipo 1 |
+| Frank Soto | Script de creación del modelo, pruebas y diagrama | [313b9ae](https://github.com/bakkap0/Certamen2-BI/commit/313b9ae), [8f79512](https://github.com/bakkap0/Certamen2-BI/commit/8f79512) | Claves sustitutas, grano, relaciones y miembros desconocidos |
+| Joaquín Ramírez | Ejecución del script dimensional y verificación de conteos, miembros desconocidos, claves y relaciones | [Resultados y alcance](modelo-dimensional/validacion-joaquin.md) | Cómo está preparada la estructura del modelo antes de cargarla mediante SSIS |
 
-Las revisiones e integraciones posteriores se registrarán con su commit o Pull Request real. El DW y el ETL todavía no están implementados en este avance.
+Las revisiones e integraciones posteriores se registrarán con su commit o Pull Request real. El DW está creado y su estructura fue comprobada con el script 04 en el equipo de Joaquín; la carga ETL todavía no está implementada.
