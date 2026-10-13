@@ -97,5 +97,5 @@ Todas las dimensiones (salvo DimFecha, cuya clave es la fecha) tienen una fila -
 - **Referencias inexistentes y devoluciones:** el análisis del origen no encontró referencias inexistentes, cantidades negativas ni precios negativos, por lo que no se requiere un tratamiento especial. Si aparecieran en cargas futuras, las referencias faltantes se asocian al miembro -1.
 - **Sin rentabilidad ni moneda:** no se calcula utilidad porque no hay costos, y los montos se presentan sin convertir porque el origen no informa la moneda.
 
-## Pendiente
-Script de creación en SQL Server (`03_crear_modelo_dimensional.sql`), diagrama del modelo implementado y proceso ETL. Este documento describe el diseño; el DW todavía no está creado ni cargado.
+## Estado
+El modelo está creado en SQL Server 2019 con `database/scripts/03_crear_modelo_dimensional.sql`. El diagrama del modelo implementado está en [diagrama.png](diagrama.png). Las pruebas de la clave sustituta, el grano sin duplicados y la integridad referencial están en `docs/evidencias/03_*.png`. Las tablas están vacías, salvo los miembros -1: la carga corresponde al proceso ETL.
