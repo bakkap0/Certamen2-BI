@@ -10,18 +10,17 @@ Bike Z necesita analizar sus ventas para apoyar sus decisiones comerciales. En e
 
 En la **Fase 1** vamos a crear un modelo dimensional en SQL Server y cargar sus datos mediante un proceso ETL en SSIS. El cubo OLAP y el dashboard en Power BI quedan para la Fase 2.
 
-## Indicadores propuestos
+## Indicadores definidos
 
 | KPI | Cálculo | ¿Para qué sirve? |
 |---|---|---|
-| Monto de ventas | Suma de cantidad × precio unitario | Comparar las ventas entre períodos y segmentos |
-| Unidades vendidas | Suma de cantidades | Identificar los productos más vendidos |
-| Número de ventas | Conteo de VentaID distintos | Saber cuántas ventas se realizaron |
-| Ticket promedio | Monto de ventas / número de ventas | Conocer el monto promedio por compra |
-| Crecimiento mensual | (Ventas actuales − anteriores) / anteriores × 100 | Ver cómo cambian las ventas entre meses |
-| Participación por categoría | Ventas de la categoría / ventas totales × 100 | Identificar las categorías con mayor aporte |
+| Monto de ventas | Suma de cantidad × precio unitario | Medir el tamaño del negocio y compararlo por mes, producto, categoría o territorio |
+| Crecimiento mensual de ventas | (Monto del mes − monto del mes anterior) / monto del mes anterior × 100 | Saber si la empresa sigue creciendo |
+| % de ventas con vendedor | Ventas con vendedor / total de ventas × 100 | Ver qué parte del negocio pasa por el equipo comercial |
+| Ticket promedio | Monto de ventas / número de ventas distintas | Saber cuánto gasta un cliente por compra |
+| Días promedio de despacho | Promedio de (fecha de envío − fecha de venta) | Medir qué tan rápido se envían los pedidos |
 
-Si no hay ventas del mes anterior o su monto es cero, el crecimiento queda sin calcular. No calcularemos rentabilidad porque la base no incluye costos.
+El crecimiento se mide por mes porque 2015 y 2018 son años incompletos; si el mes anterior no tiene ventas, queda sin calcular. El ticket se divide por ventas distintas y no por detalles, porque una venta tiene varias líneas. No calcularemos rentabilidad ni inventario porque la base no incluye costos ni stock. El detalle de cada indicador está en [la propuesta del modelo](docs/modelo-dimensional/propuesta.md).
 
 ## Modelo dimensional
 

@@ -1,6 +1,6 @@
 # Análisis del origen BikeZ
 
-**Estado:** exploración inicial y controles de calidad ejecutados por Joaquín. Se registraron los resultados compartidos desde SSMS. Faltan el rango de fechas, las claves primarias de Ventas y Territorios y algunas comprobaciones adicionales.
+**Estado:** exploración inicial y controles de calidad ejecutados por Joaquín. Frank registró el rango de fechas y los códigos de género y estado civil. Faltan las claves primarias de Ventas y Territorios y algunas comprobaciones adicionales.
 
 Consultas utilizadas: `database/scripts/01_explorar_origen.sql` y `database/scripts/02_revisar_calidad.sql`.
 
@@ -69,16 +69,51 @@ Los conteos de nombre y apellido coinciden, pero todavía no comprobamos que cor
 
 Estas reglas están propuestas para la implementación. El DW y el ETL aún no están construidos. Los controles ejecutados no justifican rechazar ventas por los datos descriptivos faltantes; debemos conservar las filas y sus importes, manteniendo trazabilidad de estos casos.
 
+## Rango de fechas y códigos de empleados
+
+Consultas ejecutadas por Frank Soto el 13 de octubre de 2026 en SQL Server 2019 (instancia FRANK-PC), sobre la base `BikeZ` restaurada. El rango de fechas corresponde al primer resultado de `02_revisar_calidad.sql`; los códigos corresponden al último resultado, agregado por Frank Soto a ese mismo script. Los demás controles de `02_revisar_calidad.sql` dieron los mismos valores registrados por Joaquín.
+
+### Rango de fechas
+
+| Campo | Primera fecha | Última fecha |
+|---|---|---|
+| Fecha de venta | 2015-07-01 | 2018-07-31 |
+| Fecha de envío | 2015-07-08 | 2018-08-07 |
+
+- Todas las fechas tienen hora `00:00:00`. Aunque las columnas son `datetime`, solo registran el día, por lo que en el modelo dimensional se pueden manejar como `date`.
+- La dimensión Fecha debe cubrir desde el 2015-01-01 hasta el 2018-12-31, en años completos, para incluir tanto las fechas de venta como las de envío. La última fecha de envío (agosto de 2018) es posterior a la última venta.
+- 2015 (desde julio) y 2018 (hasta julio) son años parciales. Comparar sus totales anuales con 2016 o 2017 distorsionaría el crecimiento, por lo que conviene medirlo por mes o comparando los mismos meses entre años.
+
+### Códigos de género y estado civil
+
+| Genero | EstadoCivil | Empleados |
+|---|---|---:|
+| F | M | 49 |
+| M | M | 97 |
+| F | S | 35 |
+| M | S | 109 |
+| **Total** | | **290** |
+
+- Solo existen los códigos `F`/`M` en Genero y `M`/`S` en EstadoCivil, sin nulos. El total coincide con los 290 empleados de la tabla.
+- La letra `M` tiene un significado distinto en cada columna: en Genero corresponde a masculino y en EstadoCivil a casado (*married*). Por eso cada columna necesita su propia regla de traducción en el ETL:
+  - Genero: `F` → Femenino, `M` → Masculino.
+  - EstadoCivil: `S` → Soltero(a), `M` → Casado(a).
+
 ## Pendientes del análisis
 
-1. Registrar el primer resultado de `02_revisar_calidad.sql`: PrimeraVenta, UltimaVenta, PrimerEnvio y UltimoEnvio.
+1. ~~Registrar el rango de fechas de `02_revisar_calidad.sql`.~~ Resuelto: ver "Rango de fechas y códigos de empleados".
 2. Completar las claves primarias de Ventas y Territorios.
-3. Comprobar el solapamiento de clientes sin nombre y sin apellido y revisar códigos de género y estado civil, espacios y longitudes de textos antes de construir las transformaciones.
+3. Comprobar el solapamiento de clientes sin nombre y sin apellido, y revisar espacios y longitudes de textos antes de construir las transformaciones. Los códigos de género y estado civil ya fueron revisados.
 
 ## Evidencia
+
 - [Estructura y claves primarias](evidencias/01_exploracion_estructura.png): base, versión, columnas visibles y parte de las claves.
+
 - [Relaciones y conteos parciales](evidencias/02_exploracion_conteos_parciales.png): relaciones visibles y conteos; algunos valores están cortados y faltan las últimas filas.
+
 - [Conteos completos](evidencias/01_conteos_origen.tsv), [columnas](evidencias/01_columnas_origen.tsv), [relaciones](evidencias/01_claves_foraneas.tsv) y [claves primarias parciales](evidencias/01_claves_primarias_parciales.tsv): resultados copiados por Joaquín desde SSMS y compartidos en texto.
+
 - [Controles de calidad](evidencias/02_calidad_origen.tsv) y [referencias inexistentes](evidencias/02_referencias_origen.tsv): resultados de la segunda consulta compartidos por Joaquín.
 
-Ejecución realizada por Joaquín Ramírez. Falta completar los pendientes indicados y registrar el commit o PR de este avance.
+Evidencia: [rango de fechas](evidencias/02_rango_fechas.png) y [códigos de género y estado civil](evidencias/02_codigos_genero_estado_civil.png).
+
