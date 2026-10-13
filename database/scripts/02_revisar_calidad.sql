@@ -1,21 +1,12 @@
-/* Fase 1 - Calidad del origen BikeZ.
-   Solo lectura. Ejecutar completo en SSMS sobre la base restaurada.
-   Estos controles ayudan a decidir las reglas del ETL. Un nulo permitido,
-   un precio cero o una cantidad negativa requieren interpretacion;
-   no se eliminan registros con esta consulta.
-*/
 USE BikeZ;
 GO
 
--- Resultado 1: rango de fechas disponible para el analisis.
 SELECT MIN(Fecha) AS PrimeraVenta,
        MAX(Fecha) AS UltimaVenta,
        MIN(FechaEnvio) AS PrimerEnvio,
        MAX(FechaEnvio) AS UltimoEnvio
 FROM dbo.Ventas;
 
--- Resultado 2: cuantos registros necesitan una regla o revision.
--- Las reglas pueden solaparse; no sumar estos conteos como total de rechazos.
 SELECT N'Ventas sin fecha de envio' AS Control, COUNT_BIG(*) AS Filas
 FROM dbo.Ventas WHERE FechaEnvio IS NULL
 UNION ALL
@@ -70,8 +61,6 @@ FROM (
     HAVING COUNT_BIG(*) > 1
 ) duplicados;
 
--- Resultado 3: referencias no nulas que apuntan a una fila inexistente.
--- Los nulos permitidos se informan por separado en el resultado anterior.
 SELECT N'Productos con categoria inexistente' AS Control, COUNT_BIG(*) AS Filas
 FROM dbo.Productos p
 WHERE p.CategoriaID IS NOT NULL
@@ -112,12 +101,39 @@ UNION ALL
 SELECT N'Detalles con venta inexistente', COUNT_BIG(*)
 FROM dbo.DetalleVentas d
 WHERE NOT EXISTS (SELECT 1 FROM dbo.Ventas v WHERE v.VentaID = d.VentaID);
+GO
 
--- Resultado 4: codigos de genero y estado civil de los empleados.
--- Define las reglas de traduccion de DimVendedor en el ETL.
+;WITH ClientesRevisados AS (
+    SELECT
+        CASE WHEN NULLIF(LTRIM(RTRIM(Nombre)), N'') IS NULL
+             THEN 1 ELSE 0 END AS SinNombre,
+        CASE WHEN NULLIF(LTRIM(RTRIM(Apellido)), N'') IS NULL
+             THEN 1 ELSE 0 END AS SinApellido
+    FROM dbo.Clientes
+)
+SELECT
+    COUNT_BIG(*) AS TotalClientes,
+    COUNT_BIG(CASE WHEN SinNombre = 1 AND SinApellido = 1 THEN 1 END)
+        AS SinNombreNiApellido,
+    COUNT_BIG(CASE WHEN SinNombre = 1 AND SinApellido = 0 THEN 1 END)
+        AS SoloSinNombre,
+    COUNT_BIG(CASE WHEN SinNombre = 0 AND SinApellido = 1 THEN 1 END)
+        AS SoloSinApellido,
+    COUNT_BIG(CASE WHEN SinNombre = 0 AND SinApellido = 0 THEN 1 END)
+        AS ConNombreYApellido
+FROM ClientesRevisados;
+GO
+
 SELECT Genero, EstadoCivil, COUNT(*) AS Empleados
 FROM dbo.Empleados
 GROUP BY Genero, EstadoCivil
 ORDER BY Genero, EstadoCivil;
 GO
 
+SELECT
+    COUNT_BIG(CASE WHEN CAST(Fecha AS time) <> '00:00:00' THEN 1 END)
+        AS VentasConHora,
+    COUNT_BIG(CASE WHEN CAST(FechaEnvio AS time) <> '00:00:00' THEN 1 END)
+        AS EnviosConHora
+FROM dbo.Ventas;
+GO

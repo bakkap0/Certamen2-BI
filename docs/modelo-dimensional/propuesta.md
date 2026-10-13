@@ -1,6 +1,6 @@
 # Modelo dimensional — Bike Z
 
-Diseño definido a partir del análisis del origen (`docs/analisis-origen.md`), siguiendo los cuatro pasos de Kimball. Implementación: `database/scripts/03_crear_modelo_dimensional.sql`. Diagrama: [diagrama.png](diagrama.png).
+Diseño definido a partir del análisis del origen (`docs/analisis-origen.md`), siguiendo los cuatro pasos de Kimball. Pendientes: implementar `database/scripts/03_crear_modelo_dimensional.sql` y generar `docs/modelo-dimensional/diagrama.png` a partir del modelo creado.
 
 ## KPI definidos
 
@@ -10,18 +10,18 @@ Los KPI se definieron a partir del análisis del origen (`docs/analisis-origen.m
 |---|---|---|---|
 | 1 | Monto de ventas | Suma de Cantidad × PrecioUnitario | Medir el tamaño del negocio y compararlo por mes, producto, categoría o territorio. |
 | 2 | Crecimiento mensual de ventas | (Monto del mes − Monto del mes anterior) / Monto del mes anterior × 100 | Saber si la empresa sigue creciendo. Se mide por mes porque 2015 y 2018 son años incompletos. Si el mes anterior no tiene ventas, no se calcula. |
-| 3 | % de ventas con vendedor | Ventas con vendedor / Total de ventas × 100 | Conocer qué parte del negocio pasa por el equipo comercial y cómo cambia en el tiempo. Hoy es cerca del 12%. |
+| 3 | % de ventas con vendedor informado | Ventas distintas con vendedor informado / Total de ventas distintas × 100 | Medir la cobertura de identificación del vendedor. En el origen: 3807 / 31465 × 100 = 12,10%. Un vendedor nulo no demuestra otro canal de venta. |
 | 4 | Ticket promedio | Monto de ventas / Número de ventas distintas (`COUNT(DISTINCT VentaID)`) | Saber cuánto gasta un cliente por compra. Se divide por ventas y no por detalles, porque una venta tiene varias líneas. |
 | 5 | Días promedio de despacho | Promedio de (FechaEnvio − Fecha de venta) | Medir qué tan rápido Bike Z envía sus pedidos. La base no registra la fecha de entrega al cliente, solo la de envío. |
 
-Todos los KPI se pueden analizar por las dimensiones del modelo: fecha, producto, cliente, vendedor y territorio.
+Los KPI se calculan en el contexto de las dimensiones del modelo: fecha, producto, cliente, vendedor y territorio. El porcentaje de vendedor informado es un indicador de cobertura del dato; al filtrar un vendedor concreto pierde utilidad para comparar vendedores. En el DW, el miembro -1 se excluye del numerador, pero permanece en el denominador.
 
 ## Cuatro pasos de Kimball
 
 ### 1. Proceso de negocio
 **Ventas de artículos para motocross.**
 
-Es el proceso central de Bike Z y el que permite medir su crecimiento. Además, es el único con datos completos en el origen: la cabecera de la venta (`Ventas`) registra cuándo, a quién, quién vendió y dónde, y el detalle (`DetalleVentas`) registra qué producto, en qué cantidad y a qué precio. No se modela inventario porque `Almacenes` solo contiene el nombre del almacén y su territorio, sin stock ni movimientos.
+Es el proceso central de Bike Z y el que permite medir su crecimiento. El origen contiene la cabecera y el detalle necesarios para modelarlo, aunque algunos atributos estén sin informar: la cabecera de la venta (`Ventas`) registra fecha, cliente y, cuando están informados, vendedor y territorio, y el detalle (`DetalleVentas`) registra qué producto, en qué cantidad y a qué precio. No se modela inventario porque `Almacenes` solo contiene el nombre del almacén y su territorio, sin stock ni movimientos.
 
 ### 2. Granularidad
 **Una fila por detalle de venta, identificada por `VentaID` + `DetalleVentaID`** (un producto dentro de una venta).
@@ -38,7 +38,7 @@ Modelo **estrella**: cada dimensión es una sola tabla unida directamente a la t
 |---|---|---|---|
 | DimFecha | Generada por script (no existe en el origen) | Fecha, día, mes, trimestre, semestre, año | Año → Semestre → Trimestre → Mes → Fecha |
 | DimProducto | `Productos` + `Categorias` | Producto, color, categoría | Categoría → Producto |
-| DimCliente | `Clientes` | Nombre, apellido | — |
+| DimCliente | `Clientes` | ClienteID, nombre, apellido y etiqueta de presentación | — |
 | DimVendedor | `Empleados` + `Territorios` | Cargo, género, estado civil, territorio asignado | — |
 | DimTerritorio | `Territorios` + `Paises` | Territorio, país, grupo | Grupo → País → Territorio |
 
@@ -54,7 +54,7 @@ Modelo **estrella**: cada dimensión es una sola tabla unida directamente a la t
 | Situación | Tratamiento |
 |---|---|
 | Venta sin vendedor (27.658 ventas, 87,90%) | Se asocia a un **miembro desconocido** de DimVendedor (clave -1, "Vendedor no informado"). Así no se pierde ninguna venta y el total cuadra con el origen. |
-| Cliente sin nombre o apellido (9.546) | Conserva su propia fila y su ClienteID; el texto faltante se rellena con "Sin nombre informado" o "Sin apellido informado". No se unen clientes distintos en uno solo. |
+| Cliente sin nombre ni apellido (9.546) | Conserva su fila y ClienteID. Los atributos faltantes se etiquetan como "Sin nombre informado" y "Sin apellido informado"; la etiqueta de presentación puede ser "Cliente <ClienteID>". Los otros 10.274 tienen ambos datos. No se unen clientes distintos en uno solo. |
 | Producto sin color (248) | Conserva su fila; color = "Sin color informado". |
 | Producto sin categoría (209) | Conserva su fila; categoría = "Sin categoría informada". |
 | Empleado sin territorio asignado (275) | Territorio asignado = "Territorio no informado". |

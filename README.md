@@ -16,7 +16,7 @@ En la **Fase 1** vamos a crear un modelo dimensional en SQL Server y cargar sus 
 |---|---|---|
 | Monto de ventas | Suma de cantidad × precio unitario | Medir el tamaño del negocio y compararlo por mes, producto, categoría o territorio |
 | Crecimiento mensual de ventas | (Monto del mes − monto del mes anterior) / monto del mes anterior × 100 | Saber si la empresa sigue creciendo |
-| % de ventas con vendedor | Ventas con vendedor / total de ventas × 100 | Ver qué parte del negocio pasa por el equipo comercial |
+| % de ventas con vendedor informado | Ventas distintas con vendedor informado / total de ventas distintas × 100 | Medir la cobertura de identificación del vendedor |
 | Ticket promedio | Monto de ventas / número de ventas distintas | Saber cuánto gasta un cliente por compra |
 | Días promedio de despacho | Promedio de (fecha de envío − fecha de venta) | Medir qué tan rápido se envían los pedidos |
 
@@ -56,10 +56,10 @@ docs/presentacion/       Material para la presentación
 2. Ejecutar [01_explorar_origen.sql](database/scripts/01_explorar_origen.sql) en SSMS y registrar los resultados en [análisis del origen](docs/analisis-origen.md).
 3. Abrir [BikeZ_ETL.sln](etl/proyecto-ssis/BikeZ_ETL.sln) en Visual Studio 2019 con la extensión SSIS. El proyecto está configurado para SQL Server 2019; el paquete aún está vacío.
 
-En el equipo de Joaquín la instancia es `BAKKAPO\BI2019`. Cada integrante debe usar el nombre de su instancia al configurar las conexiones.
+En el equipo de Joaquín la instancia es `BAKKAPO\BIT2019`. Cada integrante debe usar el nombre de su instancia al configurar las conexiones.
 
 ## Avance y trabajo en equipo
 
-Tenemos el entorno instalado, la base de origen restaurada y el proyecto SSIS inicial. Falta registrar los resultados de la exploración, implementar el modelo y el ETL, validar la carga y preparar el respaldo dimensional y la presentación. La Fase 2 todavía no está iniciada.
+Tenemos el entorno instalado, la base de origen restaurada, la exploración y los controles iniciales documentados, y el diseño dimensional definido. El proyecto SSIS todavía está vacío. Falta comprobar las horas del origen, implementar el modelo y el ETL, validar la carga y preparar el respaldo dimensional y la presentación. La Fase 2 todavía no está iniciada.
 
-La distribución de tareas está en [el plan propuesto](docs/plan-trabajo.md), pendiente de acordar entre ambos. Registraremos los aportes de cada integrante en [aportes.md](docs/aportes.md), con sus commits o pull requests. Cada uno trabajará desde su cuenta y revisaremos los cambios antes de integrarlos.
+Joaquín realizó la exploración y los controles de datos; Frank amplió el análisis y documentó los KPI y el modelo. Frank continúa con el script dimensional y Joaquín revisará y probará su ejecución. Ambos participarán en SSIS, validación y presentación. El detalle está en [el plan de trabajo](docs/plan-trabajo.md) y los avances registrados en [aportes.md](docs/aportes.md). Cada uno trabaja desde su cuenta y revisamos los cambios antes de integrarlos.

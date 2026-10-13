@@ -1,11 +1,15 @@
-# Aportes verificables
+# Aportes registrados
 
-Este registro complementa el historial de Git; no lo reemplaza. Completar únicamente con cambios reales y enlaces a commits o Pull Requests. No marcar tareas como terminadas por estar asignadas.
+Este registro complementa el historial de Git. Describe avances realizados; no marca la implementación futura como terminada.
 
-| Integrante | Cambio realizado | Commit / PR | Qué puede explicar |
+| Integrante | Avance | Evidencia | Qué debe poder explicar |
 |---|---|---|---|
+| Joaquín Ramírez | Exploración y primeros controles de calidad | [4f46815](https://github.com/bakkap0/Certamen2-BI/commit/4f46815) | Tablas, relaciones, conteos y detección de datos faltantes |
+| Joaquín Ramírez | Completar fechas, claves y clasificación de clientes | [dd95c1c](https://github.com/bakkap0/Certamen2-BI/commit/dd95c1c) | Grano del detalle, período y clientes sin nombre ni apellido |
+| Frank Soto | Verificación de fechas y consulta de códigos de empleados | [20900a2](https://github.com/bakkap0/Certamen2-BI/commit/20900a2), [e8e4e41](https://github.com/bakkap0/Certamen2-BI/commit/e8e4e41) | Traducciones de género y estado civil y evidencia obtenida |
+| Frank Soto | KPI y actualización del README | [2882b23](https://github.com/bakkap0/Certamen2-BI/commit/2882b23), [66d3b70](https://github.com/bakkap0/Certamen2-BI/commit/66d3b70) | Fórmulas, utilidad y limitaciones de los indicadores |
+| Frank Soto | Proceso y granularidad | [23ebde0](https://github.com/bakkap0/Certamen2-BI/commit/23ebde0) | Los primeros dos pasos de Kimball y la clave compuesta del detalle |
+| Frank Soto | Dimensiones y datos no informados | [3f4a104](https://github.com/bakkap0/Certamen2-BI/commit/3f4a104) | Roles de Fecha, desnormalización y miembros desconocidos |
+| Frank Soto | Tabla de hechos, agregaciones e historia dimensional | [3100b5f](https://github.com/bakkap0/Certamen2-BI/commit/3100b5f), [8d075d6](https://github.com/bakkap0/Certamen2-BI/commit/8d075d6) | Medidas aditivas, promedios por venta y SCD tipo 1 |
 
-## Criterio de registro
-Después de integrar un avance, agregar una fila con el nombre del autor, el cambio concreto, su enlace y el razonamiento técnico que debe poder defender. El commit inicial de creación ya se conserva en Git. La preparación de estructura y documentación se describe en su commit real.
-
-Cada integrante usa su propia identidad de Git. No crear commits bajo el nombre del compañero ni copiar una tarea terminada para simular autoría. Las revisiones deben comprobar contenido y resultados; ambos deben dominar la solución completa.
+Las revisiones e integraciones posteriores se registrarán con su commit o Pull Request real. La verificación de horas sigue pendiente de ejecutar. El DW y el ETL todavía no están implementados en este avance.

@@ -1,24 +1,23 @@
-# Plan de trabajo — dos integrantes
+# Plan de trabajo - Fase 1
 
-Distribución propuesta para acordar entre ambos. Cada uno debe hacer avances de SQL, ETL y documentación, y revisar cambios del otro. Los nombres en esta tabla no significan que las tareas estén realizadas.
+Distribución acordada durante el avance. Las tareas futuras siguen pendientes hasta contar con código ejecutado y evidencia.
 
-| Etapa | Joaquín Ramírez — propuesta | Frank Soto — propuesta | Criterio para cerrar |
+| Etapa | Joaquín Ramírez | Frank Soto | Estado o criterio para cerrar |
 |---|---|---|---|
-| 1. Análisis | Explorar tablas, tipos y conteos; documentar entorno | Revisar calidad, relaciones y significado comercial | Resultados reales y hallazgos explicados por ambos |
-| 2. KPI y Kimball | Proponer medidas, fórmulas y consultas de comprobación | Justificar indicadores, grano y dimensiones; preparar diagrama | Diseño coherente revisado entre ambos |
-| 3. SQL dimensional | DimFecha, DimCliente y restricciones de FactVentas | DimProducto, DimVendedor y DimTerritorio; revisar relaciones | Modelo creado y DDL reproducible |
-| 4. SSIS | Flujos de fecha/cliente y hecho; trazabilidad de carga | Flujos de producto/vendedor/territorio; reglas de calidad | Paquete completo ejecuta y ambos explican transformaciones |
-| 5. Validación | Conciliar claves, filas y montos; generar backup | Verificar calidad, repetición y restauración del backup | Evidencia de integridad y restauración correcta |
-| 6. Presentación | Explicar modelo y ejecución; revisar exposición del compañero | Explicar KPI y controles; revisar exposición del compañero | Ambos pueden responder sobre toda la solución |
+| Análisis del origen | Tablas, columnas, claves, calidad y clasificación de clientes | Verificar fechas y consultar códigos de empleados | Resultados registrados; falta comprobar las horas y revisar textos para el ETL |
+| KPI y modelo | Revisar coherencia con los resultados del origen | Documentar KPI, Kimball, dimensiones, hechos e historia | Diseño documentado; revisión conjunta antes de crear las tablas |
+| SQL dimensional | Ejecutar y revisar el script en su equipo | Crear 03_crear_modelo_dimensional.sql y diagrama | DW creado en SQL Server 2019 y coherente con el diseño |
+| ETL | Cargas de Producto y Territorio; participar en FactVentas | Cargas de Cliente, Vendedor y Fecha; revisar FactVentas | Asignación propuesta para la siguiente etapa; ETL todavía no implementado |
+| Validación | Conciliar registros e importes; participar en el backup | Revisar controles, repetición y restauración | Ambos ejecutan y comprenden las comprobaciones |
+| Presentación | Explicar su trabajo y la solución completa | Explicar su trabajo y la solución completa | Demostración y ensayo de interrogación individual |
 
-## Forma de registrar avances
-Cada cambio se registra al realizarlo, desde la cuenta de su autor, con un mensaje concreto. Una tarea puede requerir varios commits si hay avances sustantivos; no se fija una cuota artificial. Un PR puede agruparlos y facilitar revisión.
+## Próximos pasos
 
-## Próxima tarea
-1. Ambos clonan el repositorio.
-2. Frank acepta la invitación como colaborador y registra su usuario.
-3. Joaquín ejecuta la consulta de exploración y documenta los resultados.
-4. Frank prepara las consultas de calidad sobre el esquema confirmado.
-5. Ambos revisan los hallazgos antes de aprobar el modelo dimensional.
+1. Integrar el análisis de ambos y resolver los conflictos sin perder resultados ni evidencias.
+2. Joaquín ejecuta la nueva comprobación de horas del script 02 y registra sus resultados.
+3. Frank implementa el modelo y prepara su diagrama; Joaquín prueba el script.
+4. Ambos revisan el diseño implementado antes de construir SSIS.
 
-No completar de una vez todas las carpetas con archivos no probados: el README debe mostrar el avance real. El equipo revisa y entiende cualquier material preparado con asistencia antes de incorporarlo a la solución.
+## Colaboración
+
+Cada integrante usa su cuenta y registra cambios concretos. Los avances se revisan mediante Pull Requests. Se acuerda quién modifica cada paquete SSIS para evitar conflictos. El registro de aportes se completa con commits reales, y ambos deben comprender el proyecto completo.
