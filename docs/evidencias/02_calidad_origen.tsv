@@ -1,0 +1,17 @@
+Control	Filas
+Ventas sin fecha de envio	0
+Ventas con envio anterior a la venta	0
+Ventas sin vendedor	27658
+Ventas sin territorio	0
+Detalles con cantidad cero	0
+Detalles con cantidad negativa	0
+Detalles con precio cero	0
+Detalles con precio negativo	0
+Clientes sin nombre o con nombre vacio	9546
+Clientes sin apellido o con apellido vacio	9546
+Productos sin color o con color vacio	248
+Productos sin categoria	209
+Empleados sin territorio	275
+Almacenes sin territorio	0
+Ventas sin detalles	0
+Claves de detalle duplicadas	0
