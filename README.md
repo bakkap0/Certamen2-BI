@@ -60,6 +60,6 @@ En el equipo de Joaquín la instancia es `BAKKAPO\BIT2019`. Cada integrante debe
 
 ## Avance y trabajo en equipo
 
-Tenemos el entorno instalado, la base de origen restaurada, la exploración y los controles iniciales documentados, y el diseño dimensional definido. El proyecto SSIS todavía está vacío. Falta comprobar las horas del origen, implementar el modelo y el ETL, validar la carga y preparar el respaldo dimensional y la presentación. La Fase 2 todavía no está iniciada.
+Tenemos el entorno instalado, la base de origen restaurada, la exploración y los controles iniciales documentados, y el diseño dimensional definido. Se comprobó que las fechas informadas están a medianoche. El proyecto SSIS todavía está vacío. Falta implementar el modelo y el ETL, validar la carga y preparar el respaldo dimensional y la presentación. La Fase 2 todavía no está iniciada.
 
 Joaquín realizó la exploración y los controles de datos; Frank amplió el análisis y documentó los KPI y el modelo. Frank continúa con el script dimensional y Joaquín revisará y probará su ejecución. Ambos participarán en SSIS, validación y presentación. El detalle está en [el plan de trabajo](docs/plan-trabajo.md) y los avances registrados en [aportes.md](docs/aportes.md). Cada uno trabaja desde su cuenta y revisamos los cambios antes de integrarlos.

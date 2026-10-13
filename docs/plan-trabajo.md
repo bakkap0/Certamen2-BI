@@ -4,7 +4,7 @@ Distribución acordada durante el avance. Las tareas futuras siguen pendientes h
 
 | Etapa | Joaquín Ramírez | Frank Soto | Estado o criterio para cerrar |
 |---|---|---|---|
-| Análisis del origen | Tablas, columnas, claves, calidad y clasificación de clientes | Verificar fechas y consultar códigos de empleados | Resultados registrados; falta comprobar las horas y revisar textos para el ETL |
+| Análisis del origen | Tablas, columnas, claves, calidad, clasificación de clientes y comprobación de horas | Verificar fechas y consultar códigos de empleados | Resultados registrados; revisar textos y tamaños al preparar el ETL |
 | KPI y modelo | Revisar coherencia con los resultados del origen | Documentar KPI, Kimball, dimensiones, hechos e historia | Diseño documentado; revisión conjunta antes de crear las tablas |
 | SQL dimensional | Ejecutar y revisar el script en su equipo | Crear 03_crear_modelo_dimensional.sql y diagrama | DW creado en SQL Server 2019 y coherente con el diseño |
 | ETL | Cargas de Producto y Territorio; participar en FactVentas | Cargas de Cliente, Vendedor y Fecha; revisar FactVentas | Asignación propuesta para la siguiente etapa; ETL todavía no implementado |
@@ -13,10 +13,9 @@ Distribución acordada durante el avance. Las tareas futuras siguen pendientes h
 
 ## Próximos pasos
 
-1. Integrar el análisis de ambos y resolver los conflictos sin perder resultados ni evidencias.
-2. Joaquín ejecuta la nueva comprobación de horas del script 02 y registra sus resultados.
-3. Frank implementa el modelo y prepara su diagrama; Joaquín prueba el script.
-4. Ambos revisan el diseño implementado antes de construir SSIS.
+1. Revisar e integrar a main la rama que conserva el análisis de ambos y la comprobación de horas.
+2. Frank implementa el modelo y prepara su diagrama; Joaquín prueba el script.
+3. Ambos revisan el diseño implementado antes de construir SSIS.
 
 ## Colaboración
 
