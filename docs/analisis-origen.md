@@ -1,6 +1,6 @@
 # Análisis del origen BikeZ
 
-**Estado:** exploración inicial y controles de calidad ejecutados por Joaquín. Frank registró el rango de fechas y los códigos de género y estado civil. Faltan las claves primarias de Ventas y Territorios y algunas comprobaciones adicionales.
+**Estado:** se integraron la exploración y los controles de Joaquín con la revisión de fechas y códigos de empleados de Frank. Están registrados los conteos, las claves de las 9 tablas de negocio, los datos faltantes y la clasificación de clientes. Joaquín ejecutó la comprobación de horas: ambos conteos dieron 0.
 
 Consultas utilizadas: `database/scripts/01_explorar_origen.sql` y `database/scripts/02_revisar_calidad.sql`.
 
@@ -27,18 +27,31 @@ Consultas utilizadas: `database/scripts/01_explorar_origen.sql` y `database/scri
 
 También aparece `sysdiagrams` con 1 registro. Es una tabla de soporte de los diagramas de SSMS y no se utilizará como fuente de negocio.
 
+## Período de los datos
+
+| Resultado | Fecha |
+|---|---|
+| PrimeraVenta | 2015-07-01 |
+| UltimaVenta | 2018-07-31 |
+| PrimerEnvio | 2015-07-08 |
+| UltimoEnvio | 2018-08-07 |
+
+La dimensión Fecha debe cubrir, como mínimo, del 1 de julio de 2015 al 7 de agosto de 2018 para resolver tanto la fecha de venta como la de envío. El último envío está fuera del mes de la última venta, por lo que el calendario no debe terminar en julio de 2018.
+
+El rango se incorporó el 13 de octubre de 2026 a partir de la captura compartida por Joaquín. Frank comprobó el mismo rango en su equipo. Para el modelo se propone generar años completos del 2015-01-01 al 2018-12-31, que incluyen todas las fechas observadas. Los años extremos tienen ventas para una parte del año; esto se debe considerar al comparar períodos.
+
 ## Hallazgos y decisiones
 
 - Hay 31465 ventas y 121317 detalles de venta. Una venta puede tener varios detalles, por lo que el número de ventas debe calcularse con `COUNT(DISTINCT VentaID)` cuando se consulta el detalle.
 - La clave primaria de DetalleVentas es `(VentaID, DetalleVentaID)`. Esta combinación permite identificar cada fila del hecho propuesto.
 - `Cantidad` es `smallint` y `PrecioUnitario` es `money`, con precisión 19 y escala 4. Debemos conservar los decimales al calcular los importes.
-- `Ventas.Fecha` y `Ventas.FechaEnvio` son `datetime`. Aunque FechaEnvio permite nulos, el control detectó 0 ventas sin envío informado y 0 envíos anteriores a la venta. Falta registrar el rango de fechas.
+- `Ventas.Fecha` y `Ventas.FechaEnvio` son `datetime`. Aunque FechaEnvio permite nulos, el control detectó 0 ventas sin envío informado y 0 envíos anteriores a la venta. Los rangos se registraron en la sección anterior.
 - Los controles confirmaron datos faltantes en nombres, apellidos, colores, categorías, vendedores y territorios de empleados. Su tratamiento propuesto se detalla abajo.
 - `PaisID` es `nvarchar(3)` tanto en Paises como en Territorios. Se debe mantener como texto al relacionar estas tablas.
 - Las 9 claves foráneas compartidas están habilitadas y verificadas (`Deshabilitada = 0`, `NoVerificada = 0`). Los 9 controles de referencias no nulas inexistentes dieron 0; los nulos permitidos se revisaron por separado.
 - El territorio de la venta proviene de `Ventas.TerritorioID`. Almacenes no tiene una relación directa con cada venta, por lo que no lo uniremos al hecho solo por territorio.
 
-Las claves primarias recibidas cubren Almacenes, Categorias, Clientes, DetalleVentas, Empleados, Paises y Productos. Faltan las filas de Ventas y Territorios para completar ese registro.
+Las claves primarias recibidas cubren las 9 tablas de negocio. La captura adicional confirmó `Ventas.VentaID` y `Territorios.TerritorioID`, ambas claves de una sola columna. DetalleVentas tiene la clave compuesta indicada anteriormente; las otras tablas usan sus identificadores respectivos.
 
 ## Calidad de datos
 
@@ -55,65 +68,80 @@ Los controles restantes de `02_revisar_calidad.sql` dieron 0: ventas sin envío,
 
 Las ventas sin vendedor representan el 87,90% de las 31465 ventas; las otras 3807 sí tienen vendedor informado. Esto limita la comparación de vendedores identificados: debemos mostrar también las ventas sin vendedor para conservar el total.
 
-Los conteos de nombre y apellido coinciden, pero todavía no comprobamos que correspondan a los mismos clientes. Las reglas pueden afectar al mismo registro, por lo que no se suman estos conteos para calcular un total de filas con problemas.
+El resultado 4 confirmó que los 9546 clientes sin nombre son los mismos que no tienen apellido. Los otros 10274 tienen ambos datos informados. No hay clientes con solo uno de los dos datos faltante.
+
+| Clasificación | Clientes |
+|---|---:|
+| Sin nombre ni apellido | 9546 |
+| Solo sin nombre | 0 |
+| Solo sin apellido | 0 |
+| Con nombre y apellido | 10274 |
+| Total | 19820 |
+
+Las categorías suman los 19820 clientes del origen. No se suman los dos conteos de 9546 como si fueran personas diferentes.
 
 ### Tratamiento propuesto para el ETL
 
 | Situación | Tratamiento |
 |---|---|
 | Venta sin vendedor | Conservar la venta y asociarla a un miembro de DimVendedor etiquetado como "Vendedor no informado". No inventar un empleado ni atribuirla a uno existente. |
-| Cliente sin nombre o apellido | Mantener su ClienteID y una fila propia en DimCliente; completar los textos faltantes con etiquetas claras. No reunir distintos clientes en uno solo por faltar su nombre. |
+| Cliente sin nombre o apellido | Mantener su ClienteID y una fila propia en DimCliente. Para los 9546 sin ambos datos, proponer la etiqueta de presentación "Cliente <ClienteID>"; por ejemplo, "Cliente 123". Conservar la identificación de los atributos faltantes y no reunir distintos clientes en uno solo. |
 | Producto sin color | Mantener el producto y usar "Sin color informado" como etiqueta. |
 | Producto sin categoría | Mantener el producto y usar "Sin categoría informada" en el atributo de categoría. |
 | Empleado sin territorio | Si se conserva ese atributo, identificarlo como "Territorio no informado". La geografía de la venta sigue viniendo de Ventas.TerritorioID. |
 
 Estas reglas están propuestas para la implementación. El DW y el ETL aún no están construidos. Los controles ejecutados no justifican rechazar ventas por los datos descriptivos faltantes; debemos conservar las filas y sus importes, manteniendo trazabilidad de estos casos.
 
-## Rango de fechas y códigos de empleados
+## Códigos de género y estado civil
 
-Consultas ejecutadas por Frank Soto el 13 de octubre de 2026 en SQL Server 2019 (instancia FRANK-PC), sobre la base `BikeZ` restaurada. El rango de fechas corresponde al primer resultado de `02_revisar_calidad.sql`; los códigos corresponden al último resultado, agregado por Frank Soto a ese mismo script. Los demás controles de `02_revisar_calidad.sql` dieron los mismos valores registrados por Joaquín.
-
-### Rango de fechas
-
-| Campo | Primera fecha | Última fecha |
-|---|---|---|
-| Fecha de venta | 2015-07-01 | 2018-07-31 |
-| Fecha de envío | 2015-07-08 | 2018-08-07 |
-
-- Todas las fechas tienen hora `00:00:00`. Aunque las columnas son `datetime`, solo registran el día, por lo que en el modelo dimensional se pueden manejar como `date`.
-- La dimensión Fecha debe cubrir desde el 2015-01-01 hasta el 2018-12-31, en años completos, para incluir tanto las fechas de venta como las de envío. La última fecha de envío (agosto de 2018) es posterior a la última venta.
-- 2015 (desde julio) y 2018 (hasta julio) son años parciales. Comparar sus totales anuales con 2016 o 2017 distorsionaría el crecimiento, por lo que conviene medirlo por mes o comparando los mismos meses entre años.
-
-### Códigos de género y estado civil
+Frank ejecutó la consulta de códigos el 13 de octubre de 2026 en su instancia FRANK-PC. La consulta se conservó en el script 02 como resultado 5, después de la clasificación de clientes de Joaquín.
 
 | Genero | EstadoCivil | Empleados |
 |---|---|---:|
 | F | M | 49 |
-| M | M | 97 |
 | F | S | 35 |
+| M | M | 97 |
 | M | S | 109 |
-| **Total** | | **290** |
+| Total | | 290 |
 
-- Solo existen los códigos `F`/`M` en Genero y `M`/`S` en EstadoCivil, sin nulos. El total coincide con los 290 empleados de la tabla.
-- La letra `M` tiene un significado distinto en cada columna: en Genero corresponde a masculino y en EstadoCivil a casado (*married*). Por eso cada columna necesita su propia regla de traducción en el ETL:
-  - Genero: `F` → Femenino, `M` → Masculino.
-  - EstadoCivil: `S` → Soltero(a), `M` → Casado(a).
+Los cuatro grupos suman los 290 empleados del origen. Solo se observaron F/M en Genero y M/S en EstadoCivil, sin nulos en ese resultado. Las traducciones propuestas son Femenino/Masculino y Casado(a)/Soltero(a), respectivamente. La M necesita una regla distinta según la columna.
+
+Frank también verificó el rango de fechas y registró que los controles generales coincidían con los obtenidos por Joaquín. Sus capturas se conservan junto con las de Joaquín.
+
+## Comprobación de horas
+
+Joaquín ejecutó el resultado 6 de `02_revisar_calidad.sql` y compartió los valores desde SSMS el 13 de octubre de 2026.
+
+| Control | Filas |
+|---|---:|
+| VentasConHora | 0 |
+| EnviosConHora | 0 |
+
+La consulta cuenta fechas informadas cuya hora es distinta de `00:00:00`. Ambos resultados confirman que las fechas de venta y envío informadas están a medianoche. Los controles anteriores también dieron 0 ventas sin fecha de envío. Para este origen podemos trabajar al nivel de día mediante una dimensión Fecha de tipo `date`, con roles de venta y envío.
+
+## Orden de resultados del script 02
+
+1. Rango de fechas.
+2. Conteos de situaciones por revisar.
+3. Referencias inexistentes.
+4. Clasificación de clientes por nombre y apellido.
+5. Códigos de género y estado civil.
+6. Ventas y envíos con hora distinta de medianoche: ejecutado; ambos conteos dieron 0.
 
 ## Pendientes del análisis
 
-1. ~~Registrar el rango de fechas de `02_revisar_calidad.sql`.~~ Resuelto: ver "Rango de fechas y códigos de empleados".
-2. Completar las claves primarias de Ventas y Territorios.
-3. Comprobar el solapamiento de clientes sin nombre y sin apellido, y revisar espacios y longitudes de textos antes de construir las transformaciones. Los códigos de género y estado civil ya fueron revisados.
+- Revisar espacios y longitudes antes de construir las transformaciones que los utilicen. Los tamaños del destino deben admitir las etiquetas: por ejemplo, Color del origen permite 15 caracteres, pero "Sin color informado" ocupa 19.
+- Mantener la comprobación de horas en futuras cargas para detectar cambios en el origen y revisar el tratamiento si fuera necesario.
 
 ## Evidencia
-
 - [Estructura y claves primarias](evidencias/01_exploracion_estructura.png): base, versión, columnas visibles y parte de las claves.
-
 - [Relaciones y conteos parciales](evidencias/02_exploracion_conteos_parciales.png): relaciones visibles y conteos; algunos valores están cortados y faltan las últimas filas.
-
 - [Conteos completos](evidencias/01_conteos_origen.tsv), [columnas](evidencias/01_columnas_origen.tsv), [relaciones](evidencias/01_claves_foraneas.tsv) y [claves primarias parciales](evidencias/01_claves_primarias_parciales.tsv): resultados copiados por Joaquín desde SSMS y compartidos en texto.
-
+- [Columnas clave de Ventas y Territorios](evidencias/01_claves_primarias_adicionales.tsv) y [captura de confirmación](evidencias/04_exploracion_claves_primarias.png): completan las columnas de las claves primarias de negocio. Los nombres generados de las restricciones se conservan en la captura, sin transcribir valores que aparecen cortados.
 - [Controles de calidad](evidencias/02_calidad_origen.tsv) y [referencias inexistentes](evidencias/02_referencias_origen.tsv): resultados de la segunda consulta compartidos por Joaquín.
+- [Rango de fechas](evidencias/02_rango_fechas.tsv) y [captura del rango](evidencias/03_exploracion_rango_fechas.png): resultado de PrimeraVenta, UltimaVenta, PrimerEnvio y UltimoEnvio compartido por Joaquín.
+- [Clasificación de clientes](evidencias/02_nombres_clientes.tsv) y [captura de clientes](evidencias/05_exploracion_nombres_clientes.png): resultado 4, que confirma la coincidencia de clientes sin nombre y sin apellido.
+- [Rango verificado por Frank](evidencias/02_rango_fechas.png) y [códigos de empleados](evidencias/02_codigos_genero_estado_civil.png): capturas aportadas por Frank desde su instancia.
+- [Horas del origen](evidencias/02_horas_origen.tsv): resultado 6 compartido por Joaquín en texto desde SSMS; 0 ventas y 0 envíos con hora distinta de medianoche.
 
-Evidencia: [rango de fechas](evidencias/02_rango_fechas.png) y [códigos de género y estado civil](evidencias/02_codigos_genero_estado_civil.png).
-
+Joaquín ejecutó y documentó la exploración, los controles y la clasificación de clientes. Frank verificó el rango de fechas y agregó la consulta y evidencia de códigos. Los commits de ambos se registran en [aportes.md](aportes.md). El DW y el ETL siguen pendientes de implementar.
