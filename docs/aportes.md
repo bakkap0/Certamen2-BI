@@ -18,5 +18,6 @@ Este registro complementa el historial de Git. Describe avances realizados; no m
 | Joaquín Ramírez | Conexiones parametrizadas y siete paquetes SSIS preparados | [12453bd](https://github.com/bakkap0/Certamen2-BI/commit/12453bd) | Diferencia entre origen y destino y uso de ServidorSQL |
 | Frank Soto | Análisis de empleados que registran ventas y necesidad del LEFT JOIN | [fbba7de](https://github.com/bakkap0/Certamen2-BI/commit/fbba7de) | Cómo conservar vendedores identificados sin territorio asignado |
 | Joaquín Ramírez | Carga de Producto con inserciones, detección de cambios y actualización tipo 1 | [Pruebas de Producto](evidencias/05_validacion_producto.md) | Lookup, claves sustitutas, tratamiento de nulos y repetición de la carga |
+| Joaquín Ramírez | Carga de Territorio y País con inserciones y actualización tipo 1 | [Pruebas de Territorio](evidencias/06_validacion_territorio.md) | Desnormalización de País, Lookup y conservación de TerritorioKey |
 
-Las revisiones e integraciones posteriores se registrarán con su commit o Pull Request real. Producto está cargado y probado en el equipo de Joaquín; las demás cargas del ETL siguen pendientes.
+Las revisiones e integraciones posteriores se registrarán con su commit o Pull Request real. Producto y Territorio están cargados y probados en el equipo de Joaquín; falta integrar las demás cargas y validar el ETL completo.
