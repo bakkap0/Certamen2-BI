@@ -12,12 +12,1341 @@
   DTS:ObjectName="CargaVendedor"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{BD3017AD-6647-46AC-8447-D9FB48BA2716}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{1E5A9E49-6947-4ED4-AD8E-1C74A915D846}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT Cargar DimVendedor"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F96B6DA9-9ACA-49AB-A92D-9F7CBB3F3B29}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT Cargar DimVendedor"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT Cargar DimVendedor\Actualizar vendedor"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Actualizar vendedor"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE dbo.DimVendedor
+  SET Vendedor = ?, Cargo = ?, Genero = ?, EstadoCivil = ?,
+      FechaNacimiento = ?, FechaContratacion = ?, TerritorioAsignado = ?
+  WHERE VendedorKey = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].Columns[Vendedor]"
+                      cachedDataType="wstr"
+                      cachedLength="19"
+                      cachedName="Vendedor"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[Vendedor]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].Columns[Cargo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Cargo"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Cargo]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].Columns[GeneroTexto]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="GeneroTexto"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[GeneroTexto]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].Columns[EstadoCivilTexto]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="EstadoCivilTexto"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[EstadoCivilTexto]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].Columns[FechaNacimiento]"
+                      cachedDataType="dbDate"
+                      cachedName="FechaNacimiento"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaNacimiento]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].Columns[FechaContratacion]"
+                      cachedDataType="dbDate"
+                      cachedName="FechaContratacion"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaContratacion]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].Columns[TerritorioAsignado]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritorioAsignado"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[TerritorioAsignado]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].Columns[VendedorKey]"
+                      cachedDataType="i4"
+                      cachedName="VendedorKey"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_7]"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[VendedorKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="30"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="wstr"
+                      length="15"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="wstr"
+                      length="15"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="dbDate"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      dataType="dbDate"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input].ExternalColumns[Param_7]"
+                      dataType="i4"
+                      name="Param_7">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Buscar en DimVendedor"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT VendedorKey, EmpleadoID,
+         Vendedor AS VendedorDW, Cargo AS CargoDW,
+         Genero AS GeneroDW, EstadoCivil AS EstadoCivilDW,
+         FechaNacimiento AS FechaNacimientoDW,
+         FechaContratacion AS FechaContratacionDW,
+         TerritorioAsignado AS TerritorioAsignadoDW
+  FROM dbo.DimVendedor
+  WHERE VendedorKey &gt; 0;</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT VendedorKey, EmpleadoID,
+         Vendedor AS VendedorDW, Cargo AS CargoDW,
+         Genero AS GeneroDW, EstadoCivil AS EstadoCivilDW,
+         FechaNacimiento AS FechaNacimientoDW,
+         FechaContratacion AS FechaContratacionDW,
+         TerritorioAsignado AS TerritorioAsignadoDW
+  FROM dbo.DimVendedor
+  WHERE VendedorKey &gt; 0;) [refTable]
+where [refTable].[EmpleadoID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="VendedorKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EmpleadoID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="VendedorDW" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CargoDW" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="GeneroDW" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EstadoCivilDW" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FechaNacimientoDW" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FechaContratacionDW" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TerritorioAsignadoDW" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EmpleadoID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Inputs[Lookup Input].Columns[EmpleadoID]"
+                      cachedDataType="i4"
+                      cachedName="EmpleadoID"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EmpleadoID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">EmpleadoID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[VendedorKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[VendedorKey]"
+                      name="VendedorKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">VendedorKey</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[VendedorDW]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="30"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[VendedorDW]"
+                      name="VendedorDW"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">VendedorDW</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[CargoDW]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[CargoDW]"
+                      name="CargoDW"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CargoDW</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[GeneroDW]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="15"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[GeneroDW]"
+                      name="GeneroDW"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">GeneroDW</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[EstadoCivilDW]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="15"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[EstadoCivilDW]"
+                      name="EstadoCivilDW"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">EstadoCivilDW</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[FechaNacimientoDW]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[FechaNacimientoDW]"
+                      name="FechaNacimientoDW"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">FechaNacimientoDW</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[FechaContratacionDW]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[FechaContratacionDW]"
+                      name="FechaContratacionDW"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">FechaContratacionDW</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[TerritorioAsignadoDW]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[TerritorioAsignadoDW]"
+                      name="TerritorioAsignadoDW"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TerritorioAsignadoDW</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT Cargar DimVendedor\Detectar cambios"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Detectar cambios"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[Cargo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Cargo"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Cargo]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[FechaNacimiento]"
+                      cachedDataType="dbDate"
+                      cachedName="FechaNacimiento"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaNacimiento]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[FechaContratacion]"
+                      cachedDataType="dbDate"
+                      cachedName="FechaContratacion"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaContratacion]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[TerritorioAsignado]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritorioAsignado"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[TerritorioAsignado]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[Vendedor]"
+                      cachedDataType="wstr"
+                      cachedLength="19"
+                      cachedName="Vendedor"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[Vendedor]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[GeneroTexto]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="GeneroTexto"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[GeneroTexto]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[EstadoCivilTexto]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="EstadoCivilTexto"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[EstadoCivilTexto]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[VendedorDW]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="VendedorDW"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[VendedorDW]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[CargoDW]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CargoDW"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[CargoDW]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[GeneroDW]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="GeneroDW"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[GeneroDW]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[EstadoCivilDW]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="EstadoCivilDW"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[EstadoCivilDW]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[FechaNacimientoDW]"
+                      cachedDataType="dbDate"
+                      cachedName="FechaNacimientoDW"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[FechaNacimientoDW]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[FechaContratacionDW]"
+                      cachedDataType="dbDate"
+                      cachedName="FechaContratacionDW"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[FechaContratacionDW]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input].Columns[TerritorioAsignadoDW]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritorioAsignadoDW"
+                      lineageId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[TerritorioAsignadoDW]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Detectar cambios.Outputs[Cambiados]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Cambiados"
+                  synchronousInputId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[Vendedor]} != #{Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[VendedorDW]} || #{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Cargo]} != #{Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[CargoDW]} || #{Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[GeneroTexto]} != #{Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[GeneroDW]} || #{Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[EstadoCivilTexto]} != #{Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[EstadoCivilDW]} || #{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaNacimiento]} != #{Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[FechaNacimientoDW]} || #{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaContratacion]} != #{Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[FechaContratacionDW]} || #{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[TerritorioAsignado]} != #{Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output].Columns[TerritorioAsignadoDW]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">Vendedor != VendedorDW || Cargo != CargoDW || GeneroTexto != GeneroDW || EstadoCivilTexto != EstadoCivilDW || FechaNacimiento != FechaNacimientoDW || FechaContratacion != FechaContratacionDW || TerritorioAsignado != TerritorioAsignadoDW</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Detectar cambios.Outputs[Sin cambios]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Sin cambios"
+                  synchronousInputId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Detectar cambios.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Detectar cambios.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Detectar cambios.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Detectar cambios.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insertar vendedores nuevos"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimVendedor]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].Columns[EmpleadoID]"
+                      cachedDataType="i4"
+                      cachedName="EmpleadoID"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[EmpleadoID]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EmpleadoID]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].Columns[Cargo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Cargo"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Cargo]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Cargo]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].Columns[FechaNacimiento]"
+                      cachedDataType="dbDate"
+                      cachedName="FechaNacimiento"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[FechaNacimiento]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaNacimiento]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].Columns[FechaContratacion]"
+                      cachedDataType="dbDate"
+                      cachedName="FechaContratacion"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[FechaContratacion]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaContratacion]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].Columns[TerritorioAsignado]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritorioAsignado"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[TerritorioAsignado]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[TerritorioAsignado]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].Columns[Vendedor]"
+                      cachedDataType="wstr"
+                      cachedLength="19"
+                      cachedName="Vendedor"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Vendedor]"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[Vendedor]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].Columns[GeneroTexto]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="GeneroTexto"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Genero]"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[GeneroTexto]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].Columns[EstadoCivilTexto]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="EstadoCivilTexto"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[EstadoCivil]"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[EstadoCivilTexto]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[VendedorKey]"
+                      dataType="i4"
+                      name="VendedorKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[EmpleadoID]"
+                      dataType="i4"
+                      name="EmpleadoID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Vendedor]"
+                      dataType="wstr"
+                      length="30"
+                      name="Vendedor" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Cargo]"
+                      dataType="wstr"
+                      length="50"
+                      name="Cargo" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Genero]"
+                      dataType="wstr"
+                      length="15"
+                      name="Genero" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[EstadoCivil]"
+                      dataType="wstr"
+                      length="15"
+                      name="EstadoCivil" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[FechaNacimiento]"
+                      dataType="dbDate"
+                      name="FechaNacimiento" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[FechaContratacion]"
+                      dataType="dbDate"
+                      name="FechaContratacion" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input].ExternalColumns[TerritorioAsignado]"
+                      dataType="wstr"
+                      length="50"
+                      name="TerritorioAsignado" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT Cargar DimVendedor\Origen Vendedores"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Origen Vendedores"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT e.EmpleadoID,
+          e.Cargo,
+          e.Genero,
+          e.EstadoCivil,
+          e.FechaNacimiento,
+          e.FechaContratacion,
+          t.Territorio AS TerritorioAsignado
+   FROM dbo.Empleados e
+   LEFT JOIN dbo.Territorios t ON t.TerritorioID = e.TerritorioID;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Connections[OleDbConnection]"
+                  connectionManagerID="{A3EE1E3A-68BB-4E3E-BB8E-5CCF56C5EDB7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Origen_BikeZ]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EmpleadoID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[EmpleadoID]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EmpleadoID]"
+                      name="EmpleadoID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Cargo]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[Cargo]"
+                      length="50"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Cargo]"
+                      name="Cargo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Genero]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[Genero]"
+                      length="1"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Genero]"
+                      name="Genero"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EstadoCivil]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[EstadoCivil]"
+                      length="1"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EstadoCivil]"
+                      name="EstadoCivil"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaNacimiento]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[FechaNacimiento]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaNacimiento]"
+                      name="FechaNacimiento"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaContratacion]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[FechaContratacion]"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[FechaContratacion]"
+                      name="FechaContratacion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[TerritorioAsignado]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[TerritorioAsignado]"
+                      length="50"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[TerritorioAsignado]"
+                      name="TerritorioAsignado"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[EmpleadoID]"
+                      dataType="i4"
+                      name="EmpleadoID" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[Cargo]"
+                      dataType="wstr"
+                      length="50"
+                      name="Cargo" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[Genero]"
+                      dataType="wstr"
+                      length="1"
+                      name="Genero" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[EstadoCivil]"
+                      dataType="wstr"
+                      length="1"
+                      name="EstadoCivil" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[FechaNacimiento]"
+                      dataType="dbDate"
+                      name="FechaNacimiento" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[FechaContratacion]"
+                      dataType="dbDate"
+                      name="FechaContratacion" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].ExternalColumns[TerritorioAsignado]"
+                      dataType="wstr"
+                      length="50"
+                      name="TerritorioAsignado" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[EmpleadoID]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[EmpleadoID]"
+                      name="EmpleadoID" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[Cargo]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[Cargo]"
+                      name="Cargo" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[Genero]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[Genero]"
+                      name="Genero" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[EstadoCivil]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[EstadoCivil]"
+                      name="EstadoCivil" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[FechaNacimiento]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[FechaNacimiento]"
+                      name="FechaNacimiento" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[FechaContratacion]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[FechaContratacion]"
+                      name="FechaContratacion" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[TerritorioAsignado]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[TerritorioAsignado]"
+                      name="TerritorioAsignado" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT Cargar DimVendedor\Traducir codigos"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Traducir codigos"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT Cargar DimVendedor\Traducir codigos.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Traducir codigos.Inputs[Derived Column Input].Columns[EmpleadoID]"
+                      cachedDataType="i4"
+                      cachedName="EmpleadoID"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EmpleadoID]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Traducir codigos.Inputs[Derived Column Input].Columns[Cargo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Cargo"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Cargo]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[TRIM](#{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Cargo]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">TRIM(Cargo)</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Traducir codigos.Inputs[Derived Column Input].Columns[Genero]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Genero"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Genero]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Traducir codigos.Inputs[Derived Column Input].Columns[EstadoCivil]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="EstadoCivil"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EstadoCivil]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimVendedor\Traducir codigos.Inputs[Derived Column Input].Columns[TerritorioAsignado]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritorioAsignado"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[TerritorioAsignado]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[ISNULL](#{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[TerritorioAsignado]}) ? "Territorio no informado" : #{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[TerritorioAsignado]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">ISNULL(TerritorioAsignado) ? "Territorio no informado" : TerritorioAsignado</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT Cargar DimVendedor\Traducir codigos.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[Vendedor]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="19"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[Vendedor]"
+                      name="Vendedor"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"Vendedor " + (DT_WSTR,10)#{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EmpleadoID]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"Vendedor " + (DT_WSTR,10)EmpleadoID</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[GeneroTexto]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="12"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[GeneroTexto]"
+                      name="GeneroTexto"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Genero]} == "F" ? "Femenino" : #{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[Genero]} == "M" ? "Masculino" : "No informado"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">Genero == "F" ? "Femenino" : Genero == "M" ? "Masculino" : "No informado"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[EstadoCivilTexto]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="12"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output].Columns[EstadoCivilTexto]"
+                      name="EstadoCivilTexto"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EstadoCivil]} == "S" ? "Soltero(a)" : #{Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output].Columns[EstadoCivil]} == "M" ? "Casado(a)" : "No informado"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">EstadoCivil == "S" ? "Soltero(a)" : EstadoCivil == "M" ? "Casado(a)" : "No informado"</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT Cargar DimVendedor\Traducir codigos.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT Cargar DimVendedor.Paths[Cambiados]"
+              endId="Package\DFT Cargar DimVendedor\Actualizar vendedor.Inputs[OLE DB Command Input]"
+              name="Cambiados"
+              startId="Package\DFT Cargar DimVendedor\Detectar cambios.Outputs[Cambiados]" />
+            <path
+              refId="Package\DFT Cargar DimVendedor.Paths[Derived Column Output]"
+              endId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\DFT Cargar DimVendedor\Traducir codigos.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT Cargar DimVendedor.Paths[Lookup Match Output]"
+              endId="Package\DFT Cargar DimVendedor\Detectar cambios.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT Cargar DimVendedor.Paths[Lookup No Match Output]"
+              endId="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\DFT Cargar DimVendedor\Buscar en DimVendedor.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DFT Cargar DimVendedor.Paths[OLE DB Source Output]"
+              endId="Package\DFT Cargar DimVendedor\Traducir codigos.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT Cargar DimVendedor\Origen Vendedores.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -25,5 +1354,209 @@
 <Objects
   Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="204,42.6666666666667"
+          Id="Package\DFT Cargar DimVendedor"
+          TopLeft="185.624997233972,71.8421066154073" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT Cargar DimVendedor">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\DFT Cargar DimVendedor\Origen Vendedores"
+          TopLeft="212,24" />
+        <NodeLayout
+          Size="158.666666666667,42.6666666666667"
+          Id="Package\DFT Cargar DimVendedor\Traducir codigos"
+          TopLeft="215,106" />
+        <EdgeLayout
+          Id="Package\DFT Cargar DimVendedor.Paths[OLE DB Source Output]"
+          TopLeft="296.166666666667,66.6666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.3333333333333"
+              Start="0,0"
+              End="0,31.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="196,42.6666666666667"
+          Id="Package\DFT Cargar DimVendedor\Buscar en DimVendedor"
+          TopLeft="194,174" />
+        <EdgeLayout
+          Id="Package\DFT Cargar DimVendedor.Paths[Derived Column Output]"
+          TopLeft="293.166666666667,148.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.3333333333334"
+              Start="0,0"
+              End="0,17.8333333333334">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.8333333333334" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="212,42.6666666666667"
+          Id="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos"
+          TopLeft="186,257" />
+        <EdgeLayout
+          Id="Package\DFT Cargar DimVendedor.Paths[Lookup No Match Output]"
+          TopLeft="292,216.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.3333333333333"
+              Start="0,0"
+              End="0,32.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,10.6119791666667,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\DFT Cargar DimVendedor\Detectar cambios"
+          TopLeft="490,175" />
+        <EdgeLayout
+          Id="Package\DFT Cargar DimVendedor.Paths[Lookup Match Output]"
+          TopLeft="390,195.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="100,0"
+              Start="0,0"
+              End="92.5000000000001,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="92.5000000000001,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-1.94138671874997,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="173.333333333334,42.6666666666667"
+          Id="Package\DFT Cargar DimVendedor\Actualizar vendedor"
+          TopLeft="490,265" />
+        <EdgeLayout
+          Id="Package\DFT Cargar DimVendedor.Paths[Cambiados]"
+          TopLeft="574,217.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.3333333333333"
+              Start="0,0"
+              End="0,39.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-24.82009765625,15.0421549479167,49.6401953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT Cargar DimVendedor\Origen Vendedores">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT Cargar DimVendedor\Buscar en DimVendedor">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT Cargar DimVendedor\Insertar vendedores nuevos">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
