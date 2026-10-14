@@ -15,5 +15,8 @@ Este registro complementa el historial de Git. Describe avances realizados; no m
 | Frank Soto | Tabla de hechos, agregaciones e historia dimensional | [3100b5f](https://github.com/bakkap0/Certamen2-BI/commit/3100b5f), [8d075d6](https://github.com/bakkap0/Certamen2-BI/commit/8d075d6) | Medidas aditivas, promedios por venta y SCD tipo 1 |
 | Frank Soto | Script de creación del modelo, pruebas y diagrama | [313b9ae](https://github.com/bakkap0/Certamen2-BI/commit/313b9ae), [8f79512](https://github.com/bakkap0/Certamen2-BI/commit/8f79512) | Claves sustitutas, grano, relaciones y miembros desconocidos |
 | Joaquín Ramírez | Ejecución del script dimensional y verificación de conteos, miembros desconocidos, claves y relaciones | [Resultados y alcance](modelo-dimensional/validacion-joaquin.md) | Cómo está preparada la estructura del modelo antes de cargarla mediante SSIS |
+| Joaquín Ramírez | Conexiones parametrizadas y siete paquetes SSIS preparados | [12453bd](https://github.com/bakkap0/Certamen2-BI/commit/12453bd) | Diferencia entre origen y destino y uso de ServidorSQL |
+| Frank Soto | Análisis de empleados que registran ventas y necesidad del LEFT JOIN | [fbba7de](https://github.com/bakkap0/Certamen2-BI/commit/fbba7de) | Cómo conservar vendedores identificados sin territorio asignado |
+| Joaquín Ramírez | Carga de Producto con inserciones, detección de cambios y actualización tipo 1 | [Pruebas de Producto](evidencias/05_validacion_producto.md) | Lookup, claves sustitutas, tratamiento de nulos y repetición de la carga |
 
-Las revisiones e integraciones posteriores se registrarán con su commit o Pull Request real. El DW está creado y su estructura fue comprobada con el script 04 en el equipo de Joaquín; la carga ETL todavía no está implementada.
+Las revisiones e integraciones posteriores se registrarán con su commit o Pull Request real. Producto está cargado y probado en el equipo de Joaquín; las demás cargas del ETL siguen pendientes.

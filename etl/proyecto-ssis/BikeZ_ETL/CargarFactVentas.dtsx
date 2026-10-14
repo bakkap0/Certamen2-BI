@@ -12,8 +12,8 @@
   DTS:ObjectName="CargarFactVentas"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{792E08D9-E544-422C-B1BF-AD7BBF7376B5}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{74CA3245-E721-42C1-992F-93652E828BFE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />

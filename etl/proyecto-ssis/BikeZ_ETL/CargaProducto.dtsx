@@ -12,12 +12,956 @@
   DTS:ObjectName="CargaProducto"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{98F47350-C5A1-4CB9-810B-494239176166}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{2A028028-FBEE-44B7-9FA2-642F9546E9CE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Cargar DimProducto"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{774b9d35-f766-4329-bef7-9152fee0b7fa}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cargar DimProducto"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Cargar DimProducto\Actualizar productos existentes"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Actualizar productos existentes"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE dbo.DimProducto
+SET
+    Producto = ?,
+    Color = ?,
+    CategoriaID = ?,
+    Categoria = ?
+WHERE ProductoKey = ?;</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar DimProducto\Actualizar productos existentes.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].Columns[Producto]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Producto"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Producto]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].Columns[Color]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Color"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Color]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].Columns[CategoriaID]"
+                      cachedDataType="i4"
+                      cachedName="CategoriaID"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[CategoriaID]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].Columns[Categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Categoria"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Categoria]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].Columns[ProductoKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductoKey"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[ProductoKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="wstr"
+                      length="30"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar DimProducto\Actualizar productos existentes.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar DimProducto\Actualizar productos existentes.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Actualizar productos existentes.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Actualizar productos existentes.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Actualizar productos existentes.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar DimProducto\Buscar producto en DW"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Buscar producto en DW"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+    ProductoID,
+    ProductoKey,
+    Producto AS ProductoActual,
+    Color AS ColorActual,
+    CategoriaID AS CategoriaIDActual,
+    Categoria AS CategoriaActual
+FROM dbo.DimProducto;</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT
+    ProductoID,
+    ProductoKey,
+    Producto AS ProductoActual,
+    Color AS ColorActual,
+    CategoriaID AS CategoriaIDActual,
+    Categoria AS CategoriaActual
+FROM dbo.DimProducto;) [refTable]
+where [refTable].[ProductoID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ProductoID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductoKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductoActual" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ColorActual" dataType="DT_WSTR" length="30" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CategoriaIDActual" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CategoriaActual" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[ProductoID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar DimProducto\Buscar producto en DW.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar DimProducto\Buscar producto en DW.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Buscar producto en DW.Inputs[Lookup Input].Columns[ProductoID]"
+                      cachedDataType="i4"
+                      cachedName="ProductoID"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[ProductoID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ProductoID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Cargar DimProducto\Buscar producto en DW.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[ProductoKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[ProductoKey]"
+                      name="ProductoKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ProductoKey</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[ProductoActual]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[ProductoActual]"
+                      name="ProductoActual"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ProductoActual</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[ColorActual]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="30"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[ColorActual]"
+                      name="ColorActual"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ColorActual</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[CategoriaIDActual]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[CategoriaIDActual]"
+                      name="CategoriaIDActual"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CategoriaIDActual</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[CategoriaActual]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[CategoriaActual]"
+                      name="CategoriaActual"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CategoriaActual</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Cargar DimProducto\Buscar producto en DW.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Cargar DimProducto\Buscar producto en DW.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar DimProducto\Detectar cambios en producto"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Detectar cambios en producto"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input].Columns[Producto]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Producto"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Producto]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input].Columns[Color]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Color"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Color]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input].Columns[CategoriaID]"
+                      cachedDataType="i4"
+                      cachedName="CategoriaID"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[CategoriaID]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input].Columns[Categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Categoria"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Categoria]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input].Columns[ProductoActual]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ProductoActual"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[ProductoActual]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input].Columns[ColorActual]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="ColorActual"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[ColorActual]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input].Columns[CategoriaIDActual]"
+                      cachedDataType="i4"
+                      cachedName="CategoriaIDActual"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[CategoriaIDActual]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input].Columns[CategoriaActual]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CategoriaActual"
+                      lineageId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[CategoriaActual]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar DimProducto\Detectar cambios en producto.Outputs[ConCambios]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="ConCambios"
+                  synchronousInputId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Producto]} != #{Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[ProductoActual]} || #{Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Color]} != #{Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[ColorActual]} || #{Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Categoria]} != #{Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[CategoriaActual]} || ([ISNULL](#{Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[CategoriaID]}) ? ![ISNULL](#{Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[CategoriaIDActual]}) : ([ISNULL](#{Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[CategoriaIDActual]}) ?  TRUE  : #{Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[CategoriaID]} != #{Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output].Columns[CategoriaIDActual]}))</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">Producto != ProductoActual || Color != ColorActual || Categoria != CategoriaActual || (ISNULL(CategoriaID) ? !ISNULL(CategoriaIDActual) : (ISNULL(CategoriaIDActual) ?  TRUE  : CategoriaID != CategoriaIDActual))</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar DimProducto\Detectar cambios en producto.Outputs[SinCambios]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="SinCambios"
+                  synchronousInputId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar DimProducto\Detectar cambios en producto.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Detectar cambios en producto.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Detectar cambios en producto.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Detectar cambios en producto.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Detectar cambios en producto.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar DimProducto\Insertar productos nuevos"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insertar productos nuevos"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimProducto]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar DimProducto\Insertar productos nuevos.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].Columns[ProductoID]"
+                      cachedDataType="i4"
+                      cachedName="ProductoID"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].ExternalColumns[ProductoID]"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[ProductoID]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].Columns[Producto]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Producto"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Producto]"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Producto]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].Columns[Color]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Color"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Color]"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Color]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].Columns[CategoriaID]"
+                      cachedDataType="i4"
+                      cachedName="CategoriaID"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].ExternalColumns[CategoriaID]"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[CategoriaID]" />
+                    <inputColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].Columns[Categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Categoria"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Categoria]"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Categoria]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].ExternalColumns[ProductoKey]"
+                      dataType="i4"
+                      name="ProductoKey" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].ExternalColumns[ProductoID]"
+                      dataType="i4"
+                      name="ProductoID" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Producto]"
+                      dataType="wstr"
+                      length="50"
+                      name="Producto" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Color]"
+                      dataType="wstr"
+                      length="30"
+                      name="Color" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].ExternalColumns[CategoriaID]"
+                      dataType="i4"
+                      name="CategoriaID" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Categoria]"
+                      dataType="wstr"
+                      length="50"
+                      name="Categoria" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar DimProducto\Insertar productos nuevos.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Insertar productos nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Insertar productos nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Insertar productos nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar DimProducto\Leer productos y categorias"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Leer productos y categorias"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+    p.ProductoID,
+    p.Producto,
+    CAST(
+        COALESCE(
+            NULLIF(LTRIM(RTRIM(p.Color)), N''),
+            N'Sin color informado'
+        ) AS nvarchar(30)
+    ) AS Color,
+    p.CategoriaID,
+    CAST(
+        COALESCE(
+            NULLIF(LTRIM(RTRIM(c.Categoria)), N''),
+            N'Sin categoría informada'
+        ) AS nvarchar(50)
+    ) AS Categoria
+FROM dbo.Productos AS p
+LEFT JOIN dbo.Categorias AS c
+    ON c.CategoriaID = p.CategoriaID;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar DimProducto\Leer productos y categorias.Connections[OleDbConnection]"
+                  connectionManagerID="{A3EE1E3A-68BB-4E3E-BB8E-5CCF56C5EDB7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Origen_BikeZ]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[ProductoID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].ExternalColumns[ProductoID]"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[ProductoID]"
+                      name="ProductoID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Producto]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].ExternalColumns[Producto]"
+                      length="50"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Producto]"
+                      name="Producto"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Color]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].ExternalColumns[Color]"
+                      length="30"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Color]"
+                      name="Color"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[CategoriaID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].ExternalColumns[CategoriaID]"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[CategoriaID]"
+                      name="CategoriaID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Categoria]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].ExternalColumns[Categoria]"
+                      length="50"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].Columns[Categoria]"
+                      name="Categoria"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].ExternalColumns[ProductoID]"
+                      dataType="i4"
+                      name="ProductoID" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].ExternalColumns[Producto]"
+                      dataType="wstr"
+                      length="50"
+                      name="Producto" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].ExternalColumns[Color]"
+                      dataType="wstr"
+                      length="30"
+                      name="Color" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].ExternalColumns[CategoriaID]"
+                      dataType="i4"
+                      name="CategoriaID" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output].ExternalColumns[Categoria]"
+                      dataType="wstr"
+                      length="50"
+                      name="Categoria" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[ProductoID]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[ProductoID]"
+                      name="ProductoID" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[Producto]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[Producto]"
+                      name="Producto" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[Color]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[Color]"
+                      name="Color" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[CategoriaID]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[CategoriaID]"
+                      name="CategoriaID" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[Categoria]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[Categoria]"
+                      name="Categoria" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Cargar DimProducto.Paths[ConCambios]"
+              endId="Package\Cargar DimProducto\Actualizar productos existentes.Inputs[OLE DB Command Input]"
+              name="ConCambios"
+              startId="Package\Cargar DimProducto\Detectar cambios en producto.Outputs[ConCambios]" />
+            <path
+              refId="Package\Cargar DimProducto.Paths[Lookup Match Output]"
+              endId="Package\Cargar DimProducto\Detectar cambios en producto.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Cargar DimProducto.Paths[Lookup No Match Output]"
+              endId="Package\Cargar DimProducto\Insertar productos nuevos.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Cargar DimProducto\Buscar producto en DW.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Cargar DimProducto.Paths[OLE DB Source Output]"
+              endId="Package\Cargar DimProducto\Buscar producto en DW.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Cargar DimProducto\Leer productos y categorias.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -25,5 +969,207 @@
 <Objects
   Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Cargar DimProducto"
+          TopLeft="510,159" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Cargar DimProducto">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="214,42"
+          Id="Package\Cargar DimProducto\Leer productos y categorias"
+          TopLeft="656,216" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Cargar DimProducto\Buscar producto en DW"
+          TopLeft="670,320" />
+        <EdgeLayout
+          Id="Package\Cargar DimProducto.Paths[OLE DB Source Output]"
+          TopLeft="765.25,258">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,62"
+              Start="0,0"
+              End="0,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Cargar DimProducto\Insertar productos nuevos"
+          TopLeft="673,420" />
+        <EdgeLayout
+          Id="Package\Cargar DimProducto.Paths[Lookup No Match Output]"
+          TopLeft="767.5,362">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.5,58"
+              Start="0,0"
+              End="8.5,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25"
+                    Point2="0,29"
+                    Point3="4,29" />
+                  <mssgle:LineSegment
+                    End="4.5,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.5,29"
+                    Point2="8.5,29"
+                    Point3="8.5,33" />
+                  <mssgle:LineSegment
+                    End="8.5,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-51.55638671875,34,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="225,42"
+          Id="Package\Cargar DimProducto\Detectar cambios en producto"
+          TopLeft="310,354" />
+        <EdgeLayout
+          Id="Package\Cargar DimProducto.Paths[Lookup Match Output]"
+          TopLeft="670,341">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-135,34"
+              Start="0,0"
+              End="-127.5,34">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-63.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-63.5,0"
+                    Point2="-67.5,0"
+                    Point3="-67.5,4" />
+                  <mssgle:LineSegment
+                    End="-67.5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-67.5,30"
+                    Point2="-67.5,34"
+                    Point3="-71.5,34" />
+                  <mssgle:LineSegment
+                    End="-127.5,34" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-115.69138671875,-17.609375,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="231,42"
+          Id="Package\Cargar DimProducto\Actualizar productos existentes"
+          TopLeft="305,463" />
+        <EdgeLayout
+          Id="Package\Cargar DimProducto.Paths[ConCambios]"
+          TopLeft="421.5,396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67"
+              Start="0,0"
+              End="0,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-27.94009765625,24.87548828125,55.8801953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar DimProducto\Leer productos y categorias">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar DimProducto\Buscar producto en DW">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar DimProducto\Insertar productos nuevos">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
