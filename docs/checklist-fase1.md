@@ -25,6 +25,9 @@ Esta lista recoge los entregables y controles de la pauta. Marcar una casilla ú
 - [x] CargaCliente probada: primera carga, repetición y actualización tipo 1; evidencias `05_carga_cliente_*.png`.
 - [x] CargaVendedor probada: primera carga, traducciones, repetición y actualización tipo 1; evidencias `06_*vendedor*.png`.
 - [x] CargaFecha probada: 1.461 días, repetición sin duplicados y año bisiesto; evidencias `07_*.png`.
+- [x] FactVentas probada individualmente: carga, repetición y actualización de un detalle; resultados en `evidencias/08_validacion_factventas.md`.
+- [x] CargaCompleta configurada y compilada con las cinco dimensiones y FactVentas.
+- [ ] Ejecución completa de CargaCompleta probada en ambos equipos.
 - [ ] Extracción, transformaciones y carga implementadas y explicadas.
 - [ ] Tratamiento de errores y reglas de calidad documentados.
 - [ ] Conteos, claves, cantidades y montos conciliados entre origen y DW.
