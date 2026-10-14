@@ -19,7 +19,9 @@ Esta lista recoge los entregables y controles de la pauta. Marcar una casilla ú
 - [x] Verificación de miembros desconocidos, claves y relaciones con el script 04 en el equipo de Joaquín.
 
 ## ETL y validación
-- [ ] Proyecto SSIS guardado, compartible y compilado para SQL Server 2019.
+- [x] Proyecto SSIS guardado, compartible y compilado para SQL Server 2019.
+- [x] CargaProducto probada: primera carga, repetición y actualización tipo 1; resultados en `evidencias/05_validacion_producto.md`.
+- [x] CargaTerritorio probada: primera carga, repetición y actualización tipo 1; resultados en `evidencias/06_validacion_territorio.md`.
 - [ ] Extracción, transformaciones y carga implementadas y explicadas.
 - [ ] Tratamiento de errores y reglas de calidad documentados.
 - [ ] Conteos, claves, cantidades y montos conciliados entre origen y DW.

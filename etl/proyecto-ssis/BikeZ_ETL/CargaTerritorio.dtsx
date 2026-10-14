@@ -12,12 +12,956 @@
   DTS:ObjectName="CargaTerritorio"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{6A82352B-A6F3-4C3C-86F9-47055D53995C}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{C549553E-F15C-49B7-84F3-31E97376BC78}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Cargar DimTerritorio"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{311FA505-4493-4AA4-92DA-406B22363250}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cargar DimTerritorio"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Cargar DimTerritorio\Actualizar territorios existentes"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Actualizar territorios existentes"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">UPDATE dbo.DimTerritorio
+SET
+    Territorio = ?,
+    PaisID = ?,
+    Pais = ?,
+    Grupo = ?
+WHERE TerritorioKey = ?;</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].Columns[Territorio]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Territorio"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Territorio]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].Columns[PaisID]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="PaisID"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[PaisID]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].Columns[Pais]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Pais"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Pais]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].Columns[Grupo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Grupo"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Grupo]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].Columns[TerritorioKey]"
+                      cachedDataType="i4"
+                      cachedName="TerritorioKey"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[TerritorioKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="wstr"
+                      length="3"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar DimTerritorio\Buscar territorio en DW"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Buscar territorio en DW"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+    TerritorioID,
+    TerritorioKey,
+    Territorio AS TerritorioActual,
+    PaisID AS PaisIDActual,
+    Pais AS PaisActual,
+    Grupo AS GrupoActual
+FROM dbo.DimTerritorio;</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT
+    TerritorioID,
+    TerritorioKey,
+    Territorio AS TerritorioActual,
+    PaisID AS PaisIDActual,
+    Pais AS PaisActual,
+    Grupo AS GrupoActual
+FROM dbo.DimTerritorio;) [refTable]
+where [refTable].[TerritorioID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="TerritorioID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TerritorioKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TerritorioActual" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PaisIDActual" dataType="DT_WSTR" length="3" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PaisActual" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="GrupoActual" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[TerritorioID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Inputs[Lookup Input].Columns[TerritorioID]"
+                      cachedDataType="i4"
+                      cachedName="TerritorioID"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[TerritorioID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">TerritorioID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Cargar DimTerritorio\Buscar territorio en DW.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[TerritorioKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[TerritorioKey]"
+                      name="TerritorioKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TerritorioKey</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[TerritorioActual]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[TerritorioActual]"
+                      name="TerritorioActual"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TerritorioActual</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[PaisIDActual]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="3"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[PaisIDActual]"
+                      name="PaisIDActual"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PaisIDActual</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[PaisActual]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[PaisActual]"
+                      name="PaisActual"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PaisActual</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[GrupoActual]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[GrupoActual]"
+                      name="GrupoActual"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">GrupoActual</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Cargar DimTerritorio\Buscar territorio en DW.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Cargar DimTerritorio\Buscar territorio en DW.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Detecctar cambios de territorio"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input].Columns[Territorio]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Territorio"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Territorio]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input].Columns[PaisID]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="PaisID"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[PaisID]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input].Columns[Pais]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Pais"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Pais]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input].Columns[Grupo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Grupo"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Grupo]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input].Columns[TerritorioActual]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritorioActual"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[TerritorioActual]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input].Columns[PaisIDActual]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="PaisIDActual"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[PaisIDActual]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input].Columns[PaisActual]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="PaisActual"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[PaisActual]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input].Columns[GrupoActual]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="GrupoActual"
+                      lineageId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[GrupoActual]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Outputs[ConCambios]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="ConCambios"
+                  synchronousInputId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Territorio]} != #{Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[TerritorioActual]} || #{Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[PaisID]} != #{Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[PaisIDActual]} || #{Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Pais]} != #{Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[PaisActual]} || #{Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Grupo]} != #{Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output].Columns[GrupoActual]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">Territorio != TerritorioActual || PaisID != PaisIDActual || Pais != PaisActual || Grupo != GrupoActual</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Outputs[SinCambios]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="SinCambios"
+                  synchronousInputId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar DimTerritorio\Insertar territorios nuevos"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insertar territorios nuevos"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimTerritorio]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].Columns[TerritorioID]"
+                      cachedDataType="i4"
+                      cachedName="TerritorioID"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].ExternalColumns[TerritorioID]"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[TerritorioID]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].Columns[Territorio]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Territorio"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Territorio]"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Territorio]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].Columns[PaisID]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="PaisID"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].ExternalColumns[PaisID]"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[PaisID]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].Columns[Pais]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Pais"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Pais]"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Pais]" />
+                    <inputColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].Columns[Grupo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Grupo"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Grupo]"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Grupo]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].ExternalColumns[TerritorioKey]"
+                      dataType="i4"
+                      name="TerritorioKey" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].ExternalColumns[TerritorioID]"
+                      dataType="i4"
+                      name="TerritorioID" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Territorio]"
+                      dataType="wstr"
+                      length="50"
+                      name="Territorio" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].ExternalColumns[PaisID]"
+                      dataType="wstr"
+                      length="3"
+                      name="PaisID" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Pais]"
+                      dataType="wstr"
+                      length="50"
+                      name="Pais" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input].ExternalColumns[Grupo]"
+                      dataType="wstr"
+                      length="50"
+                      name="Grupo" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar DimTerritorio\Leer Territorios y paises"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Leer Territorios y paises"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+    t.TerritorioID,
+    t.Territorio,
+    t.PaisID,
+    p.Pais,
+    t.Grupo
+FROM dbo.Territorios AS t
+INNER JOIN dbo.Paises AS p
+    ON p.PaisID = t.PaisID;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Connections[OleDbConnection]"
+                  connectionManagerID="{A3EE1E3A-68BB-4E3E-BB8E-5CCF56C5EDB7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Origen_BikeZ]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[TerritorioID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].ExternalColumns[TerritorioID]"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[TerritorioID]"
+                      name="TerritorioID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Territorio]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].ExternalColumns[Territorio]"
+                      length="50"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Territorio]"
+                      name="Territorio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[PaisID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].ExternalColumns[PaisID]"
+                      length="3"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[PaisID]"
+                      name="PaisID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Pais]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].ExternalColumns[Pais]"
+                      length="50"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Pais]"
+                      name="Pais"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Grupo]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].ExternalColumns[Grupo]"
+                      length="50"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].Columns[Grupo]"
+                      name="Grupo"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].ExternalColumns[TerritorioID]"
+                      dataType="i4"
+                      name="TerritorioID" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].ExternalColumns[Territorio]"
+                      dataType="wstr"
+                      length="50"
+                      name="Territorio" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].ExternalColumns[PaisID]"
+                      dataType="wstr"
+                      length="3"
+                      name="PaisID" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].ExternalColumns[Pais]"
+                      dataType="wstr"
+                      length="50"
+                      name="Pais" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output].ExternalColumns[Grupo]"
+                      dataType="wstr"
+                      length="50"
+                      name="Grupo" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[TerritorioID]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[TerritorioID]"
+                      name="TerritorioID" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[Territorio]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[Territorio]"
+                      name="Territorio" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[PaisID]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[PaisID]"
+                      name="PaisID" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[Pais]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[Pais]"
+                      name="Pais" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[Grupo]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[Grupo]"
+                      name="Grupo" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Cargar DimTerritorio.Paths[ConCambios]"
+              endId="Package\Cargar DimTerritorio\Actualizar territorios existentes.Inputs[OLE DB Command Input]"
+              name="ConCambios"
+              startId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Outputs[ConCambios]" />
+            <path
+              refId="Package\Cargar DimTerritorio.Paths[Lookup Match Output]"
+              endId="Package\Cargar DimTerritorio\Detecctar cambios de territorio.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Cargar DimTerritorio.Paths[Lookup No Match Output]"
+              endId="Package\Cargar DimTerritorio\Insertar territorios nuevos.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Cargar DimTerritorio\Buscar territorio en DW.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Cargar DimTerritorio.Paths[OLE DB Source Output]"
+              endId="Package\Cargar DimTerritorio\Buscar territorio en DW.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Cargar DimTerritorio\Leer Territorios y paises.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -25,5 +969,207 @@
 <Objects
   Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Cargar DimTerritorio"
+          TopLeft="562,199" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Cargar DimTerritorio">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="197,42"
+          Id="Package\Cargar DimTerritorio\Leer Territorios y paises"
+          TopLeft="598,193" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Cargar DimTerritorio\Buscar territorio en DW"
+          TopLeft="600,270" />
+        <EdgeLayout
+          Id="Package\Cargar DimTerritorio.Paths[OLE DB Source Output]"
+          TopLeft="696.5,235">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35"
+              Start="0,0"
+              End="0,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Cargar DimTerritorio\Insertar territorios nuevos"
+          TopLeft="721,365" />
+        <EdgeLayout
+          Id="Package\Cargar DimTerritorio.Paths[Lookup No Match Output]"
+          TopLeft="727.333333333333,312">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="95.6666666666666,53"
+              Start="0,0"
+              End="95.6666666666666,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.4614594039054" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.4614594039054"
+                    Point2="0,21.4614594039054"
+                    Point3="4,21.4614594039054" />
+                  <mssgle:LineSegment
+                    End="91.6666666666666,21.4614594039054" />
+                  <mssgle:CubicBezierSegment
+                    Point1="91.6666666666666,21.4614594039054"
+                    Point2="95.6666666666666,21.4614594039054"
+                    Point3="95.6666666666666,25.4614594039054" />
+                  <mssgle:LineSegment
+                    End="95.6666666666666,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-7.97305338541668,26.4614594039054,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="229,42"
+          Id="Package\Cargar DimTerritorio\Detecctar cambios de territorio"
+          TopLeft="438,364" />
+        <EdgeLayout
+          Id="Package\Cargar DimTerritorio.Paths[Lookup Match Output]"
+          TopLeft="665.666666666667,312">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-113.166666666667,52"
+              Start="0,0"
+              End="-113.166666666667,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.0565262076053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.0565262076053"
+                    Point2="0,21.0565262076053"
+                    Point3="-4,21.0565262076053" />
+                  <mssgle:LineSegment
+                    End="-109.166666666667,21.0565262076053" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-109.166666666667,21.0565262076053"
+                    Point2="-113.166666666667,21.0565262076053"
+                    Point3="-113.166666666667,25.0565262076053" />
+                  <mssgle:LineSegment
+                    End="-113.166666666667,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-104.774720052083,26.0565262076053,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="229,42"
+          Id="Package\Cargar DimTerritorio\Actualizar territorios existentes"
+          TopLeft="434,450" />
+        <EdgeLayout
+          Id="Package\Cargar DimTerritorio.Paths[ConCambios]"
+          TopLeft="550.5,406">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-27.94009765625,13.37548828125,55.8801953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar DimTerritorio\Leer Territorios y paises">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar DimTerritorio\Buscar territorio en DW">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar DimTerritorio\Insertar territorios nuevos">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

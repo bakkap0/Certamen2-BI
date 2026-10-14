@@ -1,16 +1,25 @@
-# Proyecto inicial SSIS
+# Proyecto SSIS
 
-Abrir `BikeZ_ETL.sln` en Visual Studio Community 2019 con SQL Server Integration Services Projects. La copia se preparó desde el proyecto local creado por Joaquín.
+Abrir `BikeZ_ETL.sln` en Visual Studio Community 2019 con SQL Server Integration Services Projects. El destino del proyecto es SQL Server 2019 y la protección es DontSaveSensitive.
 
-## Configuración preparada
-- TargetServerVersion: SQLServer2019.
-- ProtectionLevel del proyecto y paquete: DontSaveSensitive.
-- Paquete de entrada: Package.dtsx.
-- Sin conexiones, tareas, flujos ni parámetros sensibles.
+## Conexiones
 
-Se excluyeron `.vs`, archivos `.user`, compilados y el verificador cifrado que dependía del usuario local. Se conservaron los identificadores del proyecto y del paquete.
+- `Origen_BikeZ`: lee BikeZ.
+- `Destino_BikeZ_DW`: carga BikeZ_DW.
+- Ambas usan autenticación de Windows y el parámetro de proyecto `ServidorSQL`.
 
-## Estado y siguiente paso
-El paquete está vacío: no extrae, transforma ni carga datos. La revisión realizada aquí fue de estructura XML y configuración; falta abrir y compilar esta copia en Visual Studio 2019.
+Joaquín usa `BAKKAPO\BIT2019` y Frank `FRANK-PC`. Cada uno configura su servidor para las pruebas locales. Las conexiones utilizan SQL Server Native Client 11.0, que debe estar instalado en el equipo.
 
-Tras verificar el esquema y crear el DW, se incorporarán conexiones, tareas y flujos con sus reglas y validaciones. Cada integrante debe ajustar su servidor local; no asumir que el nombre de instancia de Joaquín existe en el otro equipo.
+## Paquetes
+
+| Paquete | Estado |
+|---|---|
+| CargaProducto | Implementado y probado: inserción, repetición y actualización tipo 1 |
+| CargaCliente, CargaVendedor y CargaFecha | Preparados para el trabajo de Frank |
+| CargaTerritorio | Implementado y probado: inserción, repetición y actualización tipo 1 |
+| CargarFactVentas | Pendiente de desarrollo conjunto |
+| CargaCompleta | Pendiente de conectar las cargas en orden |
+
+Para probar Producto o Territorio, ejecutar su paquete individual. Las dimensiones deben cargarse antes que FactVentas. No ejecutar el script 03 sobre una base ya cargada: elimina y recrea las tablas.
+
+Dejé los resultados en las [pruebas de Producto](../../docs/evidencias/05_validacion_producto.md) y las [pruebas de Territorio](../../docs/evidencias/06_validacion_territorio.md). Para ejecutar con la extensión SSIS 4.0 usé Run64BitRuntime = False.
