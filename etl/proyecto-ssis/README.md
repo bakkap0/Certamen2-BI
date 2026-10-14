@@ -18,9 +18,11 @@ Joaquín usa `BAKKAPO\BIT2019` y Frank `FRANK-PC`. Cada uno configura su servido
 | CargaCliente y CargaVendedor | Implementados por Frank con inserción y actualización tipo 1; pruebas en `docs/evidencias/` |
 | CargaFecha | Implementado por Frank: 1.461 días de 2015 a 2018 y repetición sin duplicados |
 | CargaTerritorio | Implementado y probado: inserción, repetición y actualización tipo 1 |
-| CargarFactVentas | Implementado y probado individualmente; pendiente revisión y conciliación de Frank |
-| CargaCompleta | Configurado y compilado; pendiente prueba completa |
+| CargarFactVentas | Implementado, revisado y conciliado; repetición individual sin inserciones ni actualizaciones |
+| CargaCompleta | Implementado; bloqueo confirmado como resuelto por Joaquín el 14-10-2026 |
 
 Para probar un paquete, ejecutarlo individualmente. Las cinco dimensiones deben cargarse antes que FactVentas. El paquete principal las llama en orden y después ejecuta FactVentas; sus conexiones de éxito impiden continuar si una tarea falla. No ejecutar el script 03 sobre una base ya cargada: elimina y recrea las tablas.
 
 Dejé los resultados en las pruebas de [Producto](../../docs/evidencias/05_validacion_producto.md), [Territorio](../../docs/evidencias/06_validacion_territorio.md) y [FactVentas](../../docs/evidencias/08_validacion_factventas.md). Para ejecutar con la extensión SSIS 4.0 usé Run64BitRuntime = False.
+
+La conciliación completa registra 14 controles en OK. El respaldo y su restauración de prueba están documentados en [database/backup](../../database/backup/README.md). El estado actualizado del paquete principal está en [el cierre de fase](../../docs/evidencias/10_cierre_fase1.md).

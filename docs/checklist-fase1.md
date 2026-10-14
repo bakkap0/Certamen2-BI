@@ -7,7 +7,7 @@ Esta lista recoge los entregables y controles de la pauta. Marcar una casilla ú
 - [x] Nombres y sección registrados.
 - [x] Usuario GitHub de Frank registrado y colaboración habilitada.
 - [x] Aportes sustantivos de ambos identificables en Git.
-- [ ] Repositorio accesible para el docente.
+- [x] Repositorio público y accesible para consulta; comprobar el enlace enviado al docente.
 - [x] README actualizado para el avance actual; volver a revisar antes de presentar.
 
 ## Análisis y diseño
@@ -27,7 +27,7 @@ Esta lista recoge los entregables y controles de la pauta. Marcar una casilla ú
 - [x] CargaFecha probada: 1.461 días, repetición sin duplicados y año bisiesto; evidencias `07_*.png`.
 - [x] FactVentas probada individualmente: carga, repetición y actualización de un detalle; resultados en `evidencias/08_validacion_factventas.md`.
 - [x] CargaCompleta configurada y compilada con las cinco dimensiones y FactVentas.
-- [x] Ejecución completa de CargaCompleta probada en ambos equipos.
+- [x] CargaCompleta ejecutada; bloqueo confirmado como resuelto por Joaquín el 14-10-2026. Alcance en `evidencias/10_cierre_fase1.md`.
 - [x] Extracción, transformaciones y carga implementadas y explicadas.
 - [x] Tratamiento de errores y reglas de calidad documentados.
 - [x] Conteos, claves, cantidades y montos conciliados entre origen y DW.
@@ -37,8 +37,9 @@ Esta lista recoge los entregables y controles de la pauta. Marcar una casilla ú
 - [x] Backup restaurado de prueba y resultados verificados.
 
 ## Presentación y comprensión
-- [ ] Presentación final del equipo incorporada.
-- [ ] Informe del caso completado con portada, índice, introducción, desarrollo, conclusiones y bibliografía.
+- [ ] Presentación final del equipo incorporada. El equipo la llevará a la exposición de la próxima semana; no está adjunta al repositorio.
+- [x] Informe incorporado con portada, índice, introducción, desarrollo, conclusiones y bibliografía; redacción en tercera persona. Archivo en `informe/InformeBIRamirezSoto.docx`.
+- [ ] Paginación e índice del informe comprobados en Word.
 - [ ] Ambos pueden demostrar y explicar toda la Fase 1.
 
 No se exige todavía cubo OLAP ni Power BI. Un proyecto SSIS vacío, el backup transaccional o capturas aisladas no sustituyen los entregables implementados.

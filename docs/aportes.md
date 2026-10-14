@@ -24,6 +24,9 @@ Este registro complementa el historial de Git. Describe avances realizados; no m
 | Frank Soto | Carga de Fecha generando el calendario 2015-2018 | [3a92ae5](https://github.com/bakkap0/Certamen2-BI/commit/3a92ae5) | Generación del calendario, clave AAAAMMDD, año bisiesto y por qué no requiere actualización |
 | Joaquín Ramírez | Configuración del paquete principal con ejecución secuencial | [77c032c](https://github.com/bakkap0/Certamen2-BI/commit/77c032c) | Referencias de proyecto, conexiones de éxito y fallo del paquete principal |
 | Joaquín Ramírez | Carga de FactVentas con resolución de claves, cálculos, inserción y actualización por clave compuesta | [Pruebas de FactVentas](evidencias/08_validacion_factventas.md) | Grano del detalle, vendedor desconocido, cálculos y repetición de la carga |
+| Frank Soto | Documentación del ETL y script de conciliación | [Pull Request 20](https://github.com/bakkap0/Certamen2-BI/pull/20) | Transformaciones y comparación de origen con DW |
+| Frank Soto | Conciliación completa y repetición individual de FactVentas | [Pull Request 22](https://github.com/bakkap0/Certamen2-BI/pull/22) | Los 14 controles en OK y el alcance de la prueba de repetición |
+| Frank Soto | Respaldo dimensional y restauración de prueba | [Pull Request 23](https://github.com/bakkap0/Certamen2-BI/pull/23) | Restauración sin reemplazar la base original y cifras verificadas |
 
-Las revisiones e integraciones posteriores se registrarán con su commit o Pull Request real. Las cinco dimensiones están implementadas y FactVentas tiene pruebas individuales en el equipo de Joaquín; quedan pendientes la revisión conjunta y la validación del ETL completo.
+El 14 de octubre de 2026, Joaquín confirmó la resolución del bloqueo de CargaCompleta. La actualización del informe y la documentación de cierre quedan identificadas en el historial de esta rama y en [10_cierre_fase1.md](evidencias/10_cierre_fase1.md). La presentación se llevará al momento de la exposición de la próxima semana.
 

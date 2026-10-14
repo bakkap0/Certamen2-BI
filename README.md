@@ -2,66 +2,66 @@
 
 **Caso 2: Bike Z · Sección 300**
 
-**Integrantes:** Joaquín Ramírez y Frank Soto.
+**Integrantes:** Joaquín Ramírez y Frank Soto. **Profesor:** Hernan Saavedra.
 
 ## Sobre el proyecto
 
-Bike Z necesita analizar sus ventas para apoyar sus decisiones comerciales. En este proyecto trabajamos con la base de datos entregada para analizar las ventas por fecha, producto, cliente, vendedor y territorio.
+Bike Z necesita analizar sus ventas para apoyar sus decisiones comerciales. En la Fase 1 construimos un modelo estrella en SQL Server y un ETL en SSIS para analizar las ventas por fecha, producto, categoría, cliente, vendedor y territorio. El cubo OLAP y Power BI corresponden a la Fase 2.
 
-En la **Fase 1** vamos a crear un modelo dimensional en SQL Server y cargar sus datos mediante un proceso ETL en SSIS. El cubo OLAP y el dashboard en Power BI quedan para la Fase 2.
+## Estado de la Fase 1
+
+El modelo, las cinco dimensiones, FactVentas y el paquete CargaCompleta están implementados. La conciliación registrada compara origen y DW con los 14 controles en OK. El respaldo dimensional está disponible y Frank documentó su restauración de prueba. El 14 de octubre de 2026, Joaquín confirmó que el bloqueo de CargaCompleta quedó resuelto.
+
+| Control | Origen | DW |
+|---|---:|---:|
+| Detalles de venta | 121.317 | 121.317 |
+| Ventas distintas | 31.465 | 31.465 |
+| Unidades | 274.914 | 274.914 |
+| Importe total | 110.373.889,3134 | 110.373.889,3134 |
+
+La repetición individual de FactVentas registra 121.317 coincidencias, cero inserciones y cero actualizaciones. Los resultados y el alcance de las comprobaciones están en [evidencias](docs/evidencias/README.md).
+
+La presentación se llevará al momento de la exposición de la próxima semana; su archivo aún no está incorporado al repositorio. El cierre de la documentación está en [10_cierre_fase1.md](docs/evidencias/10_cierre_fase1.md).
+
+## Entregables y documentación
+
+- [Informe en Word](docs/informe/InformeBIRamirezSoto.docx).
+- [Análisis del origen](docs/analisis-origen.md) y [diseño con Kimball](docs/modelo-dimensional/propuesta.md).
+- [Diagrama dimensional](docs/modelo-dimensional/diagrama.png).
+- [Script de creación del modelo](database/scripts/03_crear_modelo_dimensional.sql).
+- [Solución SSIS](etl/proyecto-ssis/BikeZ_ETL.sln) y [documentación del ETL](docs/proceso-etl.md).
+- [Conciliación de la carga](database/scripts/05_conciliar_carga.sql).
+- [Respaldo BikeZ_DW.bak](database/backup/BikeZ_DW.bak) e [instrucciones de restauración](database/backup/README.md).
+- [Aportes del equipo](docs/aportes.md), [plan de trabajo](docs/plan-trabajo.md) y [checklist](docs/checklist-fase1.md).
 
 ## Indicadores definidos
 
-| KPI | Cálculo | ¿Para qué sirve? |
+| KPI | Cálculo | Utilidad |
 |---|---|---|
-| Monto de ventas | Suma de cantidad × precio unitario | Medir el tamaño del negocio y compararlo por mes, producto, categoría o territorio |
-| Crecimiento mensual de ventas | (Monto del mes − monto del mes anterior) / monto del mes anterior × 100 | Saber si la empresa sigue creciendo |
-| % de ventas con vendedor informado | Ventas distintas con vendedor informado / total de ventas distintas × 100 | Medir la cobertura de identificación del vendedor |
-| Ticket promedio | Monto de ventas / número de ventas distintas | Saber cuánto gasta un cliente por compra |
-| Días promedio de despacho | Promedio de (fecha de envío − fecha de venta) | Medir qué tan rápido se envían los pedidos |
+| Monto de ventas | Suma de cantidad × precio unitario | Comparar períodos, productos, categorías y territorios |
+| Crecimiento mensual | (Monto del mes − monto anterior) / monto anterior × 100 | Identificar aumentos o caídas |
+| Ventas con vendedor informado | Ventas distintas identificadas / ventas distintas totales × 100 | Medir la cobertura del dato de vendedor |
+| Ticket promedio | Monto total / ventas distintas | Conocer el monto promedio por compra |
+| Días promedio de despacho | Promedio de días entre venta y envío, una vez por venta | Medir el tiempo hasta el envío |
 
-El crecimiento se mide por mes porque 2015 y 2018 son años incompletos; si el mes anterior no tiene ventas, queda sin calcular. El ticket se divide por ventas distintas y no por detalles, porque una venta tiene varias líneas. No calcularemos rentabilidad ni inventario porque la base no incluye costos ni stock. El detalle de cada indicador está en [la propuesta del modelo](docs/modelo-dimensional/propuesta.md).
+Si el mes anterior no existe o su monto es cero, el crecimiento queda sin calcular. Los años 2015 y 2018 tienen ventas en parte del año. Los días se promedian por VentaID, no por detalle ni con AVG(DISTINCT DiasDespacho). No se calcula rentabilidad ni inventario porque la base no incluye costos ni stock; tampoco identifica la moneda de los montos.
 
-## Modelo dimensional
+## Modelo y carga
 
-La propuesta sigue los cuatro pasos de Kimball:
+El grano es una fila por VentaID y DetalleVentaID. FactVentas se relaciona con Producto, Cliente, Vendedor y Territorio, y con Fecha mediante dos roles: venta y envío. Categoría y país se integran en sus dimensiones. Las cuatro dimensiones con claves sustitutas incluyen un miembro desconocido con clave -1.
 
-1. **Proceso:** ventas de Bike Z.
-2. **Granularidad:** una fila por detalle de venta, identificado por `VentaID` y `DetalleVentaID`.
-3. **Dimensiones:** Fecha, Producto, Cliente, Vendedor y Territorio. Fecha se usará para venta y envío; Producto incluirá categoría y Territorio incluirá país y grupo.
-4. **Tabla de hechos:** `FactVentas`, con cantidad, precio unitario e importe de venta (cantidad × precio unitario).
+CargaCompleta ejecuta: **Fecha → Producto → Cliente → Territorio → Vendedor → FactVentas**. Las cargas insertan registros nuevos y actualizan los que cambian; las dimensiones siguen SCD tipo 1 y conservan su clave sustituta.
 
-Usaremos un modelo estrella. El diseño completo está en [la propuesta del modelo](docs/modelo-dimensional/propuesta.md) y debe confirmarse con los datos del origen.
+## Cómo revisar o ejecutar
 
-## ETL y herramientas
+1. Para revisar directamente el DW cargado, restaurar [BikeZ_DW.bak](database/backup/BikeZ_DW.bak) siguiendo las instrucciones del respaldo.
+2. Para ejecutar el ETL, restaurar el BikeZ.bak del caso como BikeZ en SQL Server 2019 y disponer de BikeZ_DW. En una instalación inicial puede usarse el script 03; elimina y recrea las tablas, por lo que no debe ejecutarse sobre una carga que se quiera conservar.
+3. Abrir BikeZ_ETL.sln en Visual Studio 2019 con SSIS y configurar el parámetro ServidorSQL con la instancia local. Las conexiones usan autenticación de Windows y SQL Server Native Client 11.0.
+4. Ejecutar CargaCompleta o las dimensiones antes de CargarFactVentas. Cada tarea del paquete principal requiere el éxito de la anterior.
+5. Ejecutar el script 05_conciliar_carga.sql en una instancia con BikeZ y BikeZ_DW. Es de solo lectura y compara filas, cantidades, importes y correspondencia de claves.
 
-El flujo previsto es: **BikeZ → limpieza y transformación en SSIS → dimensiones → FactVentas → validación de la carga**.
+Las instancias usadas durante el trabajo fueron BAKKAPO\BIT2019 y FRANK-PC. La configuración local Run64BitRuntime = False se utilizó para depurar con la extensión SSIS instalada. El proyecto usa DontSaveSensitive.
 
-Trabajamos con SQL Server 2019 Developer, SSMS, Visual Studio Community 2019 con SSIS y GitHub.
+## Trabajo en equipo
 
-## Organización del repositorio
-
-```text
-database/scripts/        Consultas y scripts SQL
-database/backup/         Respaldo de la base dimensional
-etl/proyecto-ssis/       Solución y paquetes SSIS
-docs/modelo-dimensional/ Diseño y diagrama del modelo
-docs/evidencias/         Capturas y resultados de las validaciones
-docs/presentacion/       Material para la presentación
-```
-
-## Cómo revisar el avance
-
-1. Clonar el repositorio y restaurar el archivo `BikeZ.bak` del caso como base `BikeZ` en SQL Server 2019.
-2. Ejecutar [01_explorar_origen.sql](database/scripts/01_explorar_origen.sql) en SSMS y registrar los resultados en [análisis del origen](docs/analisis-origen.md).
-3. Para una instalación inicial, ejecutar [03_crear_modelo_dimensional.sql](database/scripts/03_crear_modelo_dimensional.sql). El script elimina y recrea las tablas de BikeZ_DW, por lo que no se utiliza para revisar una base ya cargada.
-4. Ejecutar [04_verificar_modelo.sql](database/scripts/04_verificar_modelo.sql), de solo lectura, para revisar conteos, miembros desconocidos, claves y relaciones.
-5. Abrir [BikeZ_ETL.sln](etl/proyecto-ssis/BikeZ_ETL.sln) en Visual Studio 2019 con la extensión SSIS. Configurar `ServidorSQL` y cargar las cinco dimensiones antes de ejecutar `CargarFactVentas.dtsx`. Las cargas individuales están implementadas y probadas. `CargaCompleta.dtsx` ya tiene el orden configurado; falta probar su ejecución completa.
-
-En el equipo de Joaquín la instancia es `BAKKAPO\BIT2019`. Ambas conexiones usan el parámetro de proyecto `ServidorSQL`; cada integrante debe configurar el valor de su instancia para las pruebas locales.
-
-## Avance y trabajo en equipo
-
-Tenemos el análisis del origen, el modelo dimensional y las cargas individuales de las cinco dimensiones y FactVentas. Ejecuté y comprobé Producto, Territorio y FactVentas, incluyendo la repetición y actualizaciones controladas. Los resultados están en [Producto](docs/evidencias/05_validacion_producto.md), [Territorio](docs/evidencias/06_validacion_territorio.md) y [FactVentas](docs/evidencias/08_validacion_factventas.md); las evidencias de las cargas de Frank están en `docs/evidencias/`. Falta la revisión conjunta, conciliar cantidades e importes, probar CargaCompleta y preparar el respaldo y la presentación. La Fase 2 todavía no está iniciada.
-
-Joaquín realizó la exploración, los controles de datos y la comprobación inicial del modelo en su equipo; Frank amplió el análisis, documentó los KPI y creó el modelo y su diagrama. Ambos participarán en SSIS, validación y presentación. El detalle está en [el plan de trabajo](docs/plan-trabajo.md) y los avances registrados en [aportes.md](docs/aportes.md). Cada uno trabaja desde su cuenta y revisamos los cambios antes de integrarlos.
+Joaquín implementó Producto, Territorio, FactVentas y CargaCompleta. Frank implementó Cliente, Vendedor y Fecha, preparó la conciliación, documentó el ETL y generó el respaldo con su prueba de restauración. El análisis y las revisiones se integraron mediante ramas y Pull Requests de ambos integrantes. Cada uno debe poder explicar la solución completa.

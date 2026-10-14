@@ -1,22 +1,21 @@
 # Plan de trabajo - Fase 1
 
-Distribución acordada durante el avance. Las tareas futuras siguen pendientes hasta contar con código ejecutado y evidencia.
+Estado actualizado el 14 de octubre de 2026.
 
-| Etapa | Joaquín Ramírez | Frank Soto | Estado o criterio para cerrar |
+| Etapa | Joaquín Ramírez | Frank Soto | Estado |
 |---|---|---|---|
-| Análisis del origen | Tablas, columnas, claves, calidad, clasificación de clientes y comprobación de horas | Verificar fechas y consultar códigos de empleados | Resultados registrados; revisar textos y tamaños al preparar el ETL |
-| KPI y modelo | Revisar coherencia con los resultados del origen | Documentar KPI, Kimball, dimensiones, hechos e historia | Diseño documentado; revisión conjunta antes de crear las tablas |
-| SQL dimensional | Ejecutó los scripts 03 y 04 y registró conteos, miembros desconocidos, claves y relaciones | Creó el script, el diagrama y pruebas de restricciones | Estructura creada en ambos equipos y verificación de Joaquín registrada |
-| ETL | Producto, Territorio y FactVentas implementados y probados; CargaCompleta configurada | Cliente, Vendedor y Fecha implementados; revisar FactVentas y documentar el ETL | Cargas individuales probadas; pendientes conciliación y prueba completa |
-| Validación | Conciliar registros e importes; participar en el backup | Revisar controles, repetición y restauración | Ambos ejecutan y comprenden las comprobaciones |
-| Presentación | Explicar su trabajo y la solución completa | Explicar su trabajo y la solución completa | Demostración y ensayo de interrogación individual |
+| Análisis | Exploración, calidad, clasificación de clientes y comprobación de horas | Verificación de fechas y códigos de empleados | Resultados documentados |
+| KPI y modelo | Revisión de coherencia con los datos | KPI, Kimball, dimensiones, medidas y SCD tipo 1 | Diseño implementado |
+| SQL dimensional | Ejecución de scripts y controles de estructura | Creación del DDL, diagrama y pruebas de restricciones | Modelo creado y comprobado |
+| ETL | Producto, Territorio, FactVentas y CargaCompleta | Cliente, Vendedor, Fecha y documentación | Paquetes implementados; bloqueo de CargaCompleta confirmado como resuelto |
+| Validación | Pruebas individuales, repetición y actualización de hechos | Conciliación, repetición de FactVentas y restauración | 14 controles en OK y respaldo restaurado de prueba |
+| Informe | Revisión e incorporación de la documentación final | Aportes técnicos y resultados de conciliación y respaldo | Informe incorporado |
+| Presentación | Explicar su trabajo y la solución completa | Explicar su trabajo y la solución completa | Se llevará a la exposición de la próxima semana; archivo aún fuera del repositorio |
 
-## Próximos pasos
+## Preparación de la exposición
 
-1. Subir FactVentas y sus pruebas para la revisión de Frank.
-2. Frank prepara `05_conciliar_carga.sql` y la documentación del ETL; cerrar también el ajuste pendiente de NombreCompleto en Cliente.
-3. Ambos prueban CargaCompleta y concilian filas, cantidades e importes; después preparan y restauran el respaldo dimensional.
+Revisar el informe en Word para comprobar paginación e índice, preparar la presentación y ensayar la demostración. Ambos deben explicar el grano del hecho, las claves sustitutas, los datos faltantes, los Lookup, las actualizaciones y las cifras de conciliación.
 
 ## Colaboración
 
-Cada integrante usa su cuenta y registra cambios concretos. Los avances se revisan mediante Pull Requests. Se acuerda quién modifica cada paquete SSIS para evitar conflictos. El registro de aportes se completa con commits reales, y ambos deben comprender el proyecto completo.
+Cada integrante utiliza su cuenta y registra cambios concretos. Los avances se revisan mediante Pull Requests. El registro de [aportes](aportes.md) conserva las referencias a los trabajos realizados. El [cierre de fase](evidencias/10_cierre_fase1.md) distingue las capturas existentes de la confirmación posterior sobre CargaCompleta.

@@ -8,5 +8,6 @@
 *.database text eol=crlf
 *.png binary
 *.pdf binary
+*.docx binary
 *.pptx binary
 *.bak binary
