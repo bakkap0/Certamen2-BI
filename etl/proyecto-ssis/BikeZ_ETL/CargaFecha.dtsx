@@ -12,12 +12,689 @@
   DTS:ObjectName="CargaFecha"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{7000ECED-E115-4EA1-A2A7-2D8A0AEC389E}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{D8D5CD64-30CE-4D08-9AD6-53E227F6BEA9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT Cargar DimFecha"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A39EBD92-6045-441A-9E8B-59E2089F21CA}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT Cargar DimFecha"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT Cargar DimFecha\Buscar en DimFecha"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Buscar en DimFecha"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT FechaKey FROM dbo.DimFecha;</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT FechaKey FROM dbo.DimFecha;) [refTable]
+where [refTable].[FechaKey] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="FechaKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[FechaKey]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Inputs[Lookup Input].Columns[FechaKey]"
+                      cachedDataType="i4"
+                      cachedName="FechaKey"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[FechaKey]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">FechaKey</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT Cargar DimFecha\Generar calendario"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Generar calendario"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">WITH Numeros AS (
+    SELECT TOP (DATEDIFF(DAY, '20150101', '20181231') + 1)
+           ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) - 1 AS n
+    FROM sys.all_objects a CROSS JOIN sys.all_objects b
+),
+Fechas AS (
+    SELECT CAST(DATEADD(DAY, n, '20150101') AS DATE) AS Fecha FROM Numeros
+)
+SELECT
+    CAST(CONVERT(CHAR(8), Fecha, 112) AS INT)                       AS FechaKey,
+    Fecha,
+    CAST(YEAR(Fecha) AS SMALLINT)                                   AS Anio,
+    CAST(CASE WHEN MONTH(Fecha) &lt;= 6 THEN 1 ELSE 2 END AS TINYINT)  AS Semestre,
+    CAST(DATEPART(QUARTER, Fecha) AS TINYINT)                       AS Trimestre,
+    CAST(MONTH(Fecha) AS TINYINT)                                   AS Mes,
+    CAST(CHOOSE(MONTH(Fecha), N'Enero', N'Febrero', N'Marzo', N'Abril', N'Mayo', N'Junio',
+         N'Julio', N'Agosto', N'Septiembre', N'Octubre', N'Noviembre', N'Diciembre')
+         AS NVARCHAR(15))                                           AS NombreMes,
+    CAST(DAY(Fecha) AS TINYINT)                                     AS Dia,
+    CAST(DATEDIFF(DAY, '19000101', Fecha) % 7 + 1 AS TINYINT)       AS DiaSemana,
+    CAST(CHOOSE(DATEDIFF(DAY, '19000101', Fecha) % 7 + 1,
+         N'Lunes', N'Martes', N'Miércoles', N'Jueves', N'Viernes', N'Sábado', N'Domingo')
+         AS NVARCHAR(15))                                           AS NombreDiaSemana
+FROM Fechas
+ORDER BY Fecha;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT Cargar DimFecha\Generar calendario.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[FechaKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[FechaKey]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[FechaKey]"
+                      name="FechaKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Fecha]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Fecha]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Fecha]"
+                      name="Fecha"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Anio]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Anio]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Anio]"
+                      name="Anio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Semestre]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Semestre]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Semestre]"
+                      name="Semestre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Trimestre]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Trimestre]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Trimestre]"
+                      name="Trimestre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Mes]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Mes]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Mes]"
+                      name="Mes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[NombreMes]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[NombreMes]"
+                      length="15"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[NombreMes]"
+                      name="NombreMes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Dia]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Dia]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Dia]"
+                      name="Dia"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[DiaSemana]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[DiaSemana]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[DiaSemana]"
+                      name="DiaSemana"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[NombreDiaSemana]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[NombreDiaSemana]"
+                      length="15"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[NombreDiaSemana]"
+                      name="NombreDiaSemana"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[FechaKey]"
+                      dataType="i4"
+                      name="FechaKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Fecha]"
+                      dataType="dbDate"
+                      name="Fecha" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Anio]"
+                      dataType="i2"
+                      name="Anio" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Semestre]"
+                      dataType="ui1"
+                      name="Semestre" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Trimestre]"
+                      dataType="ui1"
+                      name="Trimestre" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Mes]"
+                      dataType="ui1"
+                      name="Mes" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[NombreMes]"
+                      dataType="wstr"
+                      length="15"
+                      name="NombreMes" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[Dia]"
+                      dataType="ui1"
+                      name="Dia" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[DiaSemana]"
+                      dataType="ui1"
+                      name="DiaSemana" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].ExternalColumns[NombreDiaSemana]"
+                      dataType="wstr"
+                      length="15"
+                      name="NombreDiaSemana" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[FechaKey]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[FechaKey]"
+                      name="FechaKey" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Fecha]"
+                      dataType="dbDate"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Fecha]"
+                      name="Fecha" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Anio]"
+                      dataType="i2"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Anio]"
+                      name="Anio" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Semestre]"
+                      dataType="ui1"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Semestre]"
+                      name="Semestre" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Trimestre]"
+                      dataType="ui1"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Trimestre]"
+                      name="Trimestre" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Mes]"
+                      dataType="ui1"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Mes]"
+                      name="Mes" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[NombreMes]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[NombreMes]"
+                      name="NombreMes" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Dia]"
+                      dataType="ui1"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[Dia]"
+                      name="Dia" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[DiaSemana]"
+                      dataType="ui1"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[DiaSemana]"
+                      name="DiaSemana" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[NombreDiaSemana]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[NombreDiaSemana]"
+                      name="NombreDiaSemana" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insertar fechas nuevas"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimFecha]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Connections[OleDbConnection]"
+                  connectionManagerID="{B6A8E7C3-A617-4056-BC74-2E9AACCBD6C4}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Destino_BikeZ_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].Columns[FechaKey]"
+                      cachedDataType="i4"
+                      cachedName="FechaKey"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[FechaKey]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[FechaKey]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].Columns[Fecha]"
+                      cachedDataType="dbDate"
+                      cachedName="Fecha"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Fecha]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Fecha]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].Columns[Anio]"
+                      cachedDataType="i2"
+                      cachedName="Anio"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Anio]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Anio]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].Columns[Semestre]"
+                      cachedDataType="ui1"
+                      cachedName="Semestre"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Semestre]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Semestre]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].Columns[Trimestre]"
+                      cachedDataType="ui1"
+                      cachedName="Trimestre"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Trimestre]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Trimestre]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].Columns[Mes]"
+                      cachedDataType="ui1"
+                      cachedName="Mes"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Mes]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Mes]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].Columns[NombreMes]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="NombreMes"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[NombreMes]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[NombreMes]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].Columns[Dia]"
+                      cachedDataType="ui1"
+                      cachedName="Dia"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Dia]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[Dia]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].Columns[DiaSemana]"
+                      cachedDataType="ui1"
+                      cachedName="DiaSemana"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[DiaSemana]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[DiaSemana]" />
+                    <inputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].Columns[NombreDiaSemana]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="NombreDiaSemana"
+                      externalMetadataColumnId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[NombreDiaSemana]"
+                      lineageId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output].Columns[NombreDiaSemana]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[FechaKey]"
+                      dataType="i4"
+                      name="FechaKey" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Fecha]"
+                      dataType="dbDate"
+                      name="Fecha" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Anio]"
+                      dataType="i2"
+                      name="Anio" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Semestre]"
+                      dataType="ui1"
+                      name="Semestre" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Trimestre]"
+                      dataType="ui1"
+                      name="Trimestre" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Mes]"
+                      dataType="ui1"
+                      name="Mes" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[NombreMes]"
+                      dataType="wstr"
+                      length="15"
+                      name="NombreMes" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[Dia]"
+                      dataType="ui1"
+                      name="Dia" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[DiaSemana]"
+                      dataType="ui1"
+                      name="DiaSemana" />
+                    <externalMetadataColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input].ExternalColumns[NombreDiaSemana]"
+                      dataType="wstr"
+                      length="15"
+                      name="NombreDiaSemana" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT Cargar DimFecha.Paths[Lookup No Match Output]"
+              endId="Package\DFT Cargar DimFecha\Insertar fechas nuevas.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DFT Cargar DimFecha.Paths[OLE DB Source Output]"
+              endId="Package\DFT Cargar DimFecha\Buscar en DimFecha.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT Cargar DimFecha\Generar calendario.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -25,5 +702,127 @@
 <Objects
   Version="8">
   <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="188,42.6666666666667"
+          Id="Package\DFT Cargar DimFecha"
+          TopLeft="187.499997206032,74.5789487721848" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT Cargar DimFecha">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="170.666666666667,42.6666666666667"
+          Id="Package\DFT Cargar DimFecha\Generar calendario"
+          TopLeft="183.749997261912,24.6315794109968" />
+        <NodeLayout
+          Size="178.666666666667,42.6666666666667"
+          Id="Package\DFT Cargar DimFecha\Buscar en DimFecha"
+          TopLeft="178.749997336417,101.947370339959" />
+        <EdgeLayout
+          Id="Package\DFT Cargar DimFecha.Paths[OLE DB Source Output]"
+          TopLeft="268.583330632498,67.2982460776635">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.6491242622955"
+              Start="0,0"
+              End="0,27.1491242622955">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.1491242622955" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="186.666666666667,42.6666666666667"
+          Id="Package\DFT Cargar DimFecha\Insertar fechas nuevas"
+          TopLeft="182.499997280538,167.631582102617" />
+        <EdgeLayout
+          Id="Package\DFT Cargar DimFecha.Paths[Lookup No Match Output]"
+          TopLeft="271.958330641811,144.614037006626">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.0175450959914"
+              Start="0,0"
+              End="0,15.5175450959914">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5175450959914" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,1.9540850479957,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT Cargar DimFecha\Generar calendario">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT Cargar DimFecha\Buscar en DimFecha">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT Cargar DimFecha\Insertar fechas nuevas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
