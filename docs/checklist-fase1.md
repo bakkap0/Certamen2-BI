@@ -5,7 +5,7 @@ Esta lista recoge los entregables y controles de la pauta. Marcar una casilla ú
 ## Equipo y repositorio
 - [x] Repositorio creado.
 - [x] Nombres y sección registrados.
-- [ ] Usuario GitHub de Frank registrado y colaboración habilitada.
+- [x] Usuario GitHub de Frank registrado y colaboración habilitada.
 - [x] Aportes sustantivos de ambos identificables en Git.
 - [ ] Repositorio accesible para el docente.
 - [x] README actualizado para el avance actual; volver a revisar antes de presentar.
@@ -22,6 +22,9 @@ Esta lista recoge los entregables y controles de la pauta. Marcar una casilla ú
 - [x] Proyecto SSIS guardado, compartible y compilado para SQL Server 2019.
 - [x] CargaProducto probada: primera carga, repetición y actualización tipo 1; resultados en `evidencias/05_validacion_producto.md`.
 - [x] CargaTerritorio probada: primera carga, repetición y actualización tipo 1; resultados en `evidencias/06_validacion_territorio.md`.
+- [x] CargaCliente probada: primera carga, repetición y actualización tipo 1; evidencias `05_carga_cliente_*.png`.
+- [x] CargaVendedor probada: primera carga, traducciones, repetición y actualización tipo 1; evidencias `06_*vendedor*.png`.
+- [x] CargaFecha probada: 1.461 días, repetición sin duplicados y año bisiesto; evidencias `07_*.png`.
 - [ ] Extracción, transformaciones y carga implementadas y explicadas.
 - [ ] Tratamiento de errores y reglas de calidad documentados.
 - [ ] Conteos, claves, cantidades y montos conciliados entre origen y DW.
