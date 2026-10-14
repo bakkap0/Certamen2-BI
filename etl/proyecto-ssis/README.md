@@ -15,11 +15,12 @@ Joaquín usa `BAKKAPO\BIT2019` y Frank `FRANK-PC`. Cada uno configura su servido
 | Paquete | Estado |
 |---|---|
 | CargaProducto | Implementado y probado: inserción, repetición y actualización tipo 1 |
-| CargaCliente, CargaVendedor y CargaFecha | Preparados para el trabajo de Frank |
+| CargaCliente y CargaVendedor | Implementados por Frank con inserción y actualización tipo 1; pruebas en `docs/evidencias/` |
+| CargaFecha | Implementado por Frank: 1.461 días de 2015 a 2018 y repetición sin duplicados |
 | CargaTerritorio | Implementado y probado: inserción, repetición y actualización tipo 1 |
-| CargarFactVentas | Pendiente de desarrollo conjunto |
-| CargaCompleta | Pendiente de conectar las cargas en orden |
+| CargarFactVentas | Implementado y probado individualmente; pendiente revisión y conciliación de Frank |
+| CargaCompleta | Configurado y compilado; pendiente prueba completa |
 
-Para probar Producto o Territorio, ejecutar su paquete individual. Las dimensiones deben cargarse antes que FactVentas. No ejecutar el script 03 sobre una base ya cargada: elimina y recrea las tablas.
+Para probar un paquete, ejecutarlo individualmente. Las cinco dimensiones deben cargarse antes que FactVentas. El paquete principal las llama en orden y después ejecuta FactVentas; sus conexiones de éxito impiden continuar si una tarea falla. No ejecutar el script 03 sobre una base ya cargada: elimina y recrea las tablas.
 
-Dejé los resultados en las [pruebas de Producto](../../docs/evidencias/05_validacion_producto.md) y las [pruebas de Territorio](../../docs/evidencias/06_validacion_territorio.md). Para ejecutar con la extensión SSIS 4.0 usé Run64BitRuntime = False.
+Dejé los resultados en las pruebas de [Producto](../../docs/evidencias/05_validacion_producto.md), [Territorio](../../docs/evidencias/06_validacion_territorio.md) y [FactVentas](../../docs/evidencias/08_validacion_factventas.md). Para ejecutar con la extensión SSIS 4.0 usé Run64BitRuntime = False.

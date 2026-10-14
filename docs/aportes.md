@@ -19,14 +19,11 @@ Este registro complementa el historial de Git. Describe avances realizados; no m
 |Frank Soto|Análisis de empleados que registran ventas y necesidad del LEFT JOIN|[fbba7de](https://github.com/bakkap0/Certamen2-BI/commit/fbba7de)|Cómo conservar vendedores identificados sin territorio asignado|
 |Joaquín Ramírez|Carga de Producto con inserciones, detección de cambios y actualización tipo 1|[Pruebas de Producto](evidencias/05_validacion_producto.md)|Lookup, claves sustitutas, tratamiento de nulos y repetición de la carga|
 |Joaquín Ramírez|Carga de Territorio y País con inserciones y actualización tipo 1|[Pruebas de Territorio](evidencias/06_validacion_territorio.md)|Desnormalización de País, Lookup y conservación de TerritorioKey|
+| Frank Soto | Carga de Cliente con limpieza de nombres, inserciones y actualización tipo 1 | [37b8268](https://github.com/bakkap0/Certamen2-BI/commit/37b8268), [28dfb12](https://github.com/bakkap0/Certamen2-BI/commit/28dfb12) | Derived Column, Lookup, Conditional Split y por qué no se duplica al repetir la carga |
+| Frank Soto | Carga de Vendedor con traducción de códigos, LEFT JOIN e inserciones y actualización tipo 1 | [bfd6574](https://github.com/bakkap0/Certamen2-BI/commit/bfd6574) | Por qué Genero y EstadoCivil se agregan como columnas nuevas y cómo se validaron las traducciones |
+| Frank Soto | Carga de Fecha generando el calendario 2015-2018 | [3a92ae5](https://github.com/bakkap0/Certamen2-BI/commit/3a92ae5) | Generación del calendario, clave AAAAMMDD, año bisiesto y por qué no requiere actualización |
+| Joaquín Ramírez | Configuración del paquete principal con ejecución secuencial | [77c032c](https://github.com/bakkap0/Certamen2-BI/commit/77c032c) | Referencias de proyecto, conexiones de éxito y fallo del paquete principal |
+| Joaquín Ramírez | Carga de FactVentas con resolución de claves, cálculos, inserción y actualización por clave compuesta | [Pruebas de FactVentas](evidencias/08_validacion_factventas.md) | Grano del detalle, vendedor desconocido, cálculos y repetición de la carga |
 
-| Frank Soto | Carga de Cliente con limpieza de nombres, inserciones y actualización tipo 1 | \[37b8268](https://github.com/bakkap0/Certamen2-BI/commit/37b8268), \[28dfb12](https://github.com/bakkap0/Certamen2-BI/commit/28dfb12) | Derived Column, Lookup, Conditional Split y por qué no se duplica al repetir la carga |
-
-| Frank Soto | Carga de Vendedor con traducción de códigos, LEFT JOIN e inserciones y actualización tipo 1 | \[bfd6574](https://github.com/bakkap0/Certamen2-BI/commit/bfd6574) | Por qué Genero y EstadoCivil se agregan como columnas nuevas y cómo se validaron las traducciones |
-
-| Frank Soto | Carga de Fecha generando el calendario 2015-2018 | \[3a92ae5](https://github.com/bakkap0/Certamen2-BI/commit/3a92ae5) | Generación del calendario, clave AAAAMMDD, año bisiesto y por qué no requiere actualización |
-
-
-
-Las revisiones e integraciones posteriores se registrarán con su commit o Pull Request real. Producto y Territorio están cargados y probados en el equipo de Joaquín; falta integrar las demás cargas y validar el ETL completo.
+Las revisiones e integraciones posteriores se registrarán con su commit o Pull Request real. Las cinco dimensiones están implementadas y FactVentas tiene pruebas individuales en el equipo de Joaquín; quedan pendientes la revisión conjunta y la validación del ETL completo.
 
