@@ -16,10 +16,10 @@ Joaquín usa `BAKKAPO\BIT2019` y Frank `FRANK-PC`. Cada uno configura su servido
 |---|---|
 | CargaProducto | Implementado y probado: inserción, repetición y actualización tipo 1 |
 | CargaCliente, CargaVendedor y CargaFecha | Preparados para el trabajo de Frank |
-| CargaTerritorio | Preparado para el trabajo de Joaquín |
+| CargaTerritorio | Implementado y probado: inserción, repetición y actualización tipo 1 |
 | CargarFactVentas | Pendiente de desarrollo conjunto |
 | CargaCompleta | Pendiente de conectar las cargas en orden |
 
-Para probar Producto, ejecutar únicamente `CargaProducto.dtsx`. Las dimensiones deben cargarse antes que FactVentas. No ejecutar el script 03 sobre una base ya cargada: elimina y recrea las tablas.
+Para probar Producto o Territorio, ejecutar su paquete individual. Las dimensiones deben cargarse antes que FactVentas. No ejecutar el script 03 sobre una base ya cargada: elimina y recrea las tablas.
 
-Dejé los resultados en las [pruebas de Producto](../../docs/evidencias/05_validacion_producto.md). Para ejecutar el paquete con la extensión SSIS 4.0 usé Run64BitRuntime = False.
+Dejé los resultados en las [pruebas de Producto](../../docs/evidencias/05_validacion_producto.md) y las [pruebas de Territorio](../../docs/evidencias/06_validacion_territorio.md). Para ejecutar con la extensión SSIS 4.0 usé Run64BitRuntime = False.
