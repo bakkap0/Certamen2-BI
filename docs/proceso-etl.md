@@ -45,7 +45,7 @@ Consecuencias del diseño:
 | CargaCliente | `Clientes` | Nombre y apellido faltantes → "Sin nombre informado" / "Sin apellido informado". NombreCompleto: ambos datos → "Nombre Apellido"; solo uno → el dato disponible; ninguno → "Cliente ‹ID›" | Frank |
 | CargaTerritorio | `Territorios` INNER JOIN `Paises` | INNER JOIN porque todos los territorios tienen país (verificado en el análisis). Desnormaliza país y grupo | Joaquín |
 | CargaVendedor | `Empleados` LEFT JOIN `Territorios` | "Vendedor ‹ID›"; Genero F/M → Femenino/Masculino y EstadoCivil S/M → Soltero(a)/Casado(a), como columnas nuevas porque el origen es nchar(1); territorio faltante → "Territorio no informado". LEFT JOIN para no perder los 275 empleados sin territorio, entre ellos 4 que registran ventas | Frank |
-| CargarFactVentas | `DetalleVentas` JOIN `Ventas` | Completar al terminar el paquete | Joaquín, con revisión de Frank |
+| CargarFactVentas | `Ventas` JOIN `DetalleVentas` | FechaVentaKey y FechaEnvioKey AAAAMMDD; ImporteVenta = Cantidad × PrecioUnitario en decimal(19,4); DiasDespacho; VendedorID y TerritorioID nulos → -1. Cuatro Lookups resuelven las claves sustitutas y dos validan las fechas contra DimFecha. Si una referencia no existe, el paquete falla en vez de cargar un dato incorrecto (el análisis no encontró referencias inexistentes). Un Lookup por VentaID + DetalleVentaID inserta los detalles nuevos y actualiza solo los que cambiaron | Joaquín, con revisión de Frank |
 
 ## Reglas de calidad aplicadas
 
@@ -67,9 +67,13 @@ Ninguna regla elimina filas: todas las ventas y sus montos llegan al DW.
 | Los cuatro casos de NombreCompleto | `docs/evidencias/05_nombre_completo_*` |
 | Conciliación origen vs. DW: filas, ventas distintas, cantidades, montos y claves | `database/scripts/05_conciliar_carga.sql` |
 | Dimensiones conciliadas (controles 1 a 6 en OK) | `docs/evidencias/08_conciliacion_dimensiones.png` |
+| Carga completa: los 14 controles de conciliación en OK, monto total 110.373.889,3134 en origen y DW | `docs/evidencias/09_conciliacion_completa.png` |
+| Repetición de FactVentas: 121.317 coincidencias, 0 insertados y 0 actualizados; la conciliación sigue en OK | `docs/evidencias/09_factventas_segunda.png`, `09_conciliacion_segunda.png` |
 
 Cifras de control del origen para validar FactVentas: **121.317 líneas**, **31.465 ventas**, **274.914 unidades** y un monto total de **110.373.889,3134**. Las líneas sin vendedor son **60.397**.
 
-## Pendiente
 
-Implementar y probar CargarFactVentas, ejecutar CargaCompleta dos veces y completar la conciliación de los controles 7 a 14.
+
+## Observación
+
+En el equipo de Frank, la segunda ejecución consecutiva de `CargaCompleta` quedó detenida dentro de CargarFactVentas, sin actividad en SQL Server, y dejó bloqueado el archivo `.ispac`. Ejecutado por separado, CargarFactVentas repite la carga correctamente. Queda por revisar la ejecución repetida de CargaCompleta (por ejemplo, con `ExecuteOutOfProcess` en las tareas Execute Package).

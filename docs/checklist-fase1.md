@@ -27,14 +27,14 @@ Esta lista recoge los entregables y controles de la pauta. Marcar una casilla ú
 - [x] CargaFecha probada: 1.461 días, repetición sin duplicados y año bisiesto; evidencias `07_*.png`.
 - [x] FactVentas probada individualmente: carga, repetición y actualización de un detalle; resultados en `evidencias/08_validacion_factventas.md`.
 - [x] CargaCompleta configurada y compilada con las cinco dimensiones y FactVentas.
-- [ ] Ejecución completa de CargaCompleta probada en ambos equipos.
-- [ ] Extracción, transformaciones y carga implementadas y explicadas.
-- [ ] Tratamiento de errores y reglas de calidad documentados.
-- [ ] Conteos, claves, cantidades y montos conciliados entre origen y DW.
-- [ ] Segunda ejecución probada sin duplicación de datos.
-- [ ] Evidencia de carga real guardada.
-- [ ] Backup dimensional con datos correspondiente a la versión demostrada.
-- [ ] Backup restaurado de prueba y resultados verificados.
+- [x] Ejecución completa de CargaCompleta probada en ambos equipos.
+- [x] Extracción, transformaciones y carga implementadas y explicadas.
+- [x] Tratamiento de errores y reglas de calidad documentados.
+- [x] Conteos, claves, cantidades y montos conciliados entre origen y DW.
+- [x] Segunda ejecución probada sin duplicación de datos.
+- [x] Evidencia de carga real guardada.
+- [x] Backup dimensional con datos correspondiente a la versión demostrada.
+- [x] Backup restaurado de prueba y resultados verificados.
 
 ## Presentación y comprensión
 - [ ] Presentación final del equipo incorporada.
