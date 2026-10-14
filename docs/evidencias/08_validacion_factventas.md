@@ -26,3 +26,7 @@ La captura muestra la configuración del flujo. Los resultados de ejecución est
 ## Pendientes
 
 Falta la revisión de Frank y ejecutar su conciliación de cantidades e importes en ambos equipos. También falta probar CargaCompleta, registrar el tratamiento de errores para la entrega y preparar el respaldo final. Estas pruebas individuales no cierran la validación completa de la Fase 1.
+
+## Estado posterior al registro inicial
+
+Las observaciones anteriores conservan el alcance de la prueba original. La conciliación, el respaldo y la confirmación de cierre de CargaCompleta ya están registrados en [el cierre de la Fase 1](10_cierre_fase1.md), actualizado el 14 de octubre de 2026.

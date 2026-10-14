@@ -31,3 +31,7 @@ La estructura consultada en el equipo de Joaquín coincide con el diseño. Las c
 ## Alcance
 
 Esta verificación corresponde a la preparación de la estructura. Todavía no se ejecutó la carga SSIS ni se validaron sus cantidades e importes. El script 03 elimina y recrea las tablas: se usa para preparar el modelo y no para verificarlo después de cargar datos.
+
+## Estado posterior al registro inicial
+
+Las observaciones anteriores conservan el alcance de la prueba original. La conciliación, el respaldo y la confirmación de cierre de CargaCompleta ya están registrados en [el cierre de la Fase 1](../evidencias/10_cierre_fase1.md), actualizado el 14 de octubre de 2026.

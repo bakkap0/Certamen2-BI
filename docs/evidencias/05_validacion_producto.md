@@ -20,3 +20,7 @@ El origen une Productos y Categorias con LEFT JOIN y completa los textos faltant
 ## Alcance
 
 Estas pruebas corresponden solo a DimProducto. Las demás dimensiones, FactVentas, la conciliación completa y el respaldo final siguen pendientes. Para ejecutar el paquete usé Run64BitRuntime = False por el error COM de la extensión SSIS 4.0.
+
+## Estado posterior al registro inicial
+
+Las observaciones anteriores conservan el alcance de la prueba original. La conciliación, el respaldo y la confirmación de cierre de CargaCompleta ya están registrados en [el cierre de la Fase 1](10_cierre_fase1.md), actualizado el 14 de octubre de 2026.

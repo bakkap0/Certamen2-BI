@@ -25,7 +25,7 @@ Las dimensiones se cargan primero porque FactVentas necesita sus claves sustitut
 Todas las dimensiones, salvo Fecha, siguen el mismo flujo:
 
 1. **Origen:** consulta a las tablas de BikeZ.
-2. **Derived Column:** limpieza, textos de relleno y traducciones.
+2. **Transformaciones:** limpieza, textos de relleno y traducciones, aplicadas en la consulta de origen o mediante Derived Column según el paquete.
 3. **Lookup por la clave del origen:** decide si el registro ya existe en el DW.
    - **No Match →** se inserta como registro nuevo.
    - **Match → Conditional Split →** si algún atributo cambió, un **OLE DB Command** hace el UPDATE; si no, la fila se descarta.
@@ -34,7 +34,7 @@ Consecuencias del diseño:
 
 - **Ejecutar el paquete dos veces no duplica datos:** en la segunda ejecución todos los registros salen por Match y ninguno se inserta.
 - **SCD tipo 1:** si un atributo cambió en el origen, se sobrescribe en la misma fila. La clave sustituta no cambia.
-- **Miembro -1:** lo crea el script del modelo. Los Lookup lo excluyen (`WHERE Key > 0`) y las cargas no lo modifican.
+- **Miembro -1:** lo crea el script del modelo. Las cargas de dimensiones procesan los ID del origen y conservan ese miembro. Los Lookup de FactVentas incluyen el miembro desconocido para resolver las referencias nulas convertidas a -1.
 
 ## Paquetes
 
@@ -68,7 +68,7 @@ Ninguna regla elimina filas: todas las ventas y sus montos llegan al DW.
 | Conciliación origen vs. DW: filas, ventas distintas, cantidades, montos y claves | `database/scripts/05_conciliar_carga.sql` |
 | Dimensiones conciliadas (controles 1 a 6 en OK) | `docs/evidencias/08_conciliacion_dimensiones.png` |
 | Carga completa: los 14 controles de conciliación en OK, monto total 110.373.889,3134 en origen y DW | `docs/evidencias/09_conciliacion_completa.png` |
-| Repetición de FactVentas: 121.317 coincidencias, 0 insertados y 0 actualizados; la conciliación sigue en OK | `docs/evidencias/09_factventas_segunda.png`, `09_conciliacion_segunda.png` |
+| Repetición de FactVentas: 121.317 coincidencias, 0 insertados y 0 actualizados; la conciliación sigue en OK | `docs/evidencias/09_factventas_segunda.png` |
 
 Cifras de control del origen para validar FactVentas: **121.317 líneas**, **31.465 ventas**, **274.914 unidades** y un monto total de **110.373.889,3134**. Las líneas sin vendedor son **60.397**.
 
@@ -76,4 +76,4 @@ Cifras de control del origen para validar FactVentas: **121.317 líneas**, **31.
 
 ## Observación
 
-En el equipo de Frank, la segunda ejecución consecutiva de `CargaCompleta` quedó detenida dentro de CargarFactVentas, sin actividad en SQL Server, y dejó bloqueado el archivo `.ispac`. Ejecutado por separado, CargarFactVentas repite la carga correctamente. Queda por revisar la ejecución repetida de CargaCompleta (por ejemplo, con `ExecuteOutOfProcess` en las tareas Execute Package).
+Durante una prueba en el equipo de Frank, la segunda ejecución consecutiva de `CargaCompleta` quedó detenida dentro de CargarFactVentas y bloqueó el archivo `.ispac`. El 14 de octubre de 2026, Joaquín confirmó que el bloqueo ya está resuelto. El cierre está registrado en [10_cierre_fase1.md](evidencias/10_cierre_fase1.md); esa confirmación no especifica la causa ni el ajuste técnico aplicado. La captura de repetición disponible corresponde al paquete individual de FactVentas.

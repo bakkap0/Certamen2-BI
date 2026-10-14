@@ -90,7 +90,7 @@ Las categorías suman los 19820 clientes del origen. No se suman los dos conteos
 | Producto sin categoría | Mantener el producto y usar "Sin categoría informada" en el atributo de categoría. |
 | Empleado sin territorio | Si se conserva ese atributo, identificarlo como "Territorio no informado". La geografía de la venta sigue viniendo de Ventas.TerritorioID. |
 
-Estas reglas están propuestas para la implementación. El DW y el ETL aún no están construidos. Los controles ejecutados no justifican rechazar ventas por los datos descriptivos faltantes; debemos conservar las filas y sus importes, manteniendo trazabilidad de estos casos.
+Estas reglas se definieron durante el análisis y ya están aplicadas en el DW y el ETL, descritos en [proceso-etl.md](proceso-etl.md). Los controles ejecutados no justifican rechazar ventas por los datos descriptivos faltantes; debemos conservar las filas y sus importes, manteniendo trazabilidad de estos casos.
 
 ## Códigos de género y estado civil
 
@@ -169,4 +169,4 @@ Evidencia: [vendedores con ventas](evidencias/02_vendedores_con_ventas.png).
 - [Rango verificado por Frank](evidencias/02_rango_fechas.png) y [códigos de empleados](evidencias/02_codigos_genero_estado_civil.png): capturas aportadas por Frank desde su instancia.
 - [Horas del origen](evidencias/02_horas_origen.tsv): resultado 6 compartido por Joaquín en texto desde SSMS; 0 ventas y 0 envíos con hora distinta de medianoche.
 
-Joaquín ejecutó y documentó la exploración, los controles y la clasificación de clientes. Frank verificó el rango de fechas y agregó la consulta y evidencia de códigos. Los commits de ambos se registran en [aportes.md](aportes.md). El DW y el ETL siguen pendientes de implementar.
+Joaquín ejecutó y documentó la exploración, los controles y la clasificación de clientes. Frank verificó el rango de fechas y agregó la consulta y evidencia de códigos. Los commits de ambos se registran en [aportes.md](aportes.md). El DW y el ETL están implementados y su cierre se documenta en [10_cierre_fase1.md](evidencias/10_cierre_fase1.md).

@@ -17,3 +17,7 @@ El origen une Territorios y Paises para obtener el país y el grupo de cada terr
 ## Alcance
 
 Estas pruebas corresponden solo a DimTerritorio. Ya comprobé Producto y Territorio; falta integrar las demás dimensiones, FactVentas, el paquete principal y las validaciones completas.
+
+## Estado posterior al registro inicial
+
+Las observaciones anteriores conservan el alcance de la prueba original. La conciliación, el respaldo y la confirmación de cierre de CargaCompleta ya están registrados en [el cierre de la Fase 1](10_cierre_fase1.md), actualizado el 14 de octubre de 2026.
