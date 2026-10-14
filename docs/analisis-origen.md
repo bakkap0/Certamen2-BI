@@ -144,7 +144,6 @@ De los 290 empleados, solo **18 aparecen como vendedor** en `Ventas.VendedorID`.
 El total de 3.807 ventas coincide con las ventas con vendedor informado (31.465 − 27.658).
 
 - Los 3 gerentes de ventas regionales registran ventas, pero no tienen territorio asignado en el origen.
-- Los gerentes regionales no tienen un territorio asignado porque están a cargo de varias regiones, pero sí registran ventas.
 - El empleado 6 es ingeniero de diseño y registra una venta. Puede ser un error de registro en el origen; se conserva tal cual, porque el DW debe reflejar los datos de origen.
 - Tener territorio no define a un vendedor: el empleado 1 (Chief Executive Officer) tiene territorio asignado y no registra ventas.
 
