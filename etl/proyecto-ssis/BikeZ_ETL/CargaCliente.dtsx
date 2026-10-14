@@ -12,8 +12,8 @@
   DTS:ObjectName="CargaCliente"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{D52D9001-3BA2-4F02-9B27-B257B545215A}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{B9B1749B-E86F-4696-B8B4-6D3B6DB21D5E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -759,13 +759,13 @@ where [refTable].[ClienteID] = ?</property>
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">([ISNULL](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Nombre]}) || [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Nombre]}) == "") &amp;&amp; ([ISNULL](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Apellido]}) || [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Apellido]}) == "") ? "Cliente " + (DT_WSTR,10)#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[ClienteID]} : [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Nombre]}) + " " + [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Apellido]})</property>
+                          name="Expression">([ISNULL](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Nombre]}) || [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Nombre]}) == "") &amp;&amp; ([ISNULL](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Apellido]}) || [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Apellido]}) == "") ? "Cliente " + (DT_WSTR,10)#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[ClienteID]} : ([ISNULL](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Nombre]}) || [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Nombre]}) == "") ? [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Apellido]}) : ([ISNULL](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Apellido]}) || [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Apellido]}) == "") ? [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Nombre]}) : [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Nombre]}) + " " + [TRIM](#{Package\DFT Cargar DimCliente\Origen Clientes.Outputs[OLE DB Source Output].Columns[Apellido]})</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">(ISNULL(Nombre) || TRIM(Nombre) == "") &amp;&amp; (ISNULL(Apellido) || TRIM(Apellido) == "") ? "Cliente " + (DT_WSTR,10)ClienteID : TRIM(Nombre) + " " + TRIM(Apellido)</property>
+                          name="FriendlyExpression">(ISNULL(Nombre) || TRIM(Nombre) == "") &amp;&amp; (ISNULL(Apellido) || TRIM(Apellido) == "") ? "Cliente " + (DT_WSTR,10)ClienteID : (ISNULL(Nombre) || TRIM(Nombre) == "") ? TRIM(Apellido) : (ISNULL(Apellido) || TRIM(Apellido) == "") ? TRIM(Nombre) : TRIM(Nombre) + " " + TRIM(Apellido)</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -1002,21 +1002,29 @@ where [refTable].[ClienteID] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="158.666666666667,42.6666666666667"
+          Id="Package\DFT Cargar DimCliente\Limpiar nombres"
+          TopLeft="118.1249982398,116.31579166304" />
+        <NodeLayout
           Size="153.333333333334,42.6666666666667"
           Id="Package\DFT Cargar DimCliente\Origen Clientes"
           TopLeft="118.1249982398,41.0526323516613" />
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\DFT Cargar DimCliente\Detectar cambios"
+          TopLeft="374.999994412065,253.842110041106" />
+        <NodeLayout
+          Size="182.666666666667,42.6666666666667"
+          Id="Package\DFT Cargar DimCliente\Buscar en DimCliente"
+          TopLeft="98.1249985378236,187.473687739253" />
         <NodeLayout
           Size="192,42.6666666666667"
           Id="Package\DFT Cargar DimCliente\Insertar clientes nuevos"
           TopLeft="92.4999986216426,246.842109796413" />
         <NodeLayout
-          Size="158.666666666667,42.6666666666667"
-          Id="Package\DFT Cargar DimCliente\Limpiar nombres"
-          TopLeft="118.1249982398,116.31579166304" />
-        <NodeLayout
-          Size="182.666666666667,42.6666666666667"
-          Id="Package\DFT Cargar DimCliente\Buscar en DimCliente"
-          TopLeft="98.1249985378236,187.473687739253" />
+          Size="160,42.6666666666667"
+          Id="Package\DFT Cargar DimCliente\Actualizar cliente"
+          TopLeft="379.999994337559,339.035093862374" />
         <EdgeLayout
           Id="Package\DFT Cargar DimCliente.Paths[OLE DB Source Output]"
           TopLeft="196.1249982398,83.719299018328">
@@ -1076,32 +1084,6 @@ where [refTable].[ClienteID] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT Cargar DimCliente.Paths[Derived Column Output]"
-          TopLeft="193.458331722145,158.982458329707">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,28.4912294095463"
-              Start="0,0"
-              End="0,20.9912294095463">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.9912294095463" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="162.666666666667,42.6666666666667"
-          Id="Package\DFT Cargar DimCliente\Detectar cambios"
-          TopLeft="374.999994412065,253.842110041106" />
-        <EdgeLayout
           Id="Package\DFT Cargar DimCliente.Paths[Lookup Match Output]"
           TopLeft="189.458331871157,230.14035440592">
           <EdgeLayout.Curve>
@@ -1137,10 +1119,28 @@ where [refTable].[ClienteID] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="160,42.6666666666667"
-          Id="Package\DFT Cargar DimCliente\Actualizar cliente"
-          TopLeft="379.999994337559,339.035093862374" />
+        <EdgeLayout
+          Id="Package\DFT Cargar DimCliente.Paths[Derived Column Output]"
+          TopLeft="193.458331722145,158.982458329707">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.4912294095463"
+              Start="0,0"
+              End="0,20.9912294095463">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.9912294095463" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\DFT Cargar DimCliente.Paths[Cambiados]"
           TopLeft="458.166661041478,296.508776707773">
@@ -1177,19 +1177,6 @@ where [refTable].[ClienteID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT Cargar DimCliente\Insertar clientes nuevos">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\DFT Cargar DimCliente\Buscar en DimCliente">
     <Properties>
       <Property>
@@ -1209,6 +1196,19 @@ where [refTable].[ClienteID] = ?</property>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT Cargar DimCliente\Insertar clientes nuevos">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
