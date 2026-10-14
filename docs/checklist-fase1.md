@@ -37,7 +37,8 @@ Esta lista recoge los entregables y controles de la pauta. Marcar una casilla ú
 - [x] Backup restaurado de prueba y resultados verificados.
 
 ## Presentación y comprensión
-- [ ] Presentación final del equipo incorporada. El equipo la llevará a la exposición de la próxima semana; no está adjunta al repositorio.
+- [x] Presentación del equipo incorporada en `presentacion/Presentacion_BikeZ_Fase1.pptx`; se llevará a la exposición de la próxima semana.
+- [ ] Presentación ensayada por ambos integrantes y ajustada al tiempo asignado.
 - [x] Informe incorporado con portada, índice, introducción, desarrollo, conclusiones y bibliografía; redacción en tercera persona. Archivo en `informe/InformeBIRamirezSoto.docx`.
 - [ ] Paginación e índice del informe comprobados en Word.
 - [ ] Ambos pueden demostrar y explicar toda la Fase 1.

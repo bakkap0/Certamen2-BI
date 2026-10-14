@@ -21,11 +21,12 @@ El modelo, las cinco dimensiones, FactVentas y el paquete CargaCompleta están i
 
 La repetición individual de FactVentas registra 121.317 coincidencias, cero inserciones y cero actualizaciones. Los resultados y el alcance de las comprobaciones están en [evidencias](docs/evidencias/README.md).
 
-La presentación se llevará al momento de la exposición de la próxima semana; su archivo aún no está incorporado al repositorio. El cierre de la documentación está en [10_cierre_fase1.md](docs/evidencias/10_cierre_fase1.md).
+La [presentación en PowerPoint](docs/presentacion/Presentacion_BikeZ_Fase1.pptx) está incorporada y se llevará a la exposición de la próxima semana. Incluye notas del orador y dos diapositivas de apoyo. El cierre de la documentación está en [10_cierre_fase1.md](docs/evidencias/10_cierre_fase1.md).
 
 ## Entregables y documentación
 
 - [Informe en Word](docs/informe/InformeBIRamirezSoto.docx).
+- [Presentación en PowerPoint](docs/presentacion/Presentacion_BikeZ_Fase1.pptx).
 - [Análisis del origen](docs/analisis-origen.md) y [diseño con Kimball](docs/modelo-dimensional/propuesta.md).
 - [Diagrama dimensional](docs/modelo-dimensional/diagrama.png).
 - [Script de creación del modelo](database/scripts/03_crear_modelo_dimensional.sql).

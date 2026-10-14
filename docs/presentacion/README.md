@@ -1,7 +1,13 @@
 # Presentación de la Fase 1
 
-El equipo llevará la presentación al momento de la exposición, prevista para la próxima semana según lo acordado por los integrantes el 14 de octubre de 2026. El archivo de diapositivas todavía no está incorporado al repositorio.
+[Abrir el PowerPoint](Presentacion_BikeZ_Fase1.pptx).
 
-El contenido se preparará a partir del [informe](../informe/InformeBIRamirezSoto.docx): problema de Bike Z, KPI, cuatro pasos de Kimball, modelo estrella, ETL, demostración, conciliación, respaldo y aportes de ambos integrantes.
+La presentación contiene 15 diapositivas principales y dos diapositivas de apoyo, ocultas durante la exposición normal. Las notas del orador incluyen una propuesta de reparto entre Joaquín y Frank, explicaciones, fuentes y tiempos orientativos que suman 15 minutos, incluida la demostración.
 
-Durante la preparación, ambos deben practicar la explicación completa y comprobar la duración y el bloque asignados. Las cifras y capturas deben corresponder a las pruebas reales del proyecto.
+El contenido cubre el caso, análisis del origen, calidad de datos, KPI, Kimball, modelo estrella, claves, SCD tipo 1, dimensiones, FactVentas, CargaCompleta, conciliación, repetición de la carga y respaldo. Las tablas y el gráfico son editables. Las imágenes de SSIS y del modelo corresponden a las evidencias reales del equipo. La portada usa una ilustración decorativa de motocross.
+
+## Preparación de la exposición
+
+Abrir el archivo en PowerPoint y revisar las notas. Ensayar los tiempos entre ambos y tener abiertos Visual Studio y SSMS para la demostración. Las diapositivas 16 y 17 sirven para responder preguntas sobre el diagrama completo y los 14 controles de conciliación.
+
+El equipo llevará este material al momento de presentar, durante la próxima semana. La distribución propuesta no sustituye la preparación individual de toda la solución.

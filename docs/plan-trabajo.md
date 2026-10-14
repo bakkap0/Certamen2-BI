@@ -10,11 +10,11 @@ Estado actualizado el 14 de octubre de 2026.
 | ETL | Producto, Territorio, FactVentas y CargaCompleta | Cliente, Vendedor, Fecha y documentación | Paquetes implementados; bloqueo de CargaCompleta confirmado como resuelto |
 | Validación | Pruebas individuales, repetición y actualización de hechos | Conciliación, repetición de FactVentas y restauración | 14 controles en OK y respaldo restaurado de prueba |
 | Informe | Revisión e incorporación de la documentación final | Aportes técnicos y resultados de conciliación y respaldo | Informe incorporado |
-| Presentación | Explicar su trabajo y la solución completa | Explicar su trabajo y la solución completa | Se llevará a la exposición de la próxima semana; archivo aún fuera del repositorio |
+| Presentación | Explicar su trabajo y la solución completa | Explicar su trabajo y la solución completa | Archivo incorporado con notas y tiempos; se llevará a la exposición de la próxima semana |
 
 ## Preparación de la exposición
 
-Revisar el informe en Word para comprobar paginación e índice, preparar la presentación y ensayar la demostración. Ambos deben explicar el grano del hecho, las claves sustitutas, los datos faltantes, los Lookup, las actualizaciones y las cifras de conciliación.
+Revisar el informe en Word para comprobar paginación e índice, revisar la presentación incorporada y ensayar la demostración. Ambos deben explicar el grano del hecho, las claves sustitutas, los datos faltantes, los Lookup, las actualizaciones y las cifras de conciliación.
 
 ## Colaboración
 

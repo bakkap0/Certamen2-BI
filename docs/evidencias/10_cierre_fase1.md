@@ -16,4 +16,4 @@ El [respaldo BikeZ_DW.bak](../../database/backup/BikeZ_DW.bak) está integrado e
 
 El [informe](../informe/InformeBIRamirezSoto.docx) se incorporó con el estado actualizado y la redacción en tercera persona. Debe comprobarse su paginación al abrirlo en Word.
 
-El equipo llevará la presentación al momento de exponer, durante la próxima semana. El archivo de diapositivas todavía no está incorporado al repositorio y no se marca como entregado. Ambos integrantes deben preparar la explicación y demostración de toda la Fase 1.
+La [presentación en PowerPoint](../presentacion/Presentacion_BikeZ_Fase1.pptx) está incorporada al repositorio con notas para exponer. El equipo la llevará al momento de presentar, durante la próxima semana. El ensayo y la exposición siguen siendo actividades por realizar. Ambos integrantes deben preparar la explicación y demostración de toda la Fase 1.
