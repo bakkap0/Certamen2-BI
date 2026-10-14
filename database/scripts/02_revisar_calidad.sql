@@ -137,3 +137,15 @@ SELECT
         AS EnviosConHora
 FROM dbo.Ventas;
 GO
+
+-- Empleados que aparecen como vendedores en las ventas, con su cargo y territorio.
+-- Muestra que solo 18 de 290 empleados vendieron y cuales no tienen territorio asignado.
+SELECT e.EmpleadoID, e.Cargo,
+       ISNULL(t.Territorio, N'Territorio no informado') AS TerritorioAsignado,
+       COUNT(*) AS Ventas
+FROM dbo.Ventas v
+JOIN dbo.Empleados e        ON e.EmpleadoID = v.VendedorID
+LEFT JOIN dbo.Territorios t ON t.TerritorioID = e.TerritorioID
+GROUP BY e.EmpleadoID, e.Cargo, t.Territorio
+ORDER BY Ventas DESC;
+GO

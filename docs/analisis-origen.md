@@ -128,6 +128,26 @@ La consulta cuenta fechas informadas cuya hora es distinta de `00:00:00`. Ambos 
 5. Códigos de género y estado civil.
 6. Ventas y envíos con hora distinta de medianoche: ejecutado; ambos conteos dieron 0.
 
+## Empleados que registran ventas
+
+Consulta agregada por Frank Soto al final de `02_revisar_calidad.sql`.
+
+De los 290 empleados, solo **18 aparecen como vendedor** en `Ventas.VendedorID`. El resto pertenece a otras áreas de la empresa (ingeniería, marketing, producción, etc.).
+
+| Sales Representative | 14 | 3.703 | Sí |
+| Gerentes de ventas regionales (North American, European y Pacific Sales Manager) | 3 | 103 | No |
+| Design Engineer (EmpleadoID 6) | 1 | 1 | No |
+| **Total** | **18** | **3.807** | |
+El total de 3.807 ventas coincide con las ventas con vendedor informado (31.465 − 27.658).
+
+- Los gerentes regionales no tienen un territorio asignado porque están a cargo de varias regiones, pero sí registran ventas.
+- El empleado 6 es ingeniero de diseño y registra una venta. Puede ser un error de registro en el origen; se conserva tal cual, porque el DW debe reflejar los datos de origen.
+- Tener territorio no define a un vendedor: el empleado 1 (Chief Executive Officer) tiene territorio asignado y no registra ventas.
+
+**Implicancia para el ETL:** DimVendedor se carga con `LEFT JOIN` a `Territorios`. Con `INNER JOIN` se perderían los 4 vendedores sin territorio y sus ventas quedarían asociadas a "Vendedor no informado", aunque el vendedor sí está identificado.
+
+Evidencia: [vendedores con ventas](evidencias/02_vendedores_con_ventas.png).
+
 ## Pendientes del análisis
 
 - Revisar espacios y longitudes antes de construir las transformaciones que los utilicen. Los tamaños del destino deben admitir las etiquetas: por ejemplo, Color del origen permite 15 caracteres, pero "Sin color informado" ocupa 19.
