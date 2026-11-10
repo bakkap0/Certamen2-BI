@@ -1,0 +1,6 @@
+<Process xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <Object>
+    <DatabaseID>BikeZ_OLAP_Prueba</DatabaseID>
+  </Object>
+  <Type>ProcessFull</Type>
+</Process>

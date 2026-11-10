@@ -1,0 +1,15 @@
+-- Conexion: Analysis Services. Base activa: BikeZ_OLAP_Prueba.
+WITH
+MEMBER [Measures].[Clientes con ventas] AS
+    COUNT(NONEMPTY([Cliente].[Cliente].Levels(1).Members, {[Measures].[Importe vendido]})), FORMAT_STRING = '#,##0'
+MEMBER [Measures].[Vendedores informados con ventas] AS
+    COUNT(NONEMPTY(
+        EXCEPT([Vendedor].[Vendedor].Levels(1).Members, {[Vendedor].[Vendedor].&[-1]}),
+        {[Measures].[Importe vendido]}
+    )), FORMAT_STRING = '#,##0'
+MEMBER [Measures].[Importe sin vendedor] AS
+    ([Measures].[Importe vendido], [Vendedor].[Vendedor].&[-1]), FORMAT_STRING = '#,##0.0000'
+SELECT
+    {[Measures].[Unidades vendidas], [Measures].[Importe vendido], [Measures].[Clientes con ventas],
+     [Measures].[Vendedores informados con ventas], [Measures].[Importe sin vendedor]} ON COLUMNS
+FROM [Ventas];

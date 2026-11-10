@@ -1,0 +1,5 @@
+-- Conexión: Analysis Services. Base activa: BikeZ_OLAP_Prueba.
+-- Totales de Fase 1: 274914 unidades y 110373889.3134 de importe.
+SELECT
+    {[Measures].[Unidades vendidas], [Measures].[Importe vendido]} ON COLUMNS
+FROM [Ventas];
