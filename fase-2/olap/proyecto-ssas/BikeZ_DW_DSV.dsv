@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='utf-8'?>
+<DataSourceView xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="910adf41-8f69-5351-a82a-b89df8514097">
+  <ID>BikeZ_DW_DSV</ID>
+  <Name>BikeZ DW</Name>
+  <DataSourceID>BikeZ_DW</DataSourceID>
+  <Schema>
+    <xsd:schema xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" id="BikeZ_DW_DSV">
+      <xsd:element name="BikeZ_DW_DSV" msdata:IsDataSet="true" msdata:Locale="">
+        <xsd:complexType>
+          <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="dbo_DimProducto" msprop:DbTableName="DimProducto" msprop:FriendlyName="DimProducto" msprop:DbSchemaName="dbo">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="ProductoKey" type="xsd:int"/>
+                  <xsd:element name="Producto">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="50"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Categoria">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="50"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="dbo_DimFecha" msprop:DbTableName="DimFecha" msprop:FriendlyName="DimFecha" msprop:DbSchemaName="dbo">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="FechaKey" type="xsd:int"/>
+                  <xsd:element name="Fecha" type="xsd:dateTime"/>
+                  <xsd:element name="Anio" type="xsd:short"/>
+                  <xsd:element name="Mes" type="xsd:unsignedByte"/>
+                  <xsd:element name="NombreMes">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="15"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="FechaEtiqueta" msprop:ComputedColumnExpression="CONVERT(nvarchar(10), [Fecha], 23)" msprop:IsLogical="True" minOccurs="0">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="dbo_DimTerritorio" msprop:DbTableName="DimTerritorio" msprop:FriendlyName="DimTerritorio" msprop:DbSchemaName="dbo">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="TerritorioKey" type="xsd:int"/>
+                  <xsd:element name="Territorio">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="50"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="PaisID">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="3"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Pais">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="50"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Grupo">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="50"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="dbo_DimCliente" msprop:DbTableName="DimCliente" msprop:FriendlyName="DimCliente" msprop:DbSchemaName="dbo">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="ClienteKey" type="xsd:int"/>
+                  <xsd:element name="NombreCompleto">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="101"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="dbo_DimVendedor" msprop:DbTableName="DimVendedor" msprop:FriendlyName="DimVendedor" msprop:DbSchemaName="dbo">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="VendedorKey" type="xsd:int"/>
+                  <xsd:element name="Vendedor">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="30"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Cargo">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="50"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="TerritorioAsignado">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="50"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="VendedorInformado" msprop:ComputedColumnExpression="CASE WHEN [VendedorKey] = -1 THEN 0 ELSE 1 END" msprop:IsLogical="True" type="xsd:int" minOccurs="0"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="dbo_VentasUnicas" msprop:DataSourceID="BikeZ_DW" msprop:IsLogical="True" msprop:DbSchemaName="dbo" msprop:QueryDefinition="SELECT DISTINCT VentaID FROM dbo.FactVentas" msprop:FriendlyName="VentasUnicas" msprop:TableType="View" msprop:DbTableName="VentasUnicas">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="VentaID" type="xsd:int"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="dbo_FactVentas" msprop:DbTableName="FactVentas" msprop:FriendlyName="FactVentas" msprop:DbSchemaName="dbo">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="VentaID" type="xsd:int"/>
+                  <xsd:element name="DetalleVentaID" type="xsd:int"/>
+                  <xsd:element name="ProductoKey" type="xsd:int"/>
+                  <xsd:element name="FechaVentaKey" type="xsd:int"/>
+                  <xsd:element name="FechaEnvioKey" type="xsd:int"/>
+                  <xsd:element name="TerritorioKey" type="xsd:int"/>
+                  <xsd:element name="ClienteKey" type="xsd:int"/>
+                  <xsd:element name="VendedorKey" type="xsd:int"/>
+                  <xsd:element name="Cantidad" type="xsd:int"/>
+                  <xsd:element name="ImporteVenta" type="xsd:decimal"/>
+                  <xsd:element name="DiasDespacho" type="xsd:int" minOccurs="0"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:choice>
+        </xsd:complexType>
+        <xsd:unique name="Constraint1" msdata:PrimaryKey="true">
+          <xsd:selector xpath=".//dbo_DimProducto"/>
+          <xsd:field xpath="ProductoKey"/>
+        </xsd:unique>
+        <xsd:unique name="dbo_DimFecha_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xsd:selector xpath=".//dbo_DimFecha"/>
+          <xsd:field xpath="FechaKey"/>
+        </xsd:unique>
+        <xsd:unique name="dbo_DimTerritorio_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xsd:selector xpath=".//dbo_DimTerritorio"/>
+          <xsd:field xpath="TerritorioKey"/>
+        </xsd:unique>
+        <xsd:unique name="dbo_DimCliente_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xsd:selector xpath=".//dbo_DimCliente"/>
+          <xsd:field xpath="ClienteKey"/>
+        </xsd:unique>
+        <xsd:unique name="dbo_DimVendedor_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xsd:selector xpath=".//dbo_DimVendedor"/>
+          <xsd:field xpath="VendedorKey"/>
+        </xsd:unique>
+        <xsd:unique name="dbo_VentasUnicas_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xsd:selector xpath=".//dbo_VentasUnicas"/>
+          <xsd:field xpath="VentaID"/>
+        </xsd:unique>
+        <xsd:unique name="dbo_FactVentas_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xsd:selector xpath=".//dbo_FactVentas"/>
+          <xsd:field xpath="VentaID"/>
+          <xsd:field xpath="DetalleVentaID"/>
+        </xsd:unique>
+      </xsd:element>
+      <xsd:annotation>
+        <xsd:appinfo>
+          <msdata:Relationship name="FactVentas_Producto" msdata:parent="dbo_DimProducto" msdata:child="dbo_FactVentas" msdata:parentkey="ProductoKey" msdata:childkey="ProductoKey"/>
+          <msdata:Relationship name="FactVentas_FechaVenta" msdata:parent="dbo_DimFecha" msdata:child="dbo_FactVentas" msdata:parentkey="FechaKey" msdata:childkey="FechaVentaKey"/>
+          <msdata:Relationship name="FactVentas_FechaEnvio" msdata:parent="dbo_DimFecha" msdata:child="dbo_FactVentas" msdata:parentkey="FechaKey" msdata:childkey="FechaEnvioKey"/>
+          <msdata:Relationship name="FactVentas_Territorio" msdata:parent="dbo_DimTerritorio" msdata:child="dbo_FactVentas" msdata:parentkey="TerritorioKey" msdata:childkey="TerritorioKey"/>
+          <msdata:Relationship name="FactVentas_Cliente" msdata:parent="dbo_DimCliente" msdata:child="dbo_FactVentas" msdata:parentkey="ClienteKey" msdata:childkey="ClienteKey"/>
+          <msdata:Relationship name="FactVentas_Vendedor" msdata:parent="dbo_DimVendedor" msdata:child="dbo_FactVentas" msdata:parentkey="VendedorKey" msdata:childkey="VendedorKey"/>
+          <msdata:Relationship name="FactVentas_Venta" msdata:parent="dbo_VentasUnicas" msdata:child="dbo_FactVentas" msdata:parentkey="VentaID" msdata:childkey="VentaID"/>
+        </xsd:appinfo>
+      </xsd:annotation>
+    </xsd:schema>
+    <BikeZ_DW_DSV xmlns=""/>
+  </Schema>
+</DataSourceView>

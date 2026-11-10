@@ -1,0 +1,353 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="865e47f9-fdf2-5d87-879a-fa2aea6d27f3">
+  <ID>Ventas</ID>
+  <Name>Ventas</Name>
+  <Dimensions>
+    <Dimension>
+      <ID>Producto</ID>
+      <Name>Producto</Name>
+      <DimensionID>Producto</DimensionID>
+      <Attributes>
+        <Attribute>
+          <AttributeID>ProductoKey</AttributeID>
+        </Attribute>
+        <Attribute>
+          <AttributeID>Categoria</AttributeID>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy>
+          <HierarchyID>Catalogo</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+    <Dimension>
+      <ID>FechaVenta</ID>
+      <Name>Fecha de venta</Name>
+      <DimensionID>Fecha</DimensionID>
+      <Attributes>
+        <Attribute>
+          <AttributeID>FechaKey</AttributeID>
+        </Attribute>
+        <Attribute>
+          <AttributeID>Anio</AttributeID>
+        </Attribute>
+        <Attribute>
+          <AttributeID>Mes</AttributeID>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy>
+          <HierarchyID>Calendario</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+    <Dimension>
+      <ID>FechaEnvio</ID>
+      <Name>Fecha de envio</Name>
+      <DimensionID>Fecha</DimensionID>
+      <Attributes>
+        <Attribute>
+          <AttributeID>FechaKey</AttributeID>
+        </Attribute>
+        <Attribute>
+          <AttributeID>Anio</AttributeID>
+        </Attribute>
+        <Attribute>
+          <AttributeID>Mes</AttributeID>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy>
+          <HierarchyID>Calendario</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+    <Dimension>
+      <ID>Territorio</ID>
+      <Name>Territorio</Name>
+      <DimensionID>Territorio</DimensionID>
+      <Attributes>
+        <Attribute>
+          <AttributeID>TerritorioKey</AttributeID>
+        </Attribute>
+        <Attribute>
+          <AttributeID>PaisID</AttributeID>
+        </Attribute>
+        <Attribute>
+          <AttributeID>Grupo</AttributeID>
+        </Attribute>
+      </Attributes>
+      <Hierarchies>
+        <Hierarchy>
+          <HierarchyID>Geografia</HierarchyID>
+        </Hierarchy>
+      </Hierarchies>
+    </Dimension>
+    <Dimension>
+      <ID>Cliente</ID>
+      <Name>Cliente</Name>
+      <DimensionID>Cliente</DimensionID>
+      <Attributes>
+        <Attribute>
+          <AttributeID>ClienteKey</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension>
+      <ID>Vendedor</ID>
+      <Name>Vendedor</Name>
+      <DimensionID>Vendedor</DimensionID>
+      <Attributes>
+        <Attribute>
+          <AttributeID>VendedorKey</AttributeID>
+        </Attribute>
+        <Attribute>
+          <AttributeID>Cargo</AttributeID>
+        </Attribute>
+        <Attribute>
+          <AttributeID>TerritorioAsignado</AttributeID>
+        </Attribute>
+        <Attribute>
+          <AttributeID>VendedorInformado</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension>
+      <ID>Venta</ID>
+      <Name>Venta</Name>
+      <DimensionID>Venta</DimensionID>
+      <Visible>false</Visible>
+      <Attributes>
+        <Attribute>
+          <AttributeID>VentaID</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+  </Dimensions>
+  <DefaultMeasure>[Measures].[Importe vendido]</DefaultMeasure>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>FactVentas</ID>
+      <Name>FactVentas</Name>
+      <Measures>
+        <Measure>
+          <ID>Unidades vendidas</ID>
+          <Name>Unidades vendidas</Name>
+          <Source>
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding">
+              <TableID>dbo_FactVentas</TableID>
+              <ColumnID>Cantidad</ColumnID>
+            </Source>
+          </Source>
+          <FormatString>#,##0</FormatString>
+        </Measure>
+        <Measure>
+          <ID>Importe vendido</ID>
+          <Name>Importe vendido</Name>
+          <DataType>Currency</DataType>
+          <Source>
+            <DataType>Currency</DataType>
+            <Source xsi:type="ColumnBinding">
+              <TableID>dbo_FactVentas</TableID>
+              <ColumnID>ImporteVenta</ColumnID>
+            </Source>
+          </Source>
+          <FormatString>#,##0.0000</FormatString>
+        </Measure>
+        <Measure>
+          <ID>Dias despacho base</ID>
+          <Name>Dias despacho base</Name>
+          <AggregateFunction>Max</AggregateFunction>
+          <Source>
+            <NullProcessing>Preserve</NullProcessing>
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding">
+              <TableID>dbo_FactVentas</TableID>
+              <ColumnID>DiasDespacho</ColumnID>
+            </Source>
+          </Source>
+          <Visible>false</Visible>
+          <FormatString>#,##0</FormatString>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="RegularMeasureGroupDimension">
+          <CubeDimensionID>Producto</CubeDimensionID>
+          <Attributes>
+            <Attribute>
+              <AttributeID>ProductoKey</AttributeID>
+              <KeyColumns>
+                <KeyColumn>
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FactVentas</TableID>
+                    <ColumnID>ProductoKey</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension">
+          <CubeDimensionID>FechaVenta</CubeDimensionID>
+          <Attributes>
+            <Attribute>
+              <AttributeID>FechaKey</AttributeID>
+              <KeyColumns>
+                <KeyColumn>
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FactVentas</TableID>
+                    <ColumnID>FechaVentaKey</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension">
+          <CubeDimensionID>FechaEnvio</CubeDimensionID>
+          <Attributes>
+            <Attribute>
+              <AttributeID>FechaKey</AttributeID>
+              <KeyColumns>
+                <KeyColumn>
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FactVentas</TableID>
+                    <ColumnID>FechaEnvioKey</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension">
+          <CubeDimensionID>Territorio</CubeDimensionID>
+          <Attributes>
+            <Attribute>
+              <AttributeID>TerritorioKey</AttributeID>
+              <KeyColumns>
+                <KeyColumn>
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FactVentas</TableID>
+                    <ColumnID>TerritorioKey</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension">
+          <CubeDimensionID>Cliente</CubeDimensionID>
+          <Attributes>
+            <Attribute>
+              <AttributeID>ClienteKey</AttributeID>
+              <KeyColumns>
+                <KeyColumn>
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FactVentas</TableID>
+                    <ColumnID>ClienteKey</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension">
+          <CubeDimensionID>Vendedor</CubeDimensionID>
+          <Attributes>
+            <Attribute>
+              <AttributeID>VendedorKey</AttributeID>
+              <KeyColumns>
+                <KeyColumn>
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FactVentas</TableID>
+                    <ColumnID>VendedorKey</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension">
+          <CubeDimensionID>Venta</CubeDimensionID>
+          <Attributes>
+            <Attribute>
+              <AttributeID>VentaID</AttributeID>
+              <KeyColumns>
+                <KeyColumn>
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FactVentas</TableID>
+                    <ColumnID>VentaID</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source>
+    <DataSourceViewID>BikeZ_DW_DSV</DataSourceViewID>
+  </Source>
+  <MdxScripts>
+    <MdxScript>
+      <ID>MdxScript</ID>
+      <Name>MdxScript</Name>
+      <Commands>
+        <Command>
+          <Text>CALCULATE;
+
+CREATE MEMBER CURRENTCUBE.[Measures].[Ventas distintas] AS
+    COUNT(NONEMPTY([Venta].[Venta].Levels(1).Members, {[Measures].[Unidades vendidas]})),
+    FORMAT_STRING = '#,##0';
+
+CREATE MEMBER CURRENTCUBE.[Measures].[Ventas con vendedor informado] AS
+    IIF([Measures].[Ventas distintas] = 0, NULL,
+        COALESCEEMPTY(([Measures].[Ventas distintas], [Vendedor].[Vendedor informado].&amp;[1]), 0)),
+    FORMAT_STRING = '#,##0';
+
+CREATE MEMBER CURRENTCUBE.[Measures].[Ticket promedio] AS
+    DIVIDE([Measures].[Importe vendido], [Measures].[Ventas distintas]),
+    FORMAT_STRING = '#,##0.0000';
+
+CREATE MEMBER CURRENTCUBE.[Measures].[Porcentaje de ventas con vendedor informado] AS
+    DIVIDE([Measures].[Ventas con vendedor informado], [Measures].[Ventas distintas]),
+    FORMAT_STRING = '0.00%';
+
+CREATE MEMBER CURRENTCUBE.[Measures].[Dias promedio de despacho] AS
+    AVG(NONEMPTY([Venta].[Venta].Levels(1).Members, {[Measures].[Dias despacho base]}), [Measures].[Dias despacho base]),
+    FORMAT_STRING = '0.000000';
+
+CREATE MEMBER CURRENTCUBE.[Measures].[Importe mes anterior] AS
+    IIF([Fecha de venta].[Calendario].CurrentMember.Level.Ordinal = 2,
+        ([Measures].[Importe vendido], [Fecha de venta].[Calendario].CurrentMember.PrevMember),
+        NULL),
+    VISIBLE = 0;
+
+CREATE MEMBER CURRENTCUBE.[Measures].[Crecimiento mensual de ventas] AS
+    IIF(ISEMPTY([Measures].[Importe vendido]), NULL,
+        DIVIDE([Measures].[Importe vendido] - [Measures].[Importe mes anterior], [Measures].[Importe mes anterior])),
+    FORMAT_STRING = '0.00%';</Text>
+        </Command>
+      </Commands>
+    </MdxScript>
+  </MdxScripts>
+</Cube>

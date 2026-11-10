@@ -1,0 +1,17 @@
+-- Conexion: Analysis Services. Base activa: BikeZ_OLAP_Prueba.
+-- Conciliar el total, dos filtros y los primeros siete meses con ventas.
+WITH
+SET [Cortes] AS {
+    ([Fecha de venta].[Calendario].DefaultMember, [Producto].[Categoria].DefaultMember, [Vendedor].[Vendedor].DefaultMember),
+    ([Fecha de venta].[Calendario].DefaultMember, [Producto].[Categoria].&[Road Bikes], [Vendedor].[Vendedor].DefaultMember),
+    ([Fecha de venta].[Calendario].DefaultMember, [Producto].[Categoria].DefaultMember, [Vendedor].[Vendedor].&[-1])
+}
+SET [Primeros meses] AS
+    HEAD(NONEMPTY([Fecha de venta].[Calendario].[Mes].Members, {[Measures].[Importe vendido]}), 7)
+    * {[Producto].[Categoria].DefaultMember} * {[Vendedor].[Vendedor].DefaultMember}
+SELECT
+    {[Measures].[Importe vendido], [Measures].[Ventas distintas], [Measures].[Ventas con vendedor informado],
+     [Measures].[Ticket promedio], [Measures].[Porcentaje de ventas con vendedor informado],
+     [Measures].[Dias promedio de despacho], [Measures].[Crecimiento mensual de ventas]} ON COLUMNS,
+    [Cortes] + [Primeros meses] ON ROWS
+FROM [Ventas];

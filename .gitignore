@@ -22,5 +22,5 @@
 BikeZ.bak
 caso2.zip
 
-# El backup DIMENSIONAL validado debe incluirse en database/backup/.
+# El backup dimensional validado se incluye en fase-1/database/backup/.
 # No se ignoran todos los .bak porque son un entregable de la pauta.

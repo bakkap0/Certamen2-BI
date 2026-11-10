@@ -1,0 +1,16 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.11.37627.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "BikeZ_OLAP", "BikeZ_OLAP.dwproj", "{793D74C4-9A57-4B8C-9450-D181A8EB3651}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{793D74C4-9A57-4B8C-9450-D181A8EB3651}.Development|Default.ActiveCfg = Development
+		{793D74C4-9A57-4B8C-9450-D181A8EB3651}.Development|Default.Build.0 = Development
+		{793D74C4-9A57-4B8C-9450-D181A8EB3651}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+EndGlobal

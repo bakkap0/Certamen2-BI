@@ -1,0 +1,7 @@
+-- Conexion: Analysis Services. Base activa: BikeZ_OLAP_Prueba.
+-- Comprobar el total general y el desglose por pais.
+SELECT
+    {[Measures].[Unidades vendidas], [Measures].[Importe vendido]} ON COLUMNS,
+    {[Territorio].[Geografia].DefaultMember} +
+        NONEMPTY([Territorio].[Geografia].[Pais].Members, {[Measures].[Importe vendido]}) ON ROWS
+FROM [Ventas];
